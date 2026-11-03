@@ -33,8 +33,9 @@ inside another one is in `subject.json`:
 Optionally, set `"opens": "<child id>"` on the parent's part (in `src/parts.js`) that contains the child.
 Its panel then shows **Inside: …** as the first "Look deeper" button, as the body's Skin part does.
 
-The child should be painted so its plate **matches its drawing on the parent**: the same thing seen the same
-way. The cell plate shows the round skin cell from the skin plate, enlarged. The body plate shows the woman
+The child's plate must **match its drawing on the parent**: the same thing seen the same way, with the same
+pieces and colours. Paint the drawing on the parent from the child's plate (attach it as a reference), not the
+other way round from whatever was there. The cell plate shows the round skin cell from the skin plate, enlarged. The body plate shows the woman
 in the yellow raincoat from the bus stop. If the match is loose, the dissolve still works, but it reads as a
 cut rather than a zoom.
 

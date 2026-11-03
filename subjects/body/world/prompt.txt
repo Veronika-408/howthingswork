@@ -1,5 +1,11 @@
-Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper: a bus at a bus stop with a glass shelter, and people waiting on the pavement. EDIT THIS EXACT IMAGE, keeping the bus, the shelter, the pavement, the trees, every line, position and the framing exactly as they are, with ONE change:
+Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper: a bus at a bus stop with a glass shelter, and a few people on the pavement. Image 2 is the encyclopedia plate these people open into.
 
-The two people waiting at the shelter become a small, clearly readable group of THREE people standing together on the pavement just in front of the shelter, where they are now, each a little more pronounced and about one third bigger than now: in the middle a woman in a bright yellow raincoat, on her left a man in a blue jacket, on her right a child in a red jumper holding his hand. Colour ONLY these three people in rich ink-and-watercolour, like the coloured tram and jumbo jet on the same map. Everything else stays soft grey pencil, untouched.
+EDIT IMAGE 1, keeping the bus, the shelter, the pavement, the trees, every line, position and the framing exactly as they are, with ONE change:
+
+Replace the people waiting at the shelter with a tiny miniature of EXACTLY the three people in Image 2, standing on the pavement just in front of the shelter, in the same order, left to right, facing us:
+- on the LEFT, the man from Image 2: light grey-beige jacket over a sweater, a shoulder bag, light trousers;
+- in the MIDDLE and a little in front, the woman from Image 2: curly brown hair, a long bright YELLOW raincoat, blue trousers, brown boots, arms a little away from her body;
+- on the RIGHT, the child from Image 2: a small boy in a hooded jacket with a little backpack, holding the woman's hand and looking up at her.
+Paint all three in rich ink-and-watercolour so they read as a bright little patch of colour from far away: the woman strongest (vivid yellow), the man and the child in soft warm colours. Remove any other people at the shelter. Everything else stays soft grey pencil, untouched, same size and place.
 
 No text, letters or numbers. Same 3:2 framing as Image 1.

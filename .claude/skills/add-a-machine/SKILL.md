@@ -22,6 +22,7 @@ is the project layer on top: where things go, and what a reviewer will check.
 - [ ] Plate: one coherent cut-away, ink and watercolour, ivory paper, empty margins, no text, counts right, faces the way the map drawing faces.
 - [ ] 8 to 14 parts with accurate outlines; each has a close-up, checked facts and a "Can you find it?" line.
 - [ ] Every zoom tile matches its source (nothing moved, added or lost).
+- [ ] Map: the coloured drawing is a miniature of the plate (same pieces, arrangement, colours, direction), painted with the plate attached as Image 2, not a pre-existing grey thing coloured in.
 - [ ] Map: only `world/colour.png` changed the map. The machine is in colour, everything around it stays grey, and the zoom into the plate lands without a jump (`axis`/`plateAxis`).
 - [ ] At least one "How it works" page the child can operate, if the machine has a mechanism worth showing.
 - [ ] `node tools/smoke.mjs` prints no errors, and the screenshots for desktop and phone are in the pull request.
@@ -29,6 +30,9 @@ is the project layer on top: where things go, and what a reviewer will check.
 
 ## Pitfalls
 
+- The map drawing and the plate must show the same thing. The first body attempt coloured in the two passengers
+  already at the bus stop, while the plate showed a different family of three, so the zoom didn't match. Paint the
+  map patch from the plate (Image 2), and use `colour_in.py cut --cover` to remove what isn't on the plate.
 - Image models miscount wheels, engines, blades and seats, and invent text. Check at full size, every time.
 - Grey white paint looks like paper. If the machine is white, keep `open_sky` false, so the build keeps its white areas.
 - `colour_in.py cut` keeps only what turned colourful. If it grabs too much, make the edit prompt stricter and paint again.

@@ -67,9 +67,17 @@ The map is shared, so you never edit `world/art/world.png`. Your machine brings 
 
 ```
 python3 tools/colour_in.py crop excavator 1160 540 230 150     # the grey drawing's area in map pixels, with a margin
-# paint subjects/excavator/world/painted.png from grey.png with template 4 (image edit)
+scripts/imagegen.sh edit prompt.txt subjects/excavator/world/painted.png subjects/excavator/world/grey.png subjects/excavator/art/plate.png
 python3 tools/colour_in.py cut excavator                       # writes world/colour.png and overlay.rect
 ```
+
+**The map drawing must be a miniature of your plate.** Same machine, same pieces, same arrangement, same
+colours, facing the same way: everything you zoom into must already be there, small. Always attach your
+plate as the second image (Image 2) to the colour-in edit, and repaint the area rather than colouring in
+whatever grey thing happened to be there. Bad: the bus stop's existing two passengers coloured in, when the
+plate shows a different family of three. Good: the plane and tram, whose drawings turn into their plates
+without a jump. If the old drawing must disappear (people who aren't on the plate), add
+`--cover x0 y0 x1 y1` to `cut`.
 
 Then fill in `spot` in `subject.json`:
 - `polys`: the outline on the map.

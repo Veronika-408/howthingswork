@@ -52,12 +52,16 @@ ABSOLUTELY NO TEXT: no letters, words, labels, numbers, logos, signs or annotati
 `scripts/tiles.py` writes these prompts itself from `describe` in `subject.json`: it crops an area,
 enlarges it and asks the model to repaint the same picture with finer detail, keeping every shape.
 
-## 4. Colouring it in on the map (`subjects/<id>/world/painted.png`, edit `grey.png`)
+## 4. Colouring it in on the map (`subjects/<id>/world/painted.png`, edit `grey.png`, plate attached as Image 2)
+
+The map drawing must be a miniature of the plate, never just the grey thing that was already there coloured in.
 
 ```
-Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper. EDIT THIS EXACT IMAGE, keeping every line, shape, position and the framing exactly as they are, with ONE change:
+Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper. Image 2 is the encyclopedia plate this place opens into.
 
-Colour in ONLY the <machine> (and its own small details: <crew, cargo, …>) in rich ink-and-watercolour, like the jumbo jet and the tram on the same map: <its colours>. Everything else stays soft grey pencil, untouched.
+EDIT IMAGE 1, keeping every line, shape, position and the framing exactly as they are, with ONE change:
+
+Replace <the grey thing> with a tiny miniature of EXACTLY what is in Image 2: <list every piece and person, left to right, with clothes, colours and which way they face>, painted in rich ink-and-watercolour like the jumbo jet and the tram on the same map, so it reads as a bright little patch of colour from far away. Remove anything in that spot that is not in Image 2. Everything else stays soft grey pencil, untouched.
 
 No text, letters or numbers. Same framing as Image 1.
 ```
