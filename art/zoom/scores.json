@@ -1,0 +1,262 @@
+{
+ "apu": {
+  "after": 0.9926,
+  "before": 0.9925,
+  "warped": true
+ },
+ "apu/exhaust": {
+  "after": 0.9931,
+  "before": 0.993,
+  "warped": true
+ },
+ "apu/unit": {
+  "after": 0.9916,
+  "before": 0.9914,
+  "warped": true
+ },
+ "avionics": {
+  "after": 0.9925,
+  "before": 0.9919,
+  "warped": true
+ },
+ "avionics/racks": {
+  "after": 0.9906,
+  "before": 0.9903,
+  "warped": true
+ },
+ "baggage": {
+  "after": 0.994,
+  "before": 0.994,
+  "warped": false
+ },
+ "baggage/belt-loader": {
+  "after": 0.9909,
+  "before": 0.9902,
+  "warped": true
+ },
+ "baggage/carts": {
+  "after": 0.9925,
+  "before": 0.9922,
+  "warped": true
+ },
+ "bulkhead": {
+  "after": 0.9915,
+  "before": 0.9915,
+  "warped": false
+ },
+ "cabin": {
+  "after": 0.9946,
+  "before": 0.994,
+  "warped": true
+ },
+ "cargo": {
+  "after": 0.9963,
+  "before": 0.9963,
+  "warped": true
+ },
+ "catering": {
+  "after": 0.9931,
+  "before": 0.9929,
+  "warped": true
+ },
+ "catering/box": {
+  "after": 0.9922,
+  "before": 0.9921,
+  "warped": true
+ },
+ "catering/scissor": {
+  "after": 0.9932,
+  "before": 0.993,
+  "warped": true
+ },
+ "cockpit": {
+  "after": 0.981,
+  "before": 0.9807,
+  "warped": true
+ },
+ "cockpit/controls": {
+  "after": 0.9865,
+  "before": 0.9859,
+  "warped": true
+ },
+ "cockpit/windows": {
+  "after": 0.9944,
+  "before": 0.9944,
+  "warped": true
+ },
+ "engine": {
+  "after": 0.9907,
+  "before": 0.9899,
+  "warped": true
+ },
+ "engine/combustor": {
+  "after": 0.9895,
+  "before": 0.9883,
+  "warped": true
+ },
+ "engine/compressor": {
+  "after": 0.985,
+  "before": 0.9837,
+  "warped": true
+ },
+ "engine/fan": {
+  "after": 0.9912,
+  "before": 0.9901,
+  "warped": true
+ },
+ "engine/turbine": {
+  "after": 0.9769,
+  "before": 0.9765,
+  "warped": true
+ },
+ "first-class": {
+  "after": 0.9873,
+  "before": 0.9862,
+  "warped": true
+ },
+ "first-class/door": {
+  "after": 0.9911,
+  "before": 0.9909,
+  "warped": true
+ },
+ "first-class/seats": {
+  "after": 0.99,
+  "before": 0.9894,
+  "warped": true
+ },
+ "flaps": {
+  "after": 0.9949,
+  "before": 0.9949,
+  "warped": false
+ },
+ "fuel-truck": {
+  "after": 0.9924,
+  "before": 0.992,
+  "warped": true
+ },
+ "fuel-truck/panel": {
+  "after": 0.9902,
+  "before": 0.9898,
+  "warped": true
+ },
+ "fuselage": {
+  "after": 0.9957,
+  "before": 0.9955,
+  "warped": true
+ },
+ "galley": {
+  "after": 0.9872,
+  "before": 0.987,
+  "warped": true
+ },
+ "galley/ovens": {
+  "after": 0.9846,
+  "before": 0.9841,
+  "warped": true
+ },
+ "galley/trolleys": {
+  "after": 0.9917,
+  "before": 0.9913,
+  "warped": true
+ },
+ "jet-bridge": {
+  "after": 0.9904,
+  "before": 0.9901,
+  "warped": true
+ },
+ "jet-bridge/cab": {
+  "after": 0.9925,
+  "before": 0.9922,
+  "warped": true
+ },
+ "landing-gear": {
+  "after": 0.987,
+  "before": 0.9858,
+  "warped": true
+ },
+ "landing-gear/bogie": {
+  "after": 0.9904,
+  "before": 0.9902,
+  "warped": true
+ },
+ "landing-gear/strut": {
+  "after": 0.9903,
+  "before": 0.9902,
+  "warped": true
+ },
+ "pushback": {
+  "after": 0.9925,
+  "before": 0.9925,
+  "warped": false
+ },
+ "pushback/nose-gear": {
+  "after": 0.9907,
+  "before": 0.9903,
+  "warped": true
+ },
+ "pushback/towbar": {
+  "after": 0.9884,
+  "before": 0.9869,
+  "warped": true
+ },
+ "radar": {
+  "after": 0.9906,
+  "before": 0.9906,
+  "warped": false
+ },
+ "radar/dish": {
+  "after": 0.9951,
+  "before": 0.995,
+  "warped": true
+ },
+ "radar/radome": {
+  "after": 0.9892,
+  "before": 0.9892,
+  "warped": true
+ },
+ "recorder": {
+  "after": 0.9931,
+  "before": 0.9926,
+  "warped": true
+ },
+ "tail": {
+  "after": 0.9977,
+  "before": 0.9975,
+  "warped": true
+ },
+ "tail/fin": {
+  "after": 0.9942,
+  "before": 0.9939,
+  "warped": true
+ },
+ "tail/rudder": {
+  "after": 0.9923,
+  "before": 0.9916,
+  "warped": true
+ },
+ "tail/stabiliser": {
+  "after": 0.9953,
+  "before": 0.9951,
+  "warped": true
+ },
+ "upper-deck": {
+  "after": 0.9914,
+  "before": 0.9914,
+  "warped": false
+ },
+ "upper-deck/cabin": {
+  "after": 0.9915,
+  "before": 0.9903,
+  "warped": true
+ },
+ "upper-deck/stairs": {
+  "after": 0.9866,
+  "before": 0.9864,
+  "warped": true
+ },
+ "wing": {
+  "after": 0.9956,
+  "before": 0.9953,
+  "warped": true
+ }
+}

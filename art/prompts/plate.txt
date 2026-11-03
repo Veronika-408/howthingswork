@@ -1,0 +1,28 @@
+You are a historical illustrator, aviation engineer and technical draftsman specializing in illustrated encyclopedias for children.
+
+Subject: a four-engine double-decker "jumbo jet" airliner (Boeing 747-400 type, 1990s, international airport), parked at the gate during turnaround while passengers board. Plain white fuselage with a single thin blue cheatline. NO airline name, NO logos, NO registration letters.
+
+Generate one vast illustrated encyclopedic plate: the whole aircraft seen from its LEFT side, nose pointing to the LEFT, viewed from slightly in front and slightly above (about 15-20 degrees), so it reads almost as a side profile while the near left wing angles toward the viewer, down and to the lower right. Large portions of the outer skin are cut away to reveal everything inside, in the style of a classic aviation cutaway drawing.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise engineering lines, realistic materials: aluminium skin, frames, stringers, carpets, fabric seats, rubber tyres.
+- No 3D render, no cartoon, no photographic look. Educational, elegant, timeless.
+
+WHAT MUST BE VISIBLE (technically correct for a 747-400)
+- Upper deck hump behind the cockpit: flight deck with two pilots at the controls and instrument panels, then a small upper-deck cabin with passengers.
+- Nose: weather radar dish behind the radome. Under the flight deck, the electronics (avionics) bay with racks of equipment.
+- Main deck from nose to tail: first class seats in the nose, business class, then long economy cabin with rows of seats (3-4-3), overhead bins, windows, passengers stowing bags, flight attendants helping. A staircase connecting main deck to upper deck. A galley kitchen with trolleys and a lavatory.
+- Lower deck: cargo holds with stacked baggage containers (ULDs) and loose suitcases, a conveyor belt loader truck feeding bags in through an open cargo door.
+- Wing: the near left wing is swept back and its top skin is cut open showing fuel tanks with ribs and spars inside, with flaps along the trailing edge. It ends in an upturned WINGLET at the tip (the 747-400 has winglets on both wingtips).
+- ENGINES, EXACTLY FOUR IN TOTAL: the near wing carries exactly TWO engines on pylons, clearly separated along the span: the inboard engine about one third of the way from fuselage to wingtip, the outboard engine about two thirds of the way out. The inboard engine has its cowling cut away showing fan blades, compressor, combustion chamber and turbine. The far right wing rises behind the upper fuselage and shows BOTH of its engines (inboard and outboard, widely separated along that wing) plus its own winglet.
+- Landing gear: nose gear with two wheels under the cockpit; main landing gear made of four legs each with a four-wheel bogie (two wing gears and two body gears side by side under the wing root), 18 wheels in total, standing on the ground.
+- Rear: domed rear pressure bulkhead, tall tail fin with rudder, horizontal stabilizer with elevator, small APU (auxiliary power unit) exhaust in the tail cone, an orange flight recorder box near the tail.
+- Ground scene on the apron: fuel truck with hose connected under the near wing (between the engines and the fuselage), catering high-loader truck lifted to the rearmost main-deck door, baggage tug with carts and a conveyor belt loader at the forward cargo door, pushback tug at the nose gear, ground crew in hi-vis vests, and a short jet bridge connected to the front left main-deck door; the jet bridge stays low and small so it never hides the cockpit, nose or electronics bay, and its far end simply fades out.
+- Dozens of tiny people to scale doing realistic things.
+
+COMPOSITION
+- Wide 16:9 landscape plate. The whole aircraft, every vehicle and the full tail fit comfortably INSIDE the frame: the aircraft spans about 80% of the width, centered, with calm empty ivory paper margins on all sides (about 8% left and right, about 14% at the top above the tail and hump, about 10% at the bottom below the vehicles). These margins stay completely empty for annotations to be added later. The apron ground fades softly into the paper with an irregular watercolor edge, not a hard rectangle.
+- ABSOLUTELY NO TEXT anywhere: no letters, no labels, no numbers, no annotation lines, no title, no signage text. Pure illustration only.
+- Rich but perfectly organized, many small details to explore for minutes.

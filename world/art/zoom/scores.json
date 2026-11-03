@@ -1,0 +1,82 @@
+{
+ "w00": {
+  "after": 0.9769,
+  "before": 0.9767,
+  "warped": true
+ },
+ "w01": {
+  "after": 0.9615,
+  "before": 0.9612,
+  "warped": true
+ },
+ "w02": {
+  "after": 0.9594,
+  "before": 0.9591,
+  "warped": true
+ },
+ "w03": {
+  "after": 0.9681,
+  "before": 0.9673,
+  "warped": true
+ },
+ "w10": {
+  "after": 0.9583,
+  "before": 0.9582,
+  "warped": true
+ },
+ "w11": {
+  "after": 0.9681,
+  "before": 0.9677,
+  "warped": true
+ },
+ "w12": {
+  "after": 0.9614,
+  "before": 0.9609,
+  "warped": true
+ },
+ "w13": {
+  "after": 0.9687,
+  "before": 0.9687,
+  "warped": false
+ },
+ "w20": {
+  "after": 0.9765,
+  "before": 0.9758,
+  "warped": true
+ },
+ "w21": {
+  "after": 0.9757,
+  "before": 0.9745,
+  "warped": true
+ },
+ "w22": {
+  "after": 0.9633,
+  "before": 0.9623,
+  "warped": true
+ },
+ "w23": {
+  "after": 0.981,
+  "before": 0.9809,
+  "warped": true
+ },
+ "w30": {
+  "after": 0.9751,
+  "before": 0.9751,
+  "warped": false
+ },
+ "w31": {
+  "after": 0.9573,
+  "before": 0.9565,
+  "warped": true
+ },
+ "w32": {
+  "after": 0.971,
+  "before": 0.971,
+  "warped": false
+ },
+ "w33": {
+  "after": 0.9449,
+  "before": 0.9442,
+  "warped": true
+ }
+}

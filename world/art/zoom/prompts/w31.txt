@@ -1,0 +1,9 @@
+Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper, like an architect's presentation drawing. It was enlarged from a small area, so it is blurry.
+
+TASK: re-draw THIS EXACT IMAGE at high resolution with much finer pencil detail, as if the same artist had drawn this small area on a far bigger sheet. This is a super-resolution job, NOT a new picture.
+
+KEEP EXACTLY: the same framing and isometric angle edge to edge; every building, tree, road, vehicle, boat, person and machine in exactly the same place, size and shape; anything cut by the border stays cut at the same place. Do NOT add, remove or move anything.
+
+STYLE: soft grey graphite pencil only, fine hatching, crisp thin lines, lots of white paper, NO colour at all, except that a jumbo jet (white with blue tail and stripe, with small coloured ground crew trucks and orange vests) and a red-and-white tram, if they appear in this crop, keep exactly their colours.
+
+No text, letters, numbers or logos. Output a 3:2 landscape image with the same framing as Image 1.

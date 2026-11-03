@@ -1,0 +1,15 @@
+Image 1 is a crop of a hand-painted ink-and-watercolor cut-away plate of a white Boeing 747-400 with a thin blue cheatline, parked at an airport gate, from a 1990s children's illustrated encyclopedia (Stephen Biesty / Dorling Kindersley style). It was enlarged from a small area, so it is blurry.
+
+TASK: re-paint THIS EXACT IMAGE at high resolution with much more fine detail, as if the original artist had painted this small area at a far larger size. This is a super-resolution and detail-enhancement job, NOT a new picture.
+
+KEEP EXACTLY:
+- the same framing, camera angle and perspective, edge to edge;
+- every object, line, edge, person, vehicle and structure in exactly the same place, at the same size, with the same silhouette and the same colors; anything cut by the image border stays cut at the same place;
+- the same number of seats, windows, wheels, blades, people, containers and every other countable thing.
+Do NOT add, remove, move, rotate or resize anything. Do NOT change the composition or zoom.
+
+ADD ONLY fine detail inside the existing shapes: crisp fine ink linework, rivets and panel lines, ribs, frames and stringers, cables and pipes, fabric and metal textures, faces, hands and clothing folds on the small figures, delicate watercolor washes and granulation. Make it technically correct for a Boeing 747-400.
+
+WHAT THIS AREA SHOWS: Rows of shelf racks in the electronics bay holding grey electronic boxes with handles and connectors, bundles of wiring and cooling air ducts.
+
+No text, letters, numbers, labels or logos anywhere. Output a 3:2 landscape image with the same framing as Image 1.

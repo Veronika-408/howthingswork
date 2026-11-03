@@ -1,0 +1,8 @@
+Image 1 is a hand-painted ink-and-watercolor cut-away of a Boeing 747-400 flight deck seen exactly from the LEFT SIDE (side elevation), nose to the left. EDIT THIS EXACT IMAGE, keeping the same framing, perspective, style, colours and every other detail exactly as they are, with ONE correction:
+
+The two pilots are currently drawn one behind the other, like in a fighter jet. That is wrong: in a 747 the captain and the first officer sit SIDE BY SIDE, at exactly the same distance from the windows. Fix it so that:
+- the captain (nearest to us, on the plane's left side) stays where he is, in the front seat, at the controls;
+- the first officer sits directly BEYOND the captain on the far (right) side of the cockpit, at the SAME fore-aft position, so from this side view he is mostly hidden behind the captain: only his head, shoulder and a little of his far seat show just behind and slightly above the captain, a little smaller and paler because he is farther away;
+- the empty space where the second pilot used to sit (behind the captain) becomes the back of the flight deck: an empty observer's jump seat and the cockpit's rear wall panels.
+
+Do not move, add or remove anything else. No text.

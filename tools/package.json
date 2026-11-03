@@ -1,0 +1,7 @@
+{
+  "name": "howthingswork-tools",
+  "private": true,
+  "type": "module",
+  "description": "Browser checks and screenshots for howthings.work",
+  "dependencies": { "playwright-core": "1.48.2" }
+}

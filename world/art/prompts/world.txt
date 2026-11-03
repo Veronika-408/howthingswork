@@ -1,0 +1,19 @@
+You are a historical illustrator and technical draftsman specializing in illustrated encyclopedias for children.
+
+Generate one vast illustrated encyclopedic panorama of a whole small Central European river city and its surroundings, seen from high above and slightly from the side (an elevated bird's-eye view, like a picture-book map), in the style of the great illustrated children's encyclopedias of the 1980s-1990s (Stephen Biesty, Dorling Kindersley "Incredible Cross-Sections"): extremely detailed fine ink linework and traditional transparent watercolor washes, warm natural colors on slightly ivory paper, precise lines, dozens of tiny people, cars and activities everywhere. No 3D render, no cartoon, no photographic look.
+
+THE CITY (inspired by a Danube capital, but generic, no real names):
+- A wide blue-green river flows across the whole picture from left to right through the middle ground, with a few boats: a long river cruise ship, a small tug pushing a barge, two little sailing boats.
+- Across the river, one modern cable-stayed bridge with a single tall slanted pylon topped by a round flying-saucer-shaped observation deck.
+- On a hill above the old town on the far bank: a big white rectangular castle with four square corner towers and red roofs; below it a compact old town of pastel houses with red tile roofs and one tall Gothic church spire.
+- Behind the city, a long forested ridge of low mountains with a slim TV tower on top, fading into soft blue distance; a big airy watercolor sky with a few clouds.
+- On the left, in the distance: a power plant with two cooling towers and one tall chimney, beside the river.
+- In the middle distance on the near bank: a busy construction site with two tall tower cranes, a half-built concrete building with scaffolding, diggers, a cement mixer truck.
+- Roads with small cars and buses, trees, parks, a playground, a riverside promenade with people.
+
+TWO EMPTY PLACES (very important, leave them empty, they will be filled later):
+1. An airport on the RIGHT side of the near bank, in the middle ground: a terminal building, a control tower, a runway disappearing to the right, and one big EMPTY aircraft parking stand right next to the terminal: plain grey concrete apron with a painted-free surface, an empty jet bridge pulled back, with NO aircraft on it. The empty apron is wide and clearly visible.
+2. A straight riverside street in the LEFT FOREGROUND, running left to right along the near embankment, with a pair of tram rails set in the cobbles and a thin overhead wire on poles above it, a tram stop shelter, and NO tram on it: the rails are empty for a long stretch.
+
+COMPOSITION: wide 16:9 landscape. The scene fills the whole frame and fades softly into ivory paper only at the very edges with an irregular watercolor edge. Rich but perfectly organized, many small details to explore.
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, signs, labels, logos or annotation lines.

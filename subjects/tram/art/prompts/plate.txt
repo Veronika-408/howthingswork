@@ -1,0 +1,25 @@
+You are a historical illustrator, transport engineer and technical draftsman specializing in illustrated encyclopedias for children.
+
+Subject: a modern 100% low-floor articulated city tram (a generic 2020s design: five body modules joined by flexible articulations, about 32 m long), stopped at a tram stop on a cobbled street in a Central European old town on a river. Plain white body with a single bright red band along the bottom and red window frames; rounded modern front with a big wraparound windscreen. NO operator name, NO logos, NO route numbers, NO lettering of any kind.
+
+Generate one vast illustrated encyclopedic plate: the whole tram seen from its LEFT side, front pointing to the LEFT, viewed from slightly in front and slightly above (about 15 degrees), so it reads almost as a side profile. Large portions of the outer skin and the roof covers are cut away to reveal everything inside, in the style of a classic cutaway drawing.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+WHAT MUST BE VISIBLE (technically correct for a modern low-floor tram)
+- Front module: the driver's cab with the driver seated at a desk with a single-handle speed controller on the left of the desk, screens, the windscreen and wiper; NO steering wheel (trams are steered by the rails).
+- Roof: a diamond / half-scissor PANTOGRAPH raised and pressing up against a single overhead contact wire that runs along the whole picture above the tram, hung from thin cross-wires on slim poles; roof boxes with the traction inverters, the air-conditioning units and the braking resistors.
+- Interior: the low flat floor only a short step above the kerb along the whole tram, seated passengers, standing passengers holding poles and straps, a parent with a pushchair, a ticket validator on a pole, an information screen, the flexible accordion-like articulation joints between modules with the floor turntable visible.
+- Underneath: three or four BOGIES (wheel frames) under some modules, each with two axles of small steel wheels on the rails, traction motors and gearboxes beside the wheels, the sand box with a pipe pointing at the rail in front of a wheel, a magnetic track brake shoe hanging just above the rail.
+- Doors: several wide double sliding doors, the ones at the stop open with people stepping in and out.
+- The track: two steel grooved rails set flush in the cobbles, one rail cut in section to show its groove; just behind the tram a pair of switch points with their moving blades.
+- Tram stop: a slim glass shelter with a bench and people waiting, a ticket machine, a stop pole, a raised platform kerb.
+- Background, kept light and sparse: a strip of pastel old-town houses with red roofs, a river embankment.
+- Dozens of tiny people to scale doing realistic things.
+
+COMPOSITION
+- Wide 16:9 landscape plate. The whole tram, the overhead wire and the stop fit comfortably INSIDE the frame: the tram spans about 85% of the width, centered, with calm empty ivory paper margins (about 7% left and right, about 14% at the top above the wire, about 10% at the bottom). These margins stay completely empty for annotations. The street fades softly into the paper with an irregular watercolor edge, not a hard rectangle.
+- ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, signs, annotation lines or title. Pure illustration only.

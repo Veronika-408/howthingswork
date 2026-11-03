@@ -1,0 +1,5 @@
+A parts sheet for a hand-drawn ISOMETRIC pencil map, drawn in soft grey graphite pencil only (no colour), fine hatching, on a perfectly FLAT, UNIFORM, PURE MAGENTA background (#FF00FF) filling the whole picture edge to edge. Every item is isolated with wide gaps, nothing touching, no shadows, all drawn at the same small isometric map scale and the same isometric angle (30 degrees).
+TOP ROW: three soft, light pencil cumulus clouds of different sizes (seen from slightly above, airy and pale).
+MIDDLE ROW: a small hatchback car driving toward the lower-LEFT; the same kind of car driving toward the lower-RIGHT; a small delivery van driving toward the lower-LEFT; a small car driving toward the upper-RIGHT.
+BOTTOM ROW: a small motor boat heading to the lower-LEFT; a small sailing boat; a long flat river barge heading to the upper-RIGHT.
+No text, letters or numbers.

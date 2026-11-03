@@ -1,0 +1,105 @@
+{
+  "title": "The City Tram",
+  "kicker": "Inside a low-floor tram",
+  "whole": "Whole tram",
+  "hint": "Pick any part of the tram to look closer.",
+  "alt": "Cut-away painting of a modern low-floor tram at a tram stop.",
+  "credit": {
+    "name": "@virpo",
+    "url": "https://x.com/virpo"
+  },
+  "describe": [
+    "a modern white low-floor articulated city tram with a red band, stopped at a tram stop on a cobbled street by a river",
+    "a modern 100% low-floor articulated tram"
+  ],
+  "plate_w": 1672,
+  "open_sky": true,
+  "replaces": null,
+  "how": {
+    "map": {
+      "wire": "power",
+      "pantograph": "power",
+      "roof": "power",
+      "front-bogie": "power",
+      "cab": "power",
+      "points": "points",
+      "rails": "points",
+      "bogie": "points"
+    },
+    "thumb": {
+      "power": "assets/tram/book/power-tram.webp",
+      "points": "assets/tram/book/junction.webp"
+    },
+    "part": {
+      "power": "pantograph",
+      "points": "points"
+    }
+  },
+  "spot": {
+    "polys": [
+      [
+        [
+          252,
+          658
+        ],
+        [
+          256,
+          630
+        ],
+        [
+          420,
+          572
+        ],
+        [
+          430,
+          534
+        ],
+        [
+          445,
+          532
+        ],
+        [
+          442,
+          566
+        ],
+        [
+          478,
+          556
+        ],
+        [
+          480,
+          592
+        ],
+        [
+          270,
+          664
+        ]
+      ]
+    ],
+    "plus": [
+      372,
+      540
+    ],
+    "axis": [
+      [
+        260,
+        640
+      ],
+      [
+        476,
+        572
+      ]
+    ],
+    "plateAxis": [
+      [
+        150,
+        505
+      ],
+      [
+        1590,
+        495
+      ]
+    ]
+  },
+  "overlay": null
+}

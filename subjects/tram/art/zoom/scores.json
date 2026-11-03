@@ -1,0 +1,117 @@
+{
+ "bogie": {
+  "after": 0.9962,
+  "before": 0.9962,
+  "warped": false
+ },
+ "cab": {
+  "after": 0.992,
+  "before": 0.9905,
+  "warped": true
+ },
+ "cab/handle": {
+  "after": 0.9822,
+  "before": 0.9815,
+  "warped": true
+ },
+ "cab/machine": {
+  "after": 0.9884,
+  "before": 0.9879,
+  "warped": true
+ },
+ "cab/windscreen": {
+  "after": 0.9903,
+  "before": 0.99,
+  "warped": true
+ },
+ "doors": {
+  "after": 0.9932,
+  "before": 0.9931,
+  "warped": true
+ },
+ "front-bogie": {
+  "after": 0.9921,
+  "before": 0.9914,
+  "warped": true
+ },
+ "front-bogie/motor": {
+  "after": 0.9884,
+  "before": 0.9875,
+  "warped": true
+ },
+ "front-bogie/sand": {
+  "after": 0.9921,
+  "before": 0.9919,
+  "warped": true
+ },
+ "front-bogie/wheel": {
+  "after": 0.9723,
+  "before": 0.9719,
+  "warped": true
+ },
+ "joint": {
+  "after": 0.9943,
+  "before": 0.9942,
+  "warped": true
+ },
+ "pantograph": {
+  "after": 0.9846,
+  "before": 0.984,
+  "warped": true
+ },
+ "pantograph/arms": {
+  "after": 0.9854,
+  "before": 0.9851,
+  "warped": true
+ },
+ "pantograph/base": {
+  "after": 0.9948,
+  "before": 0.9945,
+  "warped": true
+ },
+ "pantograph/strip": {
+  "after": 0.9844,
+  "before": 0.9832,
+  "warped": true
+ },
+ "points": {
+  "after": 0.9813,
+  "before": 0.9801,
+  "warped": true
+ },
+ "points/blades": {
+  "after": 0.9872,
+  "before": 0.9866,
+  "warped": true
+ },
+ "points/motor-box": {
+  "after": 0.9823,
+  "before": 0.9822,
+  "warped": true
+ },
+ "rails": {
+  "after": 0.9933,
+  "before": 0.9933,
+  "warped": false
+ },
+ "roof": {
+  "after": 0.9943,
+  "before": 0.9943,
+  "warped": true
+ },
+ "saloon": {
+  "after": 0.9917,
+  "before": 0.9911,
+  "warped": true
+ },
+ "stop": {
+  "after": 0.996,
+  "before": 0.9955,
+  "warped": true
+ },
+ "wire": {
+  "after": 0.996,
+  "before": 0.9955,
+  "warped": true
+ }
+}

@@ -1,0 +1,298 @@
+{
+ "pantograph": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   246.7,
+   82.8,
+   516.6,
+   344.4
+  ]
+ },
+ "wire": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   376.0,
+   0,
+   1148.0,
+   765.33
+  ]
+ },
+ "roof": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   387.2,
+   84.8,
+   885.6,
+   590.4
+  ]
+ },
+ "cab": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   4.46,
+   342.64,
+   487.08,
+   324.72
+  ]
+ },
+ "front-bogie": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   45.68,
+   481.79,
+   534.64,
+   356.43
+  ]
+ },
+ "saloon": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   237.36,
+   332.57,
+   577.28,
+   384.85
+  ]
+ },
+ "doors": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   752.8,
+   268.53,
+   754.4,
+   502.93
+  ]
+ },
+ "joint": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   619.2,
+   264.47,
+   721.6,
+   481.07
+  ]
+ },
+ "bogie": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   520.8,
+   313.87,
+   918.4,
+   612.27
+  ]
+ },
+ "rails": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0.0,
+   66.33,
+   1312.0,
+   874.67
+  ]
+ },
+ "points": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1114.4,
+   444.13,
+   557.6,
+   371.73
+  ]
+ },
+ "stop": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0.0,
+   259.56,
+   656.82,
+   437.88
+  ]
+ },
+ "pantograph/strip": {
+  "level": 3,
+  "parent": "pantograph",
+  "rect": [
+   458.923,
+   120.637,
+   141.258,
+   94.172
+  ],
+  "parentRect": [
+   631.0,
+   112.5,
+   420,
+   280.0
+  ]
+ },
+ "pantograph/arms": {
+  "level": 3,
+  "parent": "pantograph",
+  "rect": [
+   326.78,
+   155.581,
+   331.552,
+   221.035
+  ],
+  "parentRect": [
+   238.1,
+   216.4,
+   985.8,
+   657.2
+  ]
+ },
+ "pantograph/base": {
+  "level": 3,
+  "parent": "pantograph",
+  "rect": [
+   403.294,
+   290.113,
+   175.16,
+   116.773
+  ],
+  "parentRect": [
+   465.6,
+   616.4,
+   520.8,
+   347.2
+  ]
+ },
+ "cab/handle": {
+  "level": 3,
+  "parent": "cab",
+  "rect": [
+   206.141,
+   498.024,
+   133.186,
+   88.791
+  ],
+  "parentRect": [
+   636.0,
+   490.0,
+   420,
+   280.0
+  ]
+ },
+ "cab/windscreen": {
+  "level": 3,
+  "parent": "cab",
+  "rect": [
+   44.606,
+   396.675,
+   342.098,
+   228.065
+  ],
+  "parentRect": [
+   126.6,
+   170.4,
+   1078.8,
+   719.2
+  ]
+ },
+ "cab/machine": {
+  "level": 3,
+  "parent": "cab",
+  "rect": [
+   65.789,
+   390.714,
+   188.743,
+   125.829
+  ],
+  "parentRect": [
+   193.4,
+   151.6,
+   595.2,
+   396.8
+  ]
+ },
+ "front-bogie/motor": {
+  "level": 3,
+  "parent": "front-bogie",
+  "rect": [
+   308.823,
+   622.76,
+   146.191,
+   97.46
+  ],
+  "parentRect": [
+   756.0,
+   405.0,
+   420,
+   280.0
+  ]
+ },
+ "front-bogie/wheel": {
+  "level": 3,
+  "parent": "front-bogie",
+  "rect": [
+   238.094,
+   628.398,
+   155.38,
+   103.587
+  ],
+  "parentRect": [
+   552.8,
+   421.2,
+   446.4,
+   297.6
+  ]
+ },
+ "front-bogie/sand": {
+  "level": 3,
+  "parent": "front-bogie",
+  "rect": [
+   177.356,
+   576.884,
+   252.492,
+   168.328
+  ],
+  "parentRect": [
+   378.3,
+   273.2,
+   725.4,
+   483.6
+  ]
+ },
+ "points/blades": {
+  "level": 3,
+  "parent": "points",
+  "rect": [
+   1358.059,
+   537.354,
+   243.079,
+   162.053
+  ],
+  "parentRect": [
+   671.2,
+   256.8,
+   669.6,
+   446.4
+  ]
+ },
+ "points/motor-box": {
+  "level": 3,
+  "parent": "points",
+  "rect": [
+   1414.255,
+   605.674,
+   152.469,
+   101.646
+  ],
+  "parentRect": [
+   826.0,
+   445.0,
+   420,
+   280.0
+  ]
+ }
+}

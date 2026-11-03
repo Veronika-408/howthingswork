@@ -1,0 +1,702 @@
+{
+ "radar": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   328.4,
+   319.8,
+   213.2
+  ]
+ },
+ "cockpit": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   96.44,
+   207.96,
+   300.12,
+   200.08
+  ]
+ },
+ "avionics": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   268.97,
+   475.6,
+   317.07
+  ]
+ },
+ "first-class": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   114.56,
+   343.37,
+   232.88,
+   155.25
+  ]
+ },
+ "upper-deck": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   221.52,
+   158.01,
+   596.96,
+   397.97
+  ]
+ },
+ "jet-bridge": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   69.82,
+   346.88,
+   408.36,
+   272.24
+  ]
+ },
+ "cabin": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   319.84,
+   30.89,
+   1128.32,
+   752.21
+  ]
+ },
+ "fuselage": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   513.84,
+   0,
+   964.32,
+   642.88
+  ]
+ },
+ "cargo": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   191.25,
+   0.0,
+   1411.5,
+   941.0
+  ]
+ },
+ "wing": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   260.5,
+   0.0,
+   1411.5,
+   941.0
+  ]
+ },
+ "flaps": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   846.0,
+   392.5,
+   738.0,
+   492.0
+  ]
+ },
+ "engine": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   689.6,
+   572.4,
+   442.8,
+   295.2
+  ]
+ },
+ "landing-gear": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   564.16,
+   479.77,
+   429.68,
+   286.45
+  ]
+ },
+ "galley": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1169.85,
+   312.4,
+   258.3,
+   172.2
+  ]
+ },
+ "bulkhead": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1269.54,
+   297.36,
+   250.92,
+   167.28
+  ]
+ },
+ "tail": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   835.6,
+   0,
+   836.4,
+   557.6
+  ]
+ },
+ "apu": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1396.48,
+   249.16,
+   275.52,
+   183.68
+  ]
+ },
+ "recorder": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1407.5,
+   277.33,
+   230,
+   153.33
+  ]
+ },
+ "pushback": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   527.96,
+   300.12,
+   200.08
+  ]
+ },
+ "baggage": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   104.64,
+   378.93,
+   652.72,
+   435.15
+  ]
+ },
+ "fuel-truck": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   856.24,
+   593.32,
+   521.52,
+   347.68
+  ]
+ },
+ "catering": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1101.28,
+   345.76,
+   570.72,
+   380.48
+  ]
+ },
+ "radar/dish": {
+  "level": 3,
+  "parent": "radar",
+  "rect": [
+   0.0,
+   387.363,
+   151.031,
+   100.687
+  ],
+  "parentRect": [
+   0,
+   283.2,
+   725.4,
+   483.6
+  ]
+ },
+ "radar/radome": {
+  "level": 3,
+  "parent": "radar",
+  "rect": [
+   0.0,
+   387.363,
+   151.031,
+   100.687
+  ],
+  "parentRect": [
+   0,
+   283.2,
+   725.4,
+   483.6
+  ]
+ },
+ "cockpit/windows": {
+  "level": 3,
+  "parent": "cockpit",
+  "rect": [
+   145.913,
+   291.744,
+   94.491,
+   62.994
+  ],
+  "parentRect": [
+   253.2,
+   428.8,
+   483.6,
+   322.4
+  ]
+ },
+ "cockpit/controls": {
+  "level": 3,
+  "parent": "cockpit",
+  "rect": [
+   222.193,
+   276.489,
+   113.874,
+   75.915
+  ],
+  "parentRect": [
+   643.6,
+   350.73,
+   582.8,
+   388.53
+  ]
+ },
+ "avionics/racks": {
+  "level": 3,
+  "parent": "avionics",
+  "rect": [
+   73.291,
+   362.728,
+   178.536,
+   119.024
+  ],
+  "parentRect": [
+   236.7,
+   302.8,
+   576.6,
+   384.4
+  ]
+ },
+ "first-class/seats": {
+  "level": 3,
+  "parent": "first-class",
+  "rect": [
+   149.953,
+   391.376,
+   115.245,
+   76.831
+  ],
+  "parentRect": [
+   233.44,
+   316.63,
+   760.12,
+   506.75
+  ]
+ },
+ "first-class/door": {
+  "level": 3,
+  "parent": "first-class",
+  "rect": [
+   228.999,
+   395.616,
+   118.441,
+   78.961
+  ],
+  "parentRect": [
+   754.8,
+   344.6,
+   781.2,
+   520.8
+  ]
+ },
+ "upper-deck/stairs": {
+  "level": 3,
+  "parent": "upper-deck",
+  "rect": [
+   291.729,
+   330.802,
+   213.25,
+   142.167
+  ],
+  "parentRect": [
+   180.65,
+   444.6,
+   548.7,
+   365.8
+  ]
+ },
+ "upper-deck/cabin": {
+  "level": 3,
+  "parent": "upper-deck",
+  "rect": [
+   451.443,
+   216.074,
+   274.695,
+   183.13
+  ],
+  "parentRect": [
+   591.6,
+   149.4,
+   706.8,
+   471.2
+  ]
+ },
+ "jet-bridge/cab": {
+  "level": 3,
+  "parent": "jet-bridge",
+  "rect": [
+   203.388,
+   424.405,
+   158.24,
+   105.493
+  ],
+  "parentRect": [
+   502.4,
+   291.6,
+   595.2,
+   396.8
+  ]
+ },
+ "engine/fan": {
+  "level": 3,
+  "parent": "engine",
+  "rect": [
+   716.41,
+   658.02,
+   214.481,
+   142.987
+  ],
+  "parentRect": [
+   93.0,
+   297.0,
+   744.0,
+   496.0
+  ]
+ },
+ "engine/compressor": {
+  "level": 3,
+  "parent": "engine",
+  "rect": [
+   815.291,
+   674.452,
+   160.861,
+   107.241
+  ],
+  "parentRect": [
+   436.0,
+   354.0,
+   558.0,
+   372.0
+  ]
+ },
+ "engine/combustor": {
+  "level": 3,
+  "parent": "engine",
+  "rect": [
+   873.077,
+   685.349,
+   126.008,
+   84.005
+  ],
+  "parentRect": [
+   636.45,
+   391.8,
+   437.1,
+   291.4
+  ]
+ },
+ "engine/turbine": {
+  "level": 3,
+  "parent": "engine",
+  "rect": [
+   926.711,
+   679.064,
+   134.051,
+   89.367
+  ],
+  "parentRect": [
+   822.5,
+   370.0,
+   465.0,
+   310.0
+  ]
+ },
+ "landing-gear/bogie": {
+  "level": 3,
+  "parent": "landing-gear",
+  "rect": [
+   635.801,
+   597.932,
+   119.673,
+   79.782
+  ],
+  "parentRect": [
+   256.1,
+   422.4,
+   427.8,
+   285.2
+  ]
+ },
+ "landing-gear/strut": {
+  "level": 3,
+  "parent": "landing-gear",
+  "rect": [
+   718.017,
+   567.888,
+   117.491,
+   78.327
+  ],
+  "parentRect": [
+   550.0,
+   315.0,
+   420,
+   280.0
+  ]
+ },
+ "galley/trolleys": {
+  "level": 3,
+  "parent": "galley",
+  "rect": [
+   1224.981,
+   390.383,
+   102.802,
+   68.535
+  ],
+  "parentRect": [
+   327.84,
+   463.73,
+   611.32,
+   407.55
+  ]
+ },
+ "galley/ovens": {
+  "level": 3,
+  "parent": "galley",
+  "rect": [
+   1216.095,
+   345.612,
+   70.629,
+   47.086
+  ],
+  "parentRect": [
+   275.0,
+   197.5,
+   420,
+   280.0
+  ]
+ },
+ "tail/fin": {
+  "level": 3,
+  "parent": "tail",
+  "rect": [
+   1233.445,
+   47.941,
+   438.555,
+   292.37
+  ],
+  "parentRect": [
+   730.62,
+   88.04,
+   805.38,
+   536.92
+  ]
+ },
+ "tail/rudder": {
+  "level": 3,
+  "parent": "tail",
+  "rect": [
+   1195.971,
+   29.187,
+   476.029,
+   317.353
+  ],
+  "parentRect": [
+   661.8,
+   53.6,
+   874.2,
+   582.8
+  ]
+ },
+ "tail/stabiliser": {
+  "level": 3,
+  "parent": "tail",
+  "rect": [
+   1418.793,
+   291.324,
+   253.207,
+   168.805
+  ],
+  "parentRect": [
+   1071.0,
+   535.0,
+   465.0,
+   310.0
+  ]
+ },
+ "apu/unit": {
+  "level": 3,
+  "parent": "apu",
+  "rect": [
+   1525.63,
+   320.91,
+   75.337,
+   50.225
+  ],
+  "parentRect": [
+   720.0,
+   400.0,
+   420,
+   280.0
+  ]
+ },
+ "apu/exhaust": {
+  "level": 3,
+  "parent": "apu",
+  "rect": [
+   1583.03,
+   306.56,
+   75.337,
+   50.225
+  ],
+  "parentRect": [
+   1040.0,
+   320.0,
+   420,
+   280.0
+  ]
+ },
+ "pushback/towbar": {
+  "level": 3,
+  "parent": "pushback",
+  "rect": [
+   157.289,
+   589.508,
+   82.064,
+   54.709
+  ],
+  "parentRect": [
+   805.0,
+   315.0,
+   420,
+   280.0
+  ]
+ },
+ "pushback/nose-gear": {
+  "level": 3,
+  "parent": "pushback",
+  "rect": [
+   157.749,
+   546.991,
+   129.016,
+   86.011
+  ],
+  "parentRect": [
+   807.35,
+   97.4,
+   660.3,
+   440.2
+  ]
+ },
+ "baggage/belt-loader": {
+  "level": 3,
+  "parent": "baggage",
+  "rect": [
+   337.426,
+   489.077,
+   268.737,
+   179.158
+  ],
+  "parentRect": [
+   547.8,
+   259.2,
+   632.4,
+   421.6
+  ]
+ },
+ "baggage/carts": {
+  "level": 3,
+  "parent": "baggage",
+  "rect": [
+   310.485,
+   572.111,
+   331.969,
+   221.313
+  ],
+  "parentRect": [
+   484.4,
+   454.6,
+   781.2,
+   520.8
+  ]
+ },
+ "catering/box": {
+  "level": 3,
+  "parent": "catering",
+  "rect": [
+   1430.354,
+   406.919,
+   203.876,
+   135.918
+  ],
+  "parentRect": [
+   885.65,
+   164.6,
+   548.7,
+   365.8
+  ]
+ },
+ "catering/scissor": {
+  "level": 3,
+  "parent": "catering",
+  "rect": [
+   1427.066,
+   503.191,
+   165.865,
+   110.577
+  ],
+  "parentRect": [
+   876.8,
+   423.7,
+   446.4,
+   297.6
+  ]
+ },
+ "fuel-truck/panel": {
+  "level": 3,
+  "parent": "fuel-truck",
+  "rect": [
+   941.123,
+   601.808,
+   142.603,
+   95.069
+  ],
+  "parentRect": [
+   250.0,
+   25.0,
+   420,
+   280.0
+  ]
+ }
+}

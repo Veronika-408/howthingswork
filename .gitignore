@@ -1,0 +1,17 @@
+dist/
+deploy/
+node_modules/
+video/out/
+video/sfx/cand/
+art/zoom/raw/
+art/zoom/src/
+*/art/zoom/raw/
+*/art/zoom/src/
+*/*/art/zoom/raw/
+*/*/art/zoom/src/
+**/rejected*/
+world/art/old/
+world/art/dir/
+world/art/dir2/
+.DS_Store
+__pycache__/
