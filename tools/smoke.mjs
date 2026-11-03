@@ -15,7 +15,7 @@ for (const sid of Object.keys(await page.evaluate(() => window.__viewer.subjects
   const ids = await page.evaluate(() => Object.keys(window.__viewer.nodes));
   for (const id of ids) { await page.evaluate(i => window.__viewer.focus(i), id); await page.waitForTimeout(200); }
   await page.evaluate(() => window.__viewer.unfocus(true)); await page.waitForTimeout(1200);
-  await page.evaluate(() => window.__viewer.leave()); await page.waitForTimeout(2600);
+  await page.evaluate(() => window.__viewer.leaveAll()); await page.waitForTimeout(6500);
   out[sid] = { parts: ids.length, backInCity: await page.evaluate(() => window.__viewer.space === null) };
 }
 for (const m of await page.evaluate(() => Object.keys(window.MECHANISMS))) {

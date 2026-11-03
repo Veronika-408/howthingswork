@@ -1,0 +1,10 @@
+You are an illustrator of children's science encyclopedias.
+
+Generate one illustrated encyclopedic plate called "the see-through person", in the style of the great children's encyclopedias of the 1980s-1990s (Dorling Kindersley "The Human Body"): fine ink linework and transparent traditional watercolor washes, warm natural colors on slightly ivory paper, friendly, calm and gentle, like a museum poster for children. No 3D render, no cartoon, no photographic look. Nothing scary.
+
+COMPOSITION: three people wait side by side at a bus stop, seen from the front, full figure, standing on one faint ground line near the bottom. The two on the sides are only faint pale grey pencil sketches fading into the paper: on the left a man in a jacket, on the right a small child holding his hand. In the CENTRE, larger and fully painted, stands a friendly grown-up in a long yellow raincoat and blue trousers, smiling, arms slightly away from the body. This central figure fills about 78% of the picture height.
+
+THE CENTRAL FIGURE IS SEE-THROUGH, like a glass window drawn in a science book: the yellow raincoat and the body are shown as a pale transparent outline, so we can see the inner organs painted inside, in correct places and sizes for an adult: the brain in the head, the windpipe, two pink spongy lungs, the heart between them, the liver, the stomach, the coiled intestines, the two kidneys and the bladder. On the figure's right arm and leg (the picture's left side) we see the red muscles inside; on the other arm and leg we see the white bones of the skeleton. Thin red and blue blood vessels run along one arm. Medically correct, simplified for children.
+
+Calm empty ivory paper margins on all sides (about 10% left and right, about 8% top and bottom) for annotations.
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, annotation lines or title. Wide 16:9 landscape.

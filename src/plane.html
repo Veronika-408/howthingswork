@@ -244,6 +244,7 @@ button { font: inherit; color: inherit; }
 .subject:not(.active) { visibility: hidden; }
 .subject .notes, .subject .intro, .subject .leader, .subject .leader-dot { transition: opacity .45s var(--ease); }
 .subject.revealing .notes, .subject.revealing .intro, .subject.revealing .leaders { opacity: 0; transition: none; }
+.entering .subject .notes, .entering .subject .intro, .entering .subject .leaders, .entering .subject .hots, .entering .childplus { opacity: 0; transition: opacity .2s; }
 .wov { position: absolute; left: 0; top: 0; overflow: visible; }
 .in-subject .wov, .in-subject .world-art { visibility: hidden; }
 .whot { fill: rgba(255, 255, 255, 0); stroke: transparent; stroke-width: calc(2.4px * var(--wk, 1)); cursor: pointer; outline: none; transition: fill .25s, stroke .25s; }
@@ -258,6 +259,9 @@ button { font: inherit; color: inherit; }
 .wplus::before { content: "+"; }
 .wplus.on { display: block; animation: wplus-breathe 2.6s ease-in-out infinite; }
 .wplus.lit { background: #8f2f10; animation: none; transform-origin: center; }
+.childplus { z-index: 2; }
+.childhot { fill: rgba(255, 255, 255, 0); stroke: #c2461c; stroke-width: calc(2px * var(--k, 1)); stroke-dasharray: calc(7px * var(--k, 1)) calc(5px * var(--k, 1)); cursor: zoom-in; outline: none; }
+.childhot:hover, .childhot:focus-visible { fill: rgba(255, 250, 232, .22); }
 @keyframes wplus-breathe { 50% { box-shadow: 0 0 0 7px rgba(194, 70, 28, .18), 0 3px 10px rgba(60, 30, 10, .35); } }
 .in-subject #wlabels, .entering #wlabels { display: none; }
 #brand { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); left: max(18px, calc(env(safe-area-inset-left, 0px) + 14px)); z-index: 5;

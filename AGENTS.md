@@ -38,3 +38,4 @@ cut-away plates, deep zoom and moving "How it works" pages. Live at https://howt
 | `scripts/` | `tiles.py` (deep-zoom repaints), `grid.py`, `cutout.py`, `imagegen.sh` |
 | `tools/` | `new_machine.py`, `colour_in.py`, `smoke.mjs`, `screenshots.mjs` |
 | `build.py` | builds everything into `dist/` |
+| `docs/SPACES.md` | the zoom tree: how spaces nest (map → body → skin → cell) and how it grows in both directions |

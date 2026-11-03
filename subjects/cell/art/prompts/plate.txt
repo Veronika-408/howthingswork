@@ -1,0 +1,7 @@
+You are a scientific illustrator specializing in illustrated encyclopedias for young children.
+
+Generate one illustrated encyclopedic plate in the style of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "The Human Body"): extremely detailed fine ink linework and traditional transparent watercolor washes, warm natural colors on slightly ivory paper, friendly, clear and beautiful. No 3D render, no cartoon, no photographic look.
+
+SUBJECT: ONE HUMAN CELL, rounded, with a quarter of it cut away like a slice taken out of a fruit, seen from slightly above, so the inside is clearly visible. Inside, technically correct and clearly separated: the large round NUCLEUS in the middle with its double envelope, nuclear pores and a darker NUCLEOLUS, with fine coiled threads of DNA inside it; folded ribbons of ROUGH ENDOPLASMIC RETICULUM dotted with tiny RIBOSOMES wrapped around the nucleus; a stack of curved flat sacs, the GOLGI apparatus, with small bubbles budding off it; several bean-shaped MITOCHONDRIA with folded inner membranes; a few small round LYSOSOMES; fine fibres of the cytoskeleton; the thin CELL MEMBRANE around everything with a few channel proteins in it. Soft pale cytoplasm fills the space. The cell fills about 75% of the picture height, centred.
+
+Calm empty ivory paper margins on all sides for annotations. ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels or annotation lines. Wide 16:9 landscape.

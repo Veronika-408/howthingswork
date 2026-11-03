@@ -199,6 +199,7 @@ def subject_js(sid, cfg, meta):
             "how": cfg["how"], "paper": "rgb(%d,%d,%d)" % tuple(meta["paper"]), "outline": meta["outline"],
             "TILES": tile_index(cfg["art"]), "bookAssets": book, "credit": cfg.get("credit")}
     if cfg.get("spot"): info["spot"] = cfg["spot"]
+    if cfg.get("parent"): info["parent"] = cfg["parent"]        # a space inside another one (skin inside the body)
     return (f"(function (window) {{\n{body}\n}})(window.SUBJECTS[{json.dumps(sid)}] = {{}});\n"
             f"Object.assign(window.SUBJECTS[{json.dumps(sid)}], {json.dumps(info, separators=(',', ':'))});\n")
 

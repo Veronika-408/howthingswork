@@ -1,0 +1,7 @@
+You are a medical illustrator and technical draftsman specializing in illustrated encyclopedias for young children.
+
+Generate one illustrated encyclopedic plate in the style of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "The Human Body"): extremely detailed fine ink linework and traditional transparent watercolor washes, warm natural colors on slightly ivory paper, friendly and calm, never scary, no blood pooling. No 3D render, no cartoon, no photographic look.
+
+SUBJECT: a BLOCK OF HUMAN SKIN cut out like a slice of layered cake and seen from slightly above and in front, drawn as a clear cross-section. From top to bottom: the thin outer EPIDERMIS, made of many small flat and rounded skin CELLS stacked in rows (draw several individual cells clearly, especially one large clear round cell with its dark nucleus near the middle of the epidermis), with a few dead flat cells flaking off the top; the thick DERMIS below, with a HAIR growing out of its follicle with its little muscle and an oil gland beside it, a coiled SWEAT GLAND with its duct opening as a pore on the surface, tiny NERVE endings, and red arteries and blue veins branching into fine capillaries; at the bottom the yellow, bubbly FAT layer. A drop of sweat sits on the surface beside the pore. The block fills about 80% of the picture width, centred.
+
+Calm empty ivory paper margins on all sides for annotations. ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels or annotation lines. Wide 16:9 landscape.

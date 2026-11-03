@@ -1,0 +1,86 @@
+{
+  "title": "Skin",
+  "kicker": "Inside your skin",
+  "whole": "Whole skin",
+  "hint": "Pick any part of the skin to look closer.",
+  "alt": "A block of human skin cut open like a slice of cake, showing its layers, a hair, a sweat gland, blood vessels, nerves and fat.",
+  "credit": {
+    "name": "@virpo",
+    "url": "https://x.com/virpo"
+  },
+  "describe": [
+    "a block of human skin cut open like a slice of layered cake, with cells, a hair, a sweat gland, blood vessels, nerves and fat",
+    "human skin, simplified for children"
+  ],
+  "plate_w": 1672,
+  "open_sky": false,
+  "replaces": null,
+  "how": {
+    "map": {},
+    "thumb": {},
+    "part": {}
+  },
+  "spot": {
+    "polys": [
+      [
+        [
+          1000,
+          455
+        ],
+        [
+          1045,
+          455
+        ],
+        [
+          1060,
+          500
+        ],
+        [
+          1040,
+          540
+        ],
+        [
+          1010,
+          540
+        ],
+        [
+          998,
+          500
+        ]
+      ]
+    ],
+    "plus": [
+      1030,
+      450
+    ],
+    "axis": [
+      [
+        1000,
+        490
+      ],
+      [
+        1058,
+        490
+      ]
+    ],
+    "plateAxis": [
+      [
+        160,
+        480
+      ],
+      [
+        1500,
+        480
+      ]
+    ]
+  },
+  "overlay": {
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "parent": "body"
+}

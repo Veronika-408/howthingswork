@@ -1,0 +1,78 @@
+{
+  "title": "The Cell",
+  "kicker": "Inside a human cell",
+  "whole": "Whole cell",
+  "hint": "Pick any part of the cell to look closer.",
+  "alt": "One human cell cut open, showing the nucleus, mitochondria, the folded ribbons with ribosomes, the Golgi and lysosomes.",
+  "credit": {
+    "name": "@virpo",
+    "url": "https://x.com/virpo"
+  },
+  "describe": [
+    "one human cell cut open like a fruit, with its nucleus, mitochondria, folded ribbons with ribosomes, Golgi and lysosomes",
+    "a human cell, simplified for children"
+  ],
+  "plate_w": 1672,
+  "open_sky": false,
+  "replaces": null,
+  "how": {
+    "map": {},
+    "thumb": {},
+    "part": {}
+  },
+  "spot": {
+    "polys": [
+      [
+        [
+          740,
+          180
+        ],
+        [
+          860,
+          176
+        ],
+        [
+          865,
+          240
+        ],
+        [
+          740,
+          245
+        ]
+      ]
+    ],
+    "plus": [
+      800,
+      172
+    ],
+    "axis": [
+      [
+        742,
+        210
+      ],
+      [
+        860,
+        210
+      ]
+    ],
+    "plateAxis": [
+      [
+        255,
+        470
+      ],
+      [
+        1340,
+        470
+      ]
+    ]
+  },
+  "overlay": {
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "parent": "skin"
+}

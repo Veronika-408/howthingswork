@@ -208,14 +208,32 @@
     // drawing order: bigger repaints first, smaller (more detailed) ones on top, deepest level last
     S.tiles.sort((a, b) => (a.level - b.level) || (b.w - a.w));
 
-    // its drawing in the city: a quiet outline and a small "+" that says it opens
-    worldSpot("subject:" + sid, S.spot.polys, "subject-spot", S.title);
-    const lab = el("button", "wplus", wlabels);
-    lab.type = "button"; lab.dataset.world = "subject:" + sid; lab.tabIndex = -1;
-    lab.setAttribute("aria-label", "Open " + S.title);
-    wspots["subject:" + sid].label = lab;
+    // Spaces form a tree: a subject sits on the map (parent "world"), or inside another subject's
+    // plate (parent "<id>", spot in that plate's pixels), which is how the zoom keeps going deeper.
+    S.parent = S.parent || "world";
+    if (S.parent === "world") {
+      // its drawing in the city: a quiet outline and a small "+" that says it opens
+      worldSpot("subject:" + sid, S.spot.polys, "subject-spot", S.title);
+      const lab = el("button", "wplus", wlabels);
+      lab.type = "button"; lab.dataset.world = "subject:" + sid; lab.tabIndex = -1;
+      lab.setAttribute("aria-label", "Open " + S.title);
+      wspots["subject:" + sid].label = lab;
+    }
   }
   worldEl.appendChild(wov);
+  // nested spaces: an outline on the parent plate and a "+" that dives in
+  const childPlus = [];
+  for (const sid of SIDS) {
+    const C = SUBJ[sid], P = SUBJ[C.parent];
+    if (!P) continue;
+    const g = svg("g", { class: "children" }, P.ov);
+    const path = svg("path", { d: polyD(C.spot.polys), class: "childhot", tabindex: 0, role: "button", "aria-label": "Look inside: " + C.title }, g);
+    path.dataset.child = sid;
+    const plus = el("button", "wplus childplus", $("#sublabels"));
+    plus.type = "button"; plus.dataset.child = sid; plus.tabIndex = -1; plus.setAttribute("aria-label", "Look inside: " + C.title);
+    childPlus.push({ C, P, plus, path });
+  }
+  const childrenOf = id => SIDS.filter(c => SUBJ[c].parent === id);
 
   const loadTile = (S, t) => { if (!t.wanted) { t.wanted = true; t.img.src = S.tileFile(t.key); } };
   function drawLeaders(S) {
@@ -240,19 +258,22 @@
   const cam = { x: 0, y: 0, s: 1, r: 0 };
   let anim = null;
   const rot = (deg, [x, y]) => { const a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return [c * x - s * y, s * x + c * y]; };
-  let worldCam = null;                        // where the city camera was left when we went into a subject
+  // the spaces we came through, outermost first: { space: null (the map) or subject id, cam }
+  let trail = [];
+  const back = () => trail.length ? trail[trail.length - 1] : null;
+  const worldCamNow = () => !space ? cam : (back() && back().space === null ? back().cam : null);
   const toScreen = (c, [x, y]) => { const [a, b] = rot(c.r || 0, [x * c.s, y * c.s]); return [c.x + a, c.y + b]; };
 
   function apply() {
-    const wc = space ? worldCam : cam;
+    const wc = worldCamNow();
     if (wc) worldEl.style.transform = `translate(${wc.x}px, ${wc.y}px) rotate(${wc.r || 0}deg) scale(${wc.s})`;
-    if (space) subjEl.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${cam.s})`;
+    if (space) subjEl.style.transform = `translate(${cam.x}px, ${cam.y}px) rotate(${cam.r || 0}deg) scale(${cam.s})`;
     wov.style.setProperty("--wk", (1 / (wc ? wc.s : 1)).toFixed(5));
     if (S) S.ov.style.setProperty("--k", (1 / cam.s).toFixed(5));
     const fit = fitView();
     $("#zoom-out").disabled = !space && cam.s <= fit.s * 1.01;
     $("#reset").disabled = cam.s <= fit.s * 1.01 && Math.abs(cam.x - fit.x) < 2 && Math.abs(cam.y - fit.y) < 2;
-    updateTiles(); updateWorldTiles(); placeSubLabels(); placeWorldLabels(); requestDraw();
+    updateTiles(); updateWorldTiles(); placeSubLabels(); placeWorldLabels(); placeChildPlus(); requestDraw();
   }
 
   function viewport() {
@@ -374,7 +395,7 @@
     }
   }
   function updateWorldTiles() {
-    const wc = space ? worldCam : cam;
+    const wc = worldCamNow();
     if (!wc) return;
     const { W, H } = viewport(), ws = wc.s;
     const vx0 = -wc.x / ws, vy0 = -wc.y / ws, vx1 = (W - wc.x) / ws, vy1 = (H - wc.y) / ws;
@@ -399,6 +420,14 @@
     return dpr;
   }
   const ready = im => im.complete && im.naturalWidth > 0;
+  function drawPlate(T, c, alpha, dpr) {
+    if (!ready(T.plate)) return;
+    vg.setTransform(dpr, 0, 0, dpr, 0, 0);
+    vg.translate(c.x, c.y); vg.rotate((c.r || 0) * Math.PI / 180); vg.scale(c.s, c.s);
+    vg.globalAlpha = alpha;
+    vg.drawImage(T.plate, 0, 0, T.PLATE.w, T.PLATE.h);
+    for (const t of T.tiles) if (t.a > 0 && t.loaded) { vg.globalAlpha = alpha * t.a; vg.drawImage(t.img, t.x, t.y, t.w, t.h); }
+  }
   function draw(now) {
     drawRaf = 0;
     const dt = Math.min(.1, ((now || performance.now()) - (drawLast || now || 0)) / 1000); drawLast = now;
@@ -410,7 +439,9 @@
     const step = t => { // fade each repaint towards its target over ~0.4 s
       if (t.a !== t.target) { t.a = t.target > t.a ? Math.min(t.target, t.a + dt / .4) : Math.max(t.target, t.a - dt / .4); moving = true; }
     };
-    const wc = space ? worldCam : cam;
+    const wc = worldCamNow();
+    const b = back();
+    if (space && b && b.space && worldAlpha > 0) drawPlate(SUBJ[b.space], b.cam, worldAlpha, dpr);
     if (worldAlpha > 0 && wc && ready(base)) {
       vg.setTransform(dpr, 0, 0, dpr, 0, 0);
       vg.translate(wc.x, wc.y); vg.rotate((wc.r || 0) * Math.PI / 180); vg.scale(wc.s, wc.s);
@@ -419,11 +450,8 @@
       for (const t of wtiles) { step(t); if (t.a > 0 && t.loaded) { vg.globalAlpha = worldAlpha * t.a; vg.drawImage(t.img, t.x, t.y, t.w, t.h); } }
     } else for (const t of wtiles) step(t);
     if (S && subjAlpha > 0 && ready(S.plate)) {
-      vg.setTransform(dpr, 0, 0, dpr, 0, 0);
-      vg.translate(cam.x, cam.y); vg.scale(cam.s, cam.s);
-      vg.globalAlpha = subjAlpha;
-      vg.drawImage(S.plate, 0, 0, S.PLATE.w, S.PLATE.h);
-      for (const t of S.tiles) { step(t); if (t.a > 0 && t.loaded) { vg.globalAlpha = subjAlpha * t.a; vg.drawImage(t.img, t.x, t.y, t.w, t.h); } }
+      for (const t of S.tiles) step(t);
+      drawPlate(S, cam, subjAlpha, dpr);
       // the dim veil around the focused part, with the part cut out of it
       const st = body.classList.contains("focused") && S.holePolys ? 1 : 0;
       if (shadeA !== st) { shadeA = st > shadeA ? Math.min(1, shadeA + dt / .6) : Math.max(0, shadeA - dt / .6); moving = true; }
@@ -464,9 +492,23 @@
       lab.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`;
     }
   }
+  // a "+" on the current plate for each space inside it (shown with the whole plate, or with the part that opens it)
+  function placeChildPlus() {
+    const entering = body.classList.contains("entering");
+    for (const { C, P, plus, path } of childPlus) {
+      const here = space === P.id && !entering;
+      const opener = current && S && S.nodes[current] && S.nodes[current].opens === C.id;
+      const show = here && (!current || opener);
+      plus.classList.toggle("on", show);
+      path.style.display = show ? "" : "none";
+      if (!show) continue;
+      const [x, y] = toScreen(cam, C.spot.plus);
+      plus.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`;
+    }
+  }
   // each coloured subject carries a small "+" in the city, so it is obvious it opens
   function placeWorldLabels() {
-    const wc = space ? worldCam : cam;
+    const wc = worldCamNow();
     for (const sid of SIDS) {
       const w = wspots["subject:" + sid];
       if (!w || !w.label || !wc) continue;
@@ -523,60 +565,91 @@
     requestAnimationFrame(step);
   });
 
+  const ancestors = sid => { const out = []; for (let p = SUBJ[sid].parent; p && p !== "world"; p = SUBJ[p].parent) out.unshift(p); return out; };
+  // camera on `from` (null = the map) that shows child `sid`'s drawing exactly where its plate will land
+  const camOn = (sid) => landing(SUBJ[sid]).world;
+
+  // Entering a child of the current space is a shared-element move: fly until its drawing lies on its
+  // plate, then dissolve. Anything else (a deep link, a jump across the tree) goes there directly.
   async function enter(sid, { instant = false } = {}) {
     if (space === sid || body.classList.contains("entering")) return;
     const T = SUBJ[sid];
     hideTip(); dismissWorldHint(); whover(null);
     prefetchSubject(T, true);
+    const fromHere = (T.parent === "world" ? null : T.parent) === space;
     const L = landing(T);
-    if (instant || reduceMotion) {
-      worldCam = L.world; setSpace(sid); Object.assign(cam, L.plate);
-      worldEl.style.opacity = 0; subjEl.style.opacity = 1; worldAlpha = 0; subjAlpha = 1; revealSubject(); apply();
+    if (instant || reduceMotion || !fromHere) {
+      if (current) unfocus(true, { noFly: true });
+      const chain = ancestors(sid);                          // e.g. ["body", "skin"] for the cell
+      trail = [{ space: null, cam: camOn(chain[0] || sid) }];
+      chain.forEach((id, i) => trail.push({ space: id, cam: camOn(chain[i + 1] || sid) }));
+      setSpace(sid); Object.assign(cam, L.plate);
+      worldEl.style.opacity = back().space === null ? 0 : 0; subjEl.style.opacity = 1; worldAlpha = 0; subjAlpha = 1; revealSubject(); apply();
     } else {
       body.classList.add("entering");
+      if (current) unfocus(true, { noFly: true });
       await flyTo(L.world, 1300);
-      worldCam = { ...cam };
+      trail.push({ space, cam: { ...cam } });
       setSpace(sid, { arrive: false });
       Object.assign(cam, L.plate);
       subjEl.style.opacity = 0; subjAlpha = 0;
       T.root.classList.add("active", "revealing");
       apply();
       await T.plate.decode().catch(() => {});
-      await fade(520, u => { subjEl.style.opacity = u.toFixed(3); worldEl.style.opacity = (1 - u).toFixed(3); subjAlpha = u; worldAlpha = 1 - u; requestDraw(); });
+      const fromMap = back().space === null;
+      await fade(520, u => { subjEl.style.opacity = u.toFixed(3); if (fromMap) worldEl.style.opacity = (1 - u).toFixed(3); subjAlpha = u; worldAlpha = 1 - u; requestDraw(); });
+      if (!fromMap) subjEl.style.opacity = 1;
       body.classList.remove("entering");
       revealSubject();
       apply();
     }
     try { history.replaceState(null, "", "#" + sid); } catch (e) {}
-    page("/" + sid); track("machine_opened", { machine: sid });
+    page("/" + sid); track("machine_opened", { machine: sid, depth: trail.length });
+    for (const c of childrenOf(sid)) prefetchSubject(SUBJ[c]);
     showHintOnce();
   }
 
+  // Up one space: back out of the plate onto its drawing in the parent, dissolve, then show the parent whole.
   async function leave() {
     if (!space || body.classList.contains("entering")) return;
-    const T = S, was = space;
+    const T = S, was = space, b = back();
     if (current) unfocus(true, { noFly: true });
     body.classList.remove("focused");
     body.classList.add("entering");
-    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
-    track("back_to_city", { machine: was }); page("/");
     const L = landing(T);
     await flyTo(L.plate, 600);
-    worldCam = L.world;
+    b.cam = L.world;
+    const toMap = b.space === null;
+    if (!toMap) { const P = SUBJ[b.space]; for (const t of P.tiles) t.a = t.target = 0; }   // parent shown as its bare plate, like on arrival
     apply();
-    await fade(480, u => { subjEl.style.opacity = (1 - u).toFixed(3); worldEl.style.opacity = u.toFixed(3); subjAlpha = 1 - u; worldAlpha = u; requestDraw(); });
+    await fade(480, u => { subjEl.style.opacity = (1 - u).toFixed(3); if (toMap) worldEl.style.opacity = u.toFixed(3); subjAlpha = 1 - u; worldAlpha = u; requestDraw(); });
     T.root.classList.remove("active");
-    body.classList.remove("in-subject");
-    setSpace(null);
-    Object.assign(cam, L.world);
-    worldCam = null;
-    apply();
-    await flyTo(worldFit(), 1200);
+    trail.pop();
+    track("back_to_city", { machine: was, to: b.space || "map" });
+    if (toMap) {
+      body.classList.remove("in-subject");
+      setSpace(null);
+      Object.assign(cam, L.world);
+      apply();
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+      page("/");
+      await flyTo(worldFit(), 1200);
+    } else {
+      setSpace(b.space);
+      Object.assign(cam, L.world);
+      subjEl.style.opacity = 1; subjAlpha = 1; worldAlpha = 0;
+      revealSubject();
+      apply();
+      try { history.replaceState(null, "", "#" + b.space); } catch (e) {}
+      page("/" + b.space);
+      await flyTo(subjectFit(S), 1000);
+    }
     body.classList.remove("entering");
     apply();
-    const spot = wspots["subject:" + was];
+    const spot = toMap ? wspots["subject:" + was] : null;
     if (spot) spot.path.focus({ preventScroll: true });
   }
+  async function leaveAll() { while (space) await leave(); }
 
   // ======================================================================= focus / panel (inside a subject)
   function setLit(id, on) {
@@ -599,7 +672,9 @@
 
   function fillPanel(id) {
     const p = S.nodes[id], sibs = siblings(id);
-    const crumbs = [crumbButton("The city", () => leave()), crumbButton(S.whole, () => unfocus(true))];
+    const crumbs = [crumbButton("The city", () => leaveAll())];
+    trail.forEach((t, i) => { if (t.space) crumbs.push(crumbButton(SUBJ[t.space].title, async () => { while (trail.length > i + 1) await leave(); })); });
+    crumbs.push(crumbButton(S.whole, () => unfocus(true)));
     if (p.level === 3) crumbs.push(crumbButton(S.nodes[p.parent].name, () => focus(p.parent)));
     const here = document.createElement("span"); here.textContent = p.name; here.setAttribute("aria-current", "location");
     crumbs.push(here);
@@ -623,8 +698,9 @@
     const mech = HOW()[id], how = $("#how");
     how.hidden = !(mech && window.BOOK && window.BOOK.has(mech));
     if (!how.hidden) { $("#how-title").textContent = window.MECHANISMS[mech].title; $("#how-img").src = S.how.thumb[mech]; }
-    $("#deeper").hidden = !p.children.length;
-    $("#deeper-list").replaceChildren(...p.children.map(c => crumbButton(S.nodes[c].name, () => focus(c))));
+    const inside = p.opens && SUBJ[p.opens] ? [crumbButton(`Inside: ${SUBJ[p.opens].title}`, () => enter(p.opens))] : [];
+    $("#deeper").hidden = !p.children.length && !inside.length;
+    $("#deeper-list").replaceChildren(...inside, ...p.children.map(c => crumbButton(S.nodes[c].name, () => focus(c))));
     const fig = $("#figure"), img = $("#p-img");
     fig.hidden = p.level !== 2;
     if (p.level === 2) {
@@ -741,7 +817,9 @@
       return;
     }
     if (e.pointerType === "mouse") {
-      if (space) {
+      const child = e.target.closest && e.target.closest("[data-child]");
+      if (space && child) { const C = SUBJ[child.dataset.child]; hover(null); showTip("Look inside: " + C.title + (C.credit ? ` · by ${C.credit.name}` : ""), e.clientX, e.clientY); }
+      else if (space) {
         const id = hitId(e.target);
         hover(id);
         if (id && id !== current) showTip(S.nodes[id].name, e.clientX, e.clientY); else hideTip();
@@ -761,7 +839,9 @@
     if (drag && pointers.size === 0) {
       stage.classList.remove("dragging");
       if (!drag.moved && e.type === "pointerup" && !body.classList.contains("entering")) {
-        if (space) {
+        const child = drag.target.closest && drag.target.closest("[data-child]");
+        if (space && child) enter(child.dataset.child);
+        else if (space) {
           const id = hitId(drag.target);
           if (id) { if (id !== current) focus(id); }
           else if (current) unfocus();
@@ -777,6 +857,7 @@
   stage.addEventListener("pointercancel", endPointer);
   stage.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hover(null); whover(null); hideTip(); } });
   wlabels.addEventListener("click", e => { const k = hitWorld(e.target); if (k) worldClick(k); });
+  $("#sublabels").addEventListener("click", e => { const c = e.target.closest("[data-child]"); if (c) enter(c.dataset.child); });
   wlabels.addEventListener("pointerover", e => whover(hitWorld(e.target)));
 
   stage.addEventListener("wheel", e => {
@@ -817,8 +898,8 @@
   $("#prev").addEventListener("click", () => step(-1));
   $("#next").addEventListener("click", () => step(1));
   $("#tour").addEventListener("click", () => { if (S) { track("tour_started", { machine: S.id }); focus(S.ORDER[0], { fromKey: true }); } });
-  $("#city").addEventListener("click", () => leave());
-  $("#brand").addEventListener("click", () => space ? leave() : flyTo(worldFit(), 800));
+  $("#city").addEventListener("click", () => leaveAll());
+  $("#brand").addEventListener("click", () => space ? leaveAll() : flyTo(worldFit(), 800));
   const centerZoom = f => {
     const { W, H } = viewport(), fit = fitView();
     dismissHint();
@@ -954,6 +1035,6 @@ Credit it to: (your name or @handle, and a link)`;
 
   window.__viewer = {
     get nodes() { return S ? S.nodes : {}; }, get tiles() { return S ? S.tiles : []; }, get space() { return space; },
-    cam, focus, unfocus, enter, leave, subjects: SUBJ, worldTiles: wtiles
+    cam, focus, unfocus, enter, leave, leaveAll, subjects: SUBJ, worldTiles: wtiles
   };
 })();

@@ -1,0 +1,77 @@
+{
+  "title": "The Human Body",
+  "kicker": "Inside a person",
+  "whole": "Whole body",
+  "hint": "Pick any part of the body to look closer.",
+  "alt": "A see-through person at a bus stop, showing the brain, lungs, heart, stomach, intestines, muscles and bones.",
+  "credit": {
+    "name": "@virpo",
+    "url": "https://x.com/virpo"
+  },
+  "describe": [
+    "a friendly see-through person in a yellow raincoat at a bus stop, with the organs, muscles and bones painted inside, flanked by two faint pencil figures",
+    "the human body, simplified for children"
+  ],
+  "plate_w": 1672,
+  "open_sky": false,
+  "replaces": null,
+  "how": {
+    "map": {},
+    "thumb": {},
+    "part": {}
+  },
+  "spot": {
+    "polys": [
+      [
+        [
+          1100,
+          728
+        ],
+        [
+          1145,
+          728
+        ],
+        [
+          1145,
+          780
+        ],
+        [
+          1100,
+          780
+        ]
+      ]
+    ],
+    "plus": [
+      1124,
+      722
+    ],
+    "axis": [
+      [
+        1124,
+        736
+      ],
+      [
+        1124,
+        773
+      ]
+    ],
+    "plateAxis": [
+      [
+        818,
+        25
+      ],
+      [
+        818,
+        905
+      ]
+    ]
+  },
+  "overlay": {
+    "rect": [
+      1068.0,
+      690.0,
+      150.0,
+      100.0
+    ]
+  }
+}

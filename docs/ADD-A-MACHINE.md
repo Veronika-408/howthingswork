@@ -81,6 +81,12 @@ The camera uses the two axes to zoom into the map until the drawing lies exactly
 dissolves into it, so get them right. Set `replaces` to the id of the grey machine you coloured in.
 That removes it from the "coming soon" list.
 
+### Inside something else
+
+A machine doesn't have to sit on the map. It can be drawn inside another space, like the skin inside the
+body or the cell inside the skin. Set `parent` to that space's id, give `spot` in that space's plate pixels,
+and skip `colour_in.py`. Then you can keep zooming in as far as you like. See `docs/SPACES.md`.
+
 ## 6. "How it works" (strongly encouraged)
 
 Choose one or two pages that let a child **do** something: dig, lift, ring, steer.
