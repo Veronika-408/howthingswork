@@ -15,3 +15,4 @@ world/art/dir/
 world/art/dir2/
 .DS_Store
 __pycache__/
+analytics.json

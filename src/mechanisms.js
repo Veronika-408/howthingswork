@@ -100,7 +100,7 @@
 
         // the inset: tiller and rudder pedals
         st.inset.innerHTML = `<svg viewBox="0 0 560 300" class="ck-inset">
-          <g class="ck-tiller"><image href="${A}ctl-2.webp" x="-87" y="-76" width="187" height="196"/></g>
+          <g class="ck-tiller"><image href="${A}ctl-tiller.webp" x="-92" y="-92" width="184" height="184"/></g>
           <g class="ck-pedal" data-side="-1"><image href="${A}ctl-4.webp" x="-55" y="-204" width="110" height="204"/></g>
           <g class="ck-pedal" data-side="1"><image href="${A}ctl-5.webp" x="-55" y="-204" width="110" height="204"/></g>
           <circle class="ck-ihit" cx="130" cy="160" r="105" tabindex="0" role="slider" aria-label="Tiller"/>

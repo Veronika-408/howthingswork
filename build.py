@@ -257,10 +257,21 @@ def build_html(world, metas, pages=()):
             '<link rel="apple-touch-icon" href="assets/brand/icon-512.png">\n'
             '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}'
             'body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n'
-            + head + "</style>\n</head>\n<body>\n" + body + "\n</body>\n</html>\n")
+            + head + "</style>\n</head>\n<body>\n" + body + "\n" + analytics_tag() + "</body>\n</html>\n")
     (DIST / "index.html").write_text(full)
 
 SITE = "https://howthings.work"
+
+def analytics_tag():
+    """Cloudflare Web Analytics (cookieless page views). Token from $CF_BEACON_TOKEN or analytics.json
+    {"cloudflare": "<token>"}; without one, no tag is added (local builds and forks stay untracked)."""
+    import os
+    token = os.environ.get("CF_BEACON_TOKEN")
+    f = ROOT / "analytics.json"
+    if not token and f.exists(): token = json.loads(f.read_text()).get("cloudflare")
+    if not token: return ""
+    return ("<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
+            f"data-cf-beacon='{json.dumps({'token': token, 'spa': False})}'></script>\n")
 
 def subject_data(cfg):
     """parts, hotspots and zoom data of a subject, evaluated by node (they are plain JS files)."""
@@ -321,7 +332,7 @@ a{{color:#a23b20}}h1{{font-size:42px;line-height:1.05;margin:.2em 0}}h2{{margin:
 <p>{esc(P.get('intro', ''))}</p>
 {''.join(items)}
 <p><a class="open" href="/#{esc(sid)}">Explore it</a> · <a href="/contribute.md">Build the next machine</a></p>
-</main></body></html>
+</main>{analytics_tag()}</body></html>
 """
         (DIST / sid).mkdir(parents=True, exist_ok=True)
         (DIST / sid / "index.html").write_text(html_page)
