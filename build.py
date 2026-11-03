@@ -160,7 +160,8 @@ def build_world(images=True):
     # machines that have been built bring a coloured cut-out of themselves (subjects/<id>/world/colour.png,
     # placed at overlay.rect in map pixels); it is painted over the grey map and every map tile it touches
     overlays = [(Image.open(c["dir"] / "world" / "colour.png").convert("RGBA"), c["overlay"]["rect"])
-                for c in SUBJECTS.values() if c.get("dir") and c.get("overlay") and (c["dir"] / "world" / "colour.png").exists()]
+                for c in SUBJECTS.values() if c.get("dir") and c.get("overlay") and (c["dir"] / "world" / "colour.png").exists()
+                and (c["art"] / "plate.png").exists()]   # a machine is coloured in only once it can be opened
     def paint(im, x0, y0, k):
         """Composite every overlay onto im, whose pixel (0, 0) is map point (x0, y0), at k pixels per map pixel."""
         im = im.convert("RGBA")
@@ -214,7 +215,7 @@ def build_subject_books():
 
 def build_html(world, metas, pages=()):
     page = (SRC / "plane.html").read_text()
-    subjects = "window.SUBJECTS = {};\n" + "".join(subject_js(sid, cfg, metas[sid]) for sid, cfg in SUBJECTS.items())
+    subjects = "window.SUBJECTS = {};\n" + "".join(subject_js(sid, cfg, metas[sid]) for sid, cfg in SUBJECTS.items() if sid in metas)   # machines still being made are skipped
     wdata = (WORLD_SRC / "world.js").read_text() if (WORLD_SRC / "world.js").exists() else "window.WORLD_DATA = {};"
     wjs = (f"{wdata}\nwindow.WORLD = Object.assign({json.dumps(world or {}, separators=(',', ':'))}, window.WORLD_DATA);\n"
            "for (const [id, p] of Object.entries(window.WORLD.spots || {})) if (window.SUBJECTS[id] && !window.SUBJECTS[id].spot) window.SUBJECTS[id].spot = p;\n"
@@ -263,15 +264,32 @@ def build_html(world, metas, pages=()):
 SITE = "https://howthings.work"
 
 def analytics_tag():
-    """Cloudflare Web Analytics (cookieless page views). Token from $CF_BEACON_TOKEN or analytics.json
-    {"cloudflare": "<token>"}; without one, no tag is added (local builds and forks stay untracked)."""
+    """Analytics for the live site only (local builds, previews and forks send nothing).
+    analytics.json (not in the repository): {"cloudflare": "<beacon token>", "posthog": "<project key>",
+    "posthog_host": "https://eu.i.posthog.com"}; $CF_BEACON_TOKEN and $POSTHOG_KEY also work.
+    PostHog runs without cookies or storage, without session recordings and without autocapture:
+    the site sends page views per machine and part, time on page, and a few named events (see track() in app.js)."""
     import os
-    token = os.environ.get("CF_BEACON_TOKEN")
     f = ROOT / "analytics.json"
-    if not token and f.exists(): token = json.loads(f.read_text()).get("cloudflare")
-    if not token: return ""
-    return ("<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
-            f"data-cf-beacon='{json.dumps({'token': token, 'spa': False})}'></script>\n")
+    cfg = json.loads(f.read_text()) if f.exists() else {}
+    cf = os.environ.get("CF_BEACON_TOKEN") or cfg.get("cloudflare")
+    ph = os.environ.get("POSTHOG_KEY") or cfg.get("posthog")
+    host = cfg.get("posthog_host", "https://eu.i.posthog.com")
+    out = ""
+    if cf:
+        out += ("<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
+                f"data-cf-beacon='{json.dumps({'token': cf, 'spa': False})}'></script>\n")
+    if ph:
+        out += ("<script>\n(function () {\n"
+                "  if (!/(^|\\.)howthings\\.work$/.test(location.hostname) || /[?&]video\\b/.test(location.search)) return;\n"
+                "  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(\".\");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement(\"script\")).type=\"text/javascript\",p.crossOrigin=\"anonymous\",p.async=!0,p.src=s.api_host.replace(\".i.posthog.com\",\"-assets.i.posthog.com\")+\"/static/array.js\",(r=t.getElementsByTagName(\"script\")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a=\"posthog\",u.people=u.people||[],u.toString=function(t){var e=\"posthog\";return\"posthog\"!==a&&(e+=\".\"+a),t||(e+=\" (stub)\"),e},u.people.toString=function(){return u.toString(1)+\".people (stub)\"},o=\"init capture register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset\".split(\" \"),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);\n"
+                f"  posthog.init({json.dumps(ph)}, {{ api_host: {json.dumps(host)}, persistence: \"memory\", person_profiles: \"identified_only\",\n"
+                "    autocapture: false, capture_pageview: false, capture_pageleave: true, disable_session_recording: true,\n"
+                "    capture_heatmaps: false, capture_dead_clicks: false, disable_surveys: true });\n"
+                "  window.track = function (event, props) { posthog.capture(event, props || {}); };\n"
+                "  posthog.capture(\"$pageview\");\n"
+                "})();\n</script>\n")
+    return out
 
 def subject_data(cfg):
     """parts, hotspots and zoom data of a subject, evaluated by node (they are plain JS files)."""

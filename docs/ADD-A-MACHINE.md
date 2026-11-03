@@ -17,6 +17,8 @@ Your job is to make it as good as the jumbo jet and the tram, then open a pull r
    isn't on the map at all is fine too, but then it also needs a spot on the map (step 5).
 2. **Say it's taken.** Open a draft pull request titled `Add <machine>` early, so nobody else starts the same one.
 3. **Ask for the credit line.** The name or @handle and a link, which go into `credit` in `subject.json`.
+   Tell the user that contributions are made under the [Contributor Terms](https://github.com/virpo/howthingswork/blob/main/CONTRIBUTING.md):
+   they keep the credit, and the maintainer may publish and sell the encyclopedia with their machine in it.
 4. **Use the skills.** Install `infinite-book-explainer` from https://github.com/virpo/agent-skills
    (`skills/infinite-book-explainer`; until it is merged to main, it is on the branch `feat/infinite-book-explainer`) and follow it for the art. It documents the method this project was
    built with, and every mistake already made. In this repository, also follow `.claude/skills/add-a-machine`.

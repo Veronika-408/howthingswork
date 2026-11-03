@@ -1,3 +1,22 @@
+howthings.work is open: you can read it, run it, learn from it and add to it. The rights stay with
+its maintainer, so the encyclopedia can also be published and sold as a book, an app or a course.
+
+1. Code (*.js, *.mjs, *.py, *.sh, *.html, *.css and build files): MIT License, below.
+
+2. Pictures, texts and data (everything under art/, subjects/, world/, brand/, docs/prompts/,
+   and the exhibit texts in src/parts.js and src/zoom.js): Copyright (c) 2026 Peter Hraska.
+   Licensed under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0),
+   https://creativecommons.org/licenses/by-nc/4.0/ . You may use, share and adapt them for
+   non-commercial purposes, such as at home, in a classroom or in a free project, with credit to
+   "howthings.work". Any commercial use, for example in a paid course, app, book, product or
+   service, needs written permission. Ask via https://x.com/virpo.
+
+3. Contributions are accepted under the Contributor Terms in CONTRIBUTING.md.
+
+Material published in this repository before 3 November 2026 at 15:00 CET was released under CC BY 4.0
+for pictures and texts. Copies taken before then keep those terms.
+
+-----------------------------------------------------------------------------------------------------
 MIT License
 
 Copyright (c) 2026 Peter Hraska
@@ -15,6 +34,3 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
-
-Pictures and texts (everything under art/, subjects/*/art/, world/art/, brand/, and the exhibit texts) are
-licensed under Creative Commons Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/).

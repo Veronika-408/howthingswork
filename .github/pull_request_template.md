@@ -13,6 +13,7 @@
 - [ ] `node tools/smoke.mjs`: no errors
 - [ ] Zoom from the map lands on the plate without a jump, on desktop and phone
 - [ ] Only `subjects/<id>/` changed
+- [ ] I agree to the [Contributor Terms](../CONTRIBUTING.md#contributor-terms)
 
 **Screenshots** (embed from your branch: `subjects/<id>/screenshots/`):
 

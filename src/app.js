@@ -20,6 +20,10 @@
     return { x0, y0, x1, y1 };
   };
   const polyD = polys => polys.map(pts => "M" + pts.map(p => p.map(v => +v.toFixed(2)).join(",")).join("L") + "Z").join("");
+  // analytics: window.track exists only on the live site (see analytics_tag in build.py)
+  const track = (event, props) => { try { window.track && window.track(event, props); } catch (e) {} };
+  // every machine and part counts as its own page, so "which parts do people look at" is a page report
+  const page = path => track("$pageview", { $current_url: location.origin + path, $pathname: path });
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const smooth = (a, b, t) => { const u = Math.min(1, Math.max(0, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 
@@ -544,6 +548,7 @@
       apply();
     }
     try { history.replaceState(null, "", "#" + sid); } catch (e) {}
+    page("/" + sid); track("machine_opened", { machine: sid });
     showHintOnce();
   }
 
@@ -554,6 +559,7 @@
     body.classList.remove("focused");
     body.classList.add("entering");
     try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    track("back_to_city", { machine: was }); page("/");
     const L = landing(T);
     await flyTo(L.plate, 600);
     worldCam = L.world;
@@ -587,6 +593,7 @@
   const openHow = () => {
     const mech = HOW()[current];
     if (!mech) return;
+    track("book_opened", { machine: S.id, page: mech, from: current });
     window.BOOK.open(mech, { fromSrc: S.tileFile(S.nodes[current].level === 3 ? S.nodes[current].key : part(current)) });
   };
 
@@ -653,6 +660,7 @@
     body.classList.add("focused");
     dismissHint();
     try { history.replaceState(null, "", `#${S.id}_${id}`); } catch (e) {}
+    page(`/${S.id}/${id.replace(".", "/")}`); track("part_opened", { machine: S.id, part: id, level: n.level });
     requestAnimationFrame(() => flyTo(focusView(id), n.level === 3 ? 1300 : 1200));
     if (fromKey) $("#close").focus({ preventScroll: true });
   }
@@ -808,7 +816,7 @@
   addEventListener("bookclosed", () => { if (current) try { history.replaceState(null, "", `#${S.id}_${current}`); } catch (e) {} });
   $("#prev").addEventListener("click", () => step(-1));
   $("#next").addEventListener("click", () => step(1));
-  $("#tour").addEventListener("click", () => S && focus(S.ORDER[0], { fromKey: true }));
+  $("#tour").addEventListener("click", () => { if (S) { track("tour_started", { machine: S.id }); focus(S.ORDER[0], { fromKey: true }); } });
   $("#city").addEventListener("click", () => leave());
   $("#brand").addEventListener("click", () => space ? leave() : flyTo(worldFit(), 800));
   const centerZoom = f => {
@@ -824,7 +832,7 @@
   $("#zoom-out").addEventListener("click", () => (space && cam.s <= fitView().s * 1.01) ? leave() : centerZoom(1 / 1.6));
   $("#reset").addEventListener("click", () => flyTo(fitView(), 800));
   const about = $("#about-dlg");
-  $("#about").addEventListener("click", () => about.showModal());
+  $("#about").addEventListener("click", () => { about.showModal(); track("about_opened"); });
   // ---------- build a machine: the prompt people hand to their agent ----------
   const buildDlg = $("#build-dlg");
   function openBuild(machine) {
@@ -846,12 +854,14 @@ Credit it to: (your name or @handle, and a link)`;
     }), Object.assign(document.createElement("li"), { className: "open", textContent: `${(WORLD.soon || []).length} more machines · by @you?` }));
     if (about.open) about.close();
     buildDlg.showModal();
+    track("build_dialog_opened", { machine: machine || null });
   }
   $("#build").addEventListener("click", () => openBuild());
   about.addEventListener("click", e => { if (e.target.closest("[data-contribute]")) openBuild(); });
   buildDlg.addEventListener("click", e => { if (e.target === buildDlg || e.target.closest("[data-close]")) buildDlg.close(); });
   $("#build-copy").addEventListener("click", async () => {
     const b = $("#build-copy"), text = $("#build-prompt").textContent;
+    track("build_prompt_copied", { prompt: text.slice(0, 200) });
     try { await navigator.clipboard.writeText(text); b.textContent = "Copied"; }
     catch (e) { const r = document.createRange(); r.selectNodeContents($("#build-prompt")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "Selected, press Copy"; }
     setTimeout(() => { b.textContent = "Copy prompt"; }, 1800);

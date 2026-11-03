@@ -253,8 +253,10 @@
   }
 
   let current = 0, playTimer = 0;
+  const track = (event, props) => { try { window.track && window.track(event, props); } catch (e) {} };
   function setStep(n, user = false) {
     current = n;
+    if (user && open) track("book_step", { page: open.id, step: n });
     for (const b of document.querySelectorAll("#bk-steps button")) b.classList.toggle("on", +b.dataset.step === n);
     for (const c of fig.querySelectorAll(".bk-callout")) c.classList.toggle("on", +c.dataset.step === n);
     open && open.api.step(n);
@@ -270,8 +272,10 @@
     open.api.step(0);
   }
   window.__clearStep = clearStep;
-  $("#bk-control").addEventListener("input", e => { if (e.isTrusted) clearStep(); });
-  $("#bk-control").addEventListener("click", e => { if (e.isTrusted && e.target.closest(".bk-pill")) clearStep(); });
+  const usedControl = () => { if (open && !open.used) { open.used = true; track("book_control_used", { page: open.id }); } };
+  $("#bk-control").addEventListener("input", e => { if (e.isTrusted) { clearStep(); usedControl(); } });
+  $("#bk-control").addEventListener("click", e => { if (e.isTrusted && e.target.closest(".bk-pill")) { clearStep(); usedControl(); } });
+  for (const el of [fig, $("#bk-inset"), $("#bk-side")]) el.addEventListener("pointerdown", e => { if (e.isTrusted) usedControl(); });
 
   function stopPlay() { clearTimeout(playTimer); playTimer = 0; $("#bk-play").setAttribute("aria-pressed", "false"); $("#bk-play").lastChild.textContent = " Play the steps"; }
   function play() {

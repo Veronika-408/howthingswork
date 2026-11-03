@@ -39,5 +39,7 @@ More in [docs/DEVELOPING.md](docs/DEVELOPING.md).
 
 ## Licence
 
-Code: MIT ([LICENSE](LICENSE)). Pictures and texts: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
-credited to each machine's builder. Made by [@virpo](https://x.com/virpo), developed with love™.
+Open to read, run and build on. Code: MIT. Pictures and texts: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/):
+free for homes, classrooms and non-commercial projects, with credit to howthings.work. For commercial
+use (courses, apps, books, products), ask [@virpo](https://x.com/virpo). Contributions are welcome under the
+[Contributor Terms](CONTRIBUTING.md). Details in [LICENSE](LICENSE). Made by [@virpo](https://x.com/virpo), developed with love™.
