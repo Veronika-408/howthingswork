@@ -45,7 +45,7 @@
     const [x, y, w, h] = t.rect;
     const img = new Image(); img.decoding = "async";
     const wt = { ...t, x, y, w, h, img, loaded: false, wanted: false, a: 0, target: 0, on: (WORLD.baseScale || 2) * .95 };
-    img.addEventListener("load", () => { wt.loaded = true; requestDraw(); }, { once: true });
+    img.addEventListener("load", () => { wt.loaded = true; updateWorldTiles(); requestDraw(); }, { once: true });
     return wt;
   });
   const loadWT = t => { if (!t.wanted) { t.wanted = true; t.img.src = t.src; } };
@@ -202,7 +202,7 @@
       const img = new Image(); img.decoding = "async";
       const parentDensity = t.level === 2 ? 1 : TILE_PX / S.TILES[key.split("/")[0]].rect[2];
       const tile = { key, level: t.level, x, y, w, h, img, on: parentDensity * 1.15, loaded: false, wanted: false, a: 0, target: 0 };
-      img.addEventListener("load", () => { tile.loaded = true; requestDraw(); }, { once: true });
+      img.addEventListener("load", () => { tile.loaded = true; updateTiles(); requestDraw(); }, { once: true });
       return tile;
     });
     // drawing order: bigger repaints first, smaller (more detailed) ones on top, deepest level last
@@ -401,7 +401,8 @@
     const vx0 = -wc.x / ws, vy0 = -wc.y / ws, vx1 = (W - wc.x) / ws, vy1 = (H - wc.y) / ws;
     for (const t of wtiles) {
       const visible = wc.r ? true : t.x < vx1 && t.x + t.w > vx0 && t.y < vy1 && t.y + t.h > vy0;
-      const need = Math.min(1, Math.max(0, (ws - t.on * .75) / (t.on * .25)));
+      const eff = ws * Math.min(2, devicePixelRatio || 1);          // screen pixels per map pixel
+      const need = Math.min(1, Math.max(0, (eff - t.on * .75) / (t.on * .25)));
       if (visible && need > 0) loadWT(t);
       t.target = visible && t.loaded ? need : 0;
     }

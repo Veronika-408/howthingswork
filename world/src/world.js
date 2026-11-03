@@ -3,7 +3,7 @@
 // (left end to right end of the vehicle) that is matched to plateAxis on its encyclopedia plate,
 // so the camera can fly until the drawing lies exactly on the plate before dissolving into it.
 window.WORLD_DATA = {
-  baseScale: .8,                      // sharper city tiles fade in once the city is shown this large
+  baseScale: .9,                      // sharper city tiles fade in once the city is drawn at this many screen pixels per map pixel
   focus: [430, 420],                  // phones open here, around the jet and the tram
   spots: {
     plane: {

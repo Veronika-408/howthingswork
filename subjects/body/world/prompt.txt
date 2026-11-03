@@ -1,11 +1,8 @@
-Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper: a bus at a bus stop with a glass shelter, and a few people on the pavement. Image 2 is the encyclopedia plate these people open into.
+Image 1 is a crop of a hand-drawn soft grey pencil isometric map of a small river town on warm white paper: a bus at a bus stop with a glass shelter. Image 2 is the encyclopedia plate the family opens into.
 
-EDIT IMAGE 1, keeping the bus, the shelter, the pavement, the trees, every line, position and the framing exactly as they are, with ONE change:
+EDIT IMAGE 1, keeping the bus, the shelter, the road, the trees, every line, position and the framing exactly as they are, with ONE change to the people on the pavement:
 
-Replace the people waiting at the shelter with a tiny miniature of EXACTLY the three people in Image 2, standing on the pavement just in front of the shelter, in the same order, left to right, facing us:
-- on the LEFT, the man from Image 2: light grey-beige jacket over a sweater, a shoulder bag, light trousers;
-- in the MIDDLE and a little in front, the woman from Image 2: curly brown hair, a long bright YELLOW raincoat, blue trousers, brown boots, arms a little away from her body;
-- on the RIGHT, the child from Image 2: a small boy in a hooded jacket with a little backpack, holding the woman's hand and looking up at her.
-Paint all three in rich ink-and-watercolour so they read as a bright little patch of colour from far away: the woman strongest (vivid yellow), the man and the child in soft warm colours. Remove any other people at the shelter. Everything else stays soft grey pencil, untouched, same size and place.
+1. A small queue of SIX or SEVEN ordinary people waiting along the pavement under and beside the shelter, drawn in the same soft grey pencil as the rest of the map (no colour): a man with a newspaper, an old lady with a shopping bag, a teenager with headphones, a woman with a pushchair, a man with an umbrella.
+2. In FRONT of them, in the middle of the pavement, slightly bigger and clearly separated, the family from Image 2 standing together, left to right, facing us: the man in a light beige jacket with a shoulder bag; the woman in a long bright yellow raincoat, blue trousers and brown boots, curly brown hair; the small boy in a hooded jacket with a backpack holding her hand. Paint ONLY these three in rich ink-and-watercolour with crisp dark ink outlines, so they pop out of the grey crowd like a bright little sticker: the woman a vivid yellow, the man and the boy in warm, clearly coloured clothes (the man's jacket warm tan, the boy's hood soft blue).
 
 No text, letters or numbers. Same 3:2 framing as Image 1.
