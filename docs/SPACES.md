@@ -7,6 +7,7 @@ and the zoom moves along it, up or down:
 the map (the town)                       ← you start here
 ├── The Jumbo Jet                        subjects: plane (built in)
 ├── The City Tram                        subjects/tram
+├── The Weather                          subjects/weather   parent: world (the clouds in the sky)
 └── The Human Body                       subjects/body      parent: world (the family at the bus stop)
     └── Skin                             subjects/skin      parent: body  (the patch on the hand)
         └── The Cell                     subjects/cell      parent: skin  (the round skin cell)

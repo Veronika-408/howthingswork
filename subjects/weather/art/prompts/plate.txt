@@ -1,0 +1,26 @@
+You are a historical illustrator, meteorologist and scientific draftsman specializing in illustrated encyclopedias for children.
+
+Subject: the life of a cloud and the weather it makes, told from left to right across one wide landscape and the sky above it, on a single day. NO logos, NO lettering of any kind.
+
+Generate one vast illustrated encyclopedic plate: a wide side view of a gentle countryside with a bank of four clouds above it, seen from slightly above (about 10 degrees), like a classic cross-section plate. The two biggest clouds are cut open like a slice of cake, so you can see what is inside them.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise scientific lines, realistic clouds with soft volume, realistic landscape.
+- No 3D render, no cartoon, no photographic look. Educational, elegant, timeless.
+
+WHAT MUST BE VISIBLE, LEFT TO RIGHT (scientifically correct)
+- FAR LEFT, ON THE GROUND: a calm blue lake with a small sailing boat and reeds; the low SUN high in the top-left sky, a warm golden disc with soft rays (no face). Above the lake, faint wavy translucent wisps of warm water vapour rise from the water surface.
+- LEFT, IN THE SKY: a SMALL NEW CLOUD just being born, a little bright white puffy cumulus with a flat base, right at the top of the rising wisps.
+- CENTRE-LEFT: a big GREY RAIN CLOUD, wide and thick, darker grey underneath. Its front is CUT OPEN like a slice of cake: inside, thousands of tiny round water droplets, tiny at the top and growing bigger towards the bottom. Below it, rain falls as fine straight slanted grey-blue streaks onto green fields with a small farmhouse, a child in a yellow raincoat with a red umbrella, and puddles. Raindrops are never drawn as teardrop shapes.
+- In the sunny gap between the small new cloud and the rain cloud, one soft RAINBOW arc over the fields, its colours in the correct order: RED on the OUTSIDE (top), then orange, yellow, green, blue, and VIOLET on the INSIDE.
+- CENTRE-RIGHT: the TALLEST cloud, a towering dark blue-grey THUNDERCLOUD (cumulonimbus) reaching to the top of the picture with a flat spreading ANVIL top. Its front is CUT OPEN too: inside, the top part is full of tiny ice crystals and small round white hailstones, the middle has soft pellets of ice, the bottom has water droplets. ONE bright white-yellow jagged LIGHTNING BOLT with two small side branches goes from its base down to the thin metal lightning rod on top of a small stone tower on a hill. Heavy rain falls under the rest of it. A family watches safely from inside a cottage window nearby.
+- FAR RIGHT: a pale cold SNOW CLOUD resting on high snowy mountain peaks. Snow falls from it as many small white flakes; a few big snowflakes are drawn larger in front, each with EXACTLY SIX arms. On the snowy slope below: a tiny skier and a child building a snowman.
+- The countryside flows continuously under all the clouds: lake, meadows, the farmhouse, a river from the mountains running back to the lake, the hill with the tower, pine forest, mountains. Tiny people to scale doing realistic things.
+
+COMPOSITION
+- Wide 16:9 landscape plate. Everything fits comfortably INSIDE the frame, about 86% of the width, centered, with calm empty ivory paper margins (about 7% left and right, about 6% at the top above the anvil, about 10% at the bottom). These margins stay completely empty for annotations added later. The sky is very pale and the land fades softly into the paper with an irregular watercolor edge, not a hard rectangle.
+- The four clouds sit side by side in one row and slightly touch, so from far away they read as one long bank of cloud.
+- ABSOLUTELY NO TEXT anywhere: no letters, labels, numbers, symbols, signs, annotation lines or title. Pure illustration only.
+- Rich but perfectly organized, many small details to explore for minutes.

@@ -1,0 +1,122 @@
+{
+ "sun": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   56.6,
+   295.2,
+   196.8
+  ]
+ },
+ "vapour": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   330.4,
+   688.8,
+   459.2
+  ]
+ },
+ "newcloud": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   0,
+   249.11,
+   347.68,
+   231.79
+  ]
+ },
+ "raincloud": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   249.6,
+   85.57,
+   770.8,
+   513.87
+  ]
+ },
+ "rain": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   192.8,
+   383.53,
+   754.4,
+   502.93
+  ]
+ },
+ "rainbow": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   84.31,
+   443.04,
+   376.38,
+   250.92
+  ]
+ },
+ "thundercloud": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   663.4,
+   0,
+   1008.6,
+   672.4
+  ]
+ },
+ "lightning": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   850.4,
+   401.6,
+   295.2,
+   196.8
+  ]
+ },
+ "rod": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   871.54,
+   509.36,
+   250.92,
+   167.28
+  ]
+ },
+ "snowcloud": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   999.6,
+   110.87,
+   672.4,
+   448.27
+  ]
+ },
+ "snowflakes": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   1065.2,
+   217.73,
+   606.8,
+   404.53
+  ]
+ },
+ "river": {
+  "level": 2,
+  "parent": null,
+  "rect": [
+   326.4,
+   416.2,
+   787.2,
+   524.8
+  ]
+ }
+}

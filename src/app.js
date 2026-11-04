@@ -150,7 +150,8 @@
     const a = m.path[i], b = m.path[i + 1], t = Math.min(1, s / m.seg[i]);
     return { x: a[0] + (b[0] - a[0]) * t, y: a[1] + (b[1] - a[1]) * t, dx: b[0] - a[0], dy: b[1] - a[1] };
   };
-  let lifeLast = 0;
+  let lifeLast = 0, boxes = null;
+  const spotBoxes = () => boxes || (boxes = SIDS.filter(id => SUBJ[id].parent === "world" && SUBJ[id].spot).map(id => bbox(SUBJ[id].spot.polys)));
   function tickLife(now) {
     requestAnimationFrame(tickLife);
     if (space || reduceMotion || document.hidden) { lifeLast = now; return; }
@@ -161,7 +162,14 @@
         o.x += o.speed * dt;
         if (o.x > WORLD.w + 40) o.x = -o.w - 40;
         o.img.style.transform = `translate(${o.x.toFixed(1)}px, ${o.y}px)`;
-        if (o.alpha) o.img.style.opacity = o.alpha;
+        // a drifting pencil cloud fades away while it passes in front of a machine (the weather lives in the sky)
+        let near = 1;
+        for (const b of spotBoxes()) {
+          const dx = Math.max(b.x0 - (o.x + o.w), o.x - b.x1, 0), dy = Math.max(b.y0 - (o.y + o.h), o.y - b.y1, 0);
+          near = Math.min(near, Math.min(1, Math.hypot(dx, dy) / 60));
+        }
+        const a = (o.alpha || 1) * near;
+        if (a !== o.shown) { o.img.style.opacity = a.toFixed(3); o.shown = a; }
       } else {
         o.s += o.speed * dt;
         const p = along(o, o.s);
@@ -843,7 +851,9 @@
     const mech = HOW()[current];
     if (!mech) return;
     track("book_opened", { machine: S.id, page: mech, from: current });
-    window.BOOK.open(mech, { fromSrc: vurl(S.tileFile(S.nodes[current].level === 3 ? S.nodes[current].key : part(current))) });
+    // the page turns from the picture the child was just looking at: the part's repaint, or its close-up
+    const key = S.nodes[current].level === 3 ? S.nodes[current].key : part(current);
+    window.BOOK.open(mech, { fromSrc: vurl(S.TILES && S.TILES[key] ? S.tileFile(key) : `${S.base}detail/${part(current)}.webp`) });
   };
 
   function fillPanel(id) {

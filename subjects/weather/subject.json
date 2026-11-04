@@ -1,0 +1,148 @@
+{
+  "title": "The Weather",
+  "kicker": "How the sky works",
+  "whole": "Whole sky",
+  "hint": "Pick a cloud, the rain or the lightning to look closer.",
+  "alt": "A painted sky with a small new cloud, a rain cloud, a thundercloud with lightning and a snow cloud, over a lake, a farm, a stone tower and snowy mountains.",
+  "credit": {
+    "name": "@virpo",
+    "url": "https://x.com/virpo"
+  },
+  "describe": [
+    "a watercolour sky with a row of clouds (a small white cloud, a grey rain cloud cut open, a towering thundercloud cut open with lightning, a snow cloud) above a countryside with a lake, a farmhouse, a stone tower and snowy mountains",
+    "clouds and weather"
+  ],
+  "plate_w": 1672,
+  "open_sky": false,
+  "replaces": null,
+  "how": {
+    "map": {
+      "vapour": "rain",
+      "newcloud": "rain",
+      "raincloud": "rain",
+      "rain": "rain",
+      "river": "rain",
+      "thundercloud": "storm",
+      "lightning": "storm",
+      "rod": "storm"
+    },
+    "thumb": {
+      "rain": "assets/weather/book/rain.webp",
+      "storm": "assets/weather/book/storm-land.webp"
+    },
+    "part": {
+      "rain": "raincloud",
+      "storm": "lightning"
+    }
+  },
+  "spot": {
+    "polys": [
+      [
+        [
+          1090.0,
+          35.0
+        ],
+        [
+          1107.5,
+          57.5
+        ],
+        [
+          1107.5,
+          100.0
+        ],
+        [
+          1122.5,
+          112.5
+        ],
+        [
+          1165.0,
+          107.5
+        ],
+        [
+          1315.0,
+          107.5
+        ],
+        [
+          1330.0,
+          100.0
+        ],
+        [
+          1390.0,
+          95.0
+        ],
+        [
+          1392.5,
+          65.0
+        ],
+        [
+          1380.0,
+          50.0
+        ],
+        [
+          1395.0,
+          25.0
+        ],
+        [
+          1320.0,
+          17.5
+        ],
+        [
+          1215.0,
+          22.5
+        ],
+        [
+          1210.0,
+          35.0
+        ],
+        [
+          1170.0,
+          40.0
+        ],
+        [
+          1145.0,
+          52.5
+        ],
+        [
+          1125.0,
+          30.0
+        ],
+        [
+          1105.0,
+          27.5
+        ]
+      ]
+    ],
+    "plus": [
+      1250,
+      124
+    ],
+    "axis": [
+      [
+        1106,
+        45
+      ],
+      [
+        1360,
+        67.5
+      ]
+    ],
+    "plateAxis": [
+      [
+        145,
+        155
+      ],
+      [
+        1450,
+        290
+      ]
+    ]
+  },
+  "overlay": {
+    "rect": [
+      1020.0,
+      0.0,
+      440.0,
+      160.0
+    ]
+  }
+}

@@ -3,10 +3,12 @@
 
   python3 tools/colour_in.py crop <id> x y w h    write subjects/<id>/world/grey.png: that rect of world/art/world.png, 4x
   (paint subjects/<id>/world/painted.png from grey.png with the image model: same drawing, the machine in colour)
-  python3 tools/colour_in.py cut <id> [--cover x0 y0 x1 y1]
+  python3 tools/colour_in.py cut <id> [--cover x0 y0 x1 y1] [--sky]
                                                   keep only what changed (the machine), write world/colour.png
                                                   and set "overlay.rect" in subject.json; --cover (map pixels) also
-                                                  takes over an area where the old drawing must disappear
+                                                  takes over an area where the old drawing must disappear; --sky is
+                                                  for things painted on bare paper (clouds): white counts as a change
+                                                  too, small pieces (a sun) stay, and the edge is feathered
 
 The build composites colour.png over the grey map and over every map tile it touches."""
 import json, sys
@@ -46,12 +48,13 @@ elif cmd == "cut":
         print("could not align the painting to the map; using it as is")
     sat = lambda im: im.max(-1) - im.min(-1)
     # the machine is where colour appeared; small grey differences elsewhere (redrawn pencil) are ignored
-    changed = (sat(b) - sat(a) > 28)
+    sky = "--sky" in sys.argv
+    changed = sat(b) - sat(a) > (12 if sky else 28)       # pencil is neutral grey; even white clouds carry a little colour
     changed = ndi.binary_opening(changed, iterations=2)
     lab, n = ndi.label(ndi.binary_closing(changed, iterations=6))
     if n == 0: sys.exit("no coloured area found: is painted.png the same drawing with the machine coloured in?")
     sizes = ndi.sum(np.ones_like(lab), lab, range(1, n + 1))
-    keep = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s > sizes.max() * .08])
+    keep = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s > (K * K * 60 if sky else sizes.max() * .08)])
     keep = ndi.binary_fill_holes(ndi.binary_dilation(keep, iterations=3))
     # old grey drawing the edit removed or moved (next to the new colour) is covered too
     gone = ndi.binary_opening(np.abs(b - a).mean(-1) > 20, iterations=2) & ndi.binary_dilation(keep, iterations=40)
@@ -60,9 +63,13 @@ elif cmd == "cut":
         i = sys.argv.index("--cover"); cx0, cy0, cx1, cy1 = map(float, sys.argv[i + 1:i + 5])
         rx, ry = json.loads((d / "rect.json").read_text())[:2]
         keep[max(0, round((cy0 - ry) * K)):round((cy1 - ry) * K), max(0, round((cx0 - rx) * K)):round((cx1 - rx) * K)] = True
-    from skimage.morphology import convex_hull_image
-    keep = convex_hull_image(keep)            # one clean patch, no gaps for old pencil lines to show through
-    alpha = ndi.gaussian_filter(keep.astype(np.float32), 2.0)
+    if sky:                                   # on bare paper nothing old shows through: follow the painting, softly
+        keep = ndi.binary_fill_holes(ndi.binary_closing(keep, iterations=10))
+        alpha = ndi.gaussian_filter(ndi.binary_erosion(keep, iterations=4).astype(np.float32), 6.0)
+    else:
+        from skimage.morphology import convex_hull_image
+        keep = convex_hull_image(keep)        # one clean patch, no gaps for old pencil lines to show through
+        alpha = ndi.gaussian_filter(keep.astype(np.float32), 2.0)
     Image.fromarray(np.dstack([b, alpha * 255]).astype(np.uint8)).save(d / "colour.png")
     rect = json.loads((d / "rect.json").read_text())
     m = json.loads(meta.read_text()); m["overlay"] = {"rect": rect}; meta.write_text(json.dumps(m, indent=2) + "\n")

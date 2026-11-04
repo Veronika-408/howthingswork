@@ -1,0 +1,57 @@
+{
+ "lightning": {
+  "after": 0.9241,
+  "before": 0.9241,
+  "warped": false
+ },
+ "newcloud": {
+  "after": 0.9668,
+  "before": 0.9664,
+  "warped": true
+ },
+ "rain": {
+  "after": 0.9477,
+  "before": 0.9476,
+  "warped": true
+ },
+ "rainbow": {
+  "after": 0.9644,
+  "before": 0.9644,
+  "warped": true
+ },
+ "raincloud": {
+  "after": 0.9676,
+  "before": 0.9672,
+  "warped": true
+ },
+ "river": {
+  "after": 0.9637,
+  "before": 0.9629,
+  "warped": true
+ },
+ "rod": {
+  "after": 0.8827,
+  "before": 0.8827,
+  "warped": false
+ },
+ "snowcloud": {
+  "after": 0.968,
+  "before": 0.9678,
+  "warped": true
+ },
+ "snowflakes": {
+  "after": 0.9691,
+  "before": 0.9689,
+  "warped": true
+ },
+ "sun": {
+  "after": 0.9358,
+  "before": 0.9338,
+  "warped": true
+ },
+ "vapour": {
+  "after": 0.9589,
+  "before": 0.9587,
+  "warped": true
+ }
+}

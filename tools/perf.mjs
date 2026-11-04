@@ -34,6 +34,12 @@ const SCENARIOS = {
     await V(page, id => __viewer.focus(id), c); await wait(1700);
     await V(page, () => __viewer.leaveAll()); await wait(1500);
   },
+  async weather(page) {                               // into the sky, a part, and back
+    await V(page, () => __viewer.enter("weather")); await settle(page);
+    await V(page, () => __viewer.focus("lightning")); await wait(1600);
+    await V(page, () => __viewer.unfocus(true)); await wait(1300);
+    await V(page, () => __viewer.leave()); await settle(page); await wait(1300);
+  },
   async wheel(page) {                                  // free zoom with the wheel: into the map, then into a plate
     const vp = page.viewportSize();
     await page.mouse.move(vp.width * .5, vp.height * .5);

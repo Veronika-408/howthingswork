@@ -77,7 +77,8 @@ plate as the second image (Image 2) to the colour-in edit, and repaint the area 
 whatever grey thing happened to be there. Bad: the bus stop's existing two passengers coloured in, when the
 plate shows a different family of three. Good: the plane and tram, whose drawings turn into their plates
 without a jump. If the old drawing must disappear (people who aren't on the plate), add
-`--cover x0 y0 x1 y1` to `cut`.
+`--cover x0 y0 x1 y1` to `cut`. If you painted onto bare paper (clouds in the sky, a balloon), add `--sky`,
+so white counts as part of it, small pieces like a sun stay, and the edge is feathered.
 
 Then fill in `spot` in `subject.json`:
 - `polys`: the outline on the map.

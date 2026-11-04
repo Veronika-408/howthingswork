@@ -4,7 +4,8 @@
 
 A pencil map of a little river town. Everything in colour opens up: a hand-painted cut-away of the
 machine, parts to tap, detail that keeps getting sharper as you zoom in, and "How it works" book pages
-that move. Today the jumbo jet and the city tram are in colour. Everything grey (the excavator, the
+that move. Today the jumbo jet, the city tram, the people at the bus stop (with the skin and the cell
+inside them) and the weather in the sky are in colour. Everything grey (the excavator, the
 tower crane, the church bell, the fire engine, …) is waiting for someone to build it.
 
 ![howthings.work](brand/og.png)
