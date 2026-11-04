@@ -8,7 +8,7 @@ const errors = [];
 page.on("pageerror", e => errors.push(e.message));
 page.on("response", r => { if (r.status() >= 400) errors.push(r.status() + " " + r.url().replace(base, "")); });
 await page.goto(base, { waitUntil: "load" });
-await page.waitForFunction(() => { const v = window.__viewer; return v && Object.values(v.subjects).every(s => s.tiles.every(t => t.loaded)) && v.worldTiles.every(t => t.loaded); }, null, { timeout: 240000 });
+await page.waitForFunction(() => window.__viewer && window.__viewer.idle(), null, { timeout: 240000 });   // everything planned is fetched
 const out = {};
 for (const sid of Object.keys(await page.evaluate(() => window.__viewer.subjects))) {
   await page.evaluate(id => window.__viewer.enter(id), sid); await page.waitForTimeout(2600);

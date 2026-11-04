@@ -8,7 +8,8 @@
 Outputs dist/index.html, dist/artifact.html and dist/assets/... (the plane keeps its old asset paths,
 other subjects live under assets/<id>/, the city under assets/world/).
 """
-import json, sys
+import json, sys, shutil, subprocess, tempfile, hashlib, os
+from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from pathlib import Path
 from PIL import Image, ImageFilter
@@ -17,6 +18,35 @@ from scipy import ndimage as ndi
 ROOT = Path(__file__).parent
 SRC, DIST = ROOT / "src", ROOT / "dist"
 SCALE = 2                         # published plates are 2x for sharper zooming
+
+# ---------------------------------------------------------------- encoding
+# WebP, because it decodes fast (AVIF is ~25% smaller but 2-3x slower to decode, which costs smoothness).
+# With cwebp installed, sharp RGB->YUV conversion keeps ink lines and colour edges crisp for the same bytes
+# (q84 with it scores like Pillow's q87). The encodes run in parallel; wait_encodes() waits for them all.
+CWEBP = shutil.which("cwebp")
+_pool = ThreadPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) - 1))
+_jobs = []
+def save_webp(im, path, q=84):
+    path = Path(path)
+    if not CWEBP:
+        im.save(path, quality=q, method=6); return
+    fd, tmp = tempfile.mkstemp(suffix=".png"); os.close(fd)
+    im.save(tmp, compress_level=1)
+    def run():
+        try: subprocess.run([CWEBP, "-quiet", "-q", str(q), "-m", "6", "-sharp_yuv", "-alpha_q", "100", tmp, "-o", str(path)], check=True)
+        finally: os.unlink(tmp)
+    _jobs.append(_pool.submit(run))
+def wait_encodes():
+    while _jobs: _jobs.pop().result()
+
+def asset_versions():
+    """Content hashes of the pictures the viewer fetches itself: a changed picture gets a new URL, so the rest can be cached for good."""
+    out = {}
+    for f in (DIST / "assets").rglob("*"):
+        rel = f.relative_to(DIST).as_posix()
+        if f.suffix in (".webp", ".png") and "/book/" not in rel and "/brand/" not in rel:
+            out[rel] = hashlib.sha1(f.read_bytes()).hexdigest()[:10]
+    return out
 
 SUBJECTS = {
     "plane": dict(
@@ -123,7 +153,8 @@ def build_subject(sid, cfg, images=True):
     meta_file = cfg["art"] / "plate-meta.json"
     if images or not meta_file.exists():
         big = canvas.resize((canvas.width * SCALE, canvas.height * SCALE), Image.LANCZOS)
-        big.filter(ImageFilter.UnsharpMask(radius=1.2, percent=40, threshold=2)).save(out / "plate.webp", quality=84, method=6)
+        save_webp(big.filter(ImageFilter.UnsharpMask(radius=1.2, percent=40, threshold=2)), out / "plate.webp", 86)
+        save_webp(canvas, out / "plate-1x.webp", 86)            # the same plate at 1x: drawn whenever the screen doesn't need 2x
         alpha, obj = paint_mask(canvas, paper, open_sky=cfg.get("open_sky", False))
         m = np.zeros((*alpha.shape, 4), np.uint8); m[..., :3] = 255; m[..., 3] = (alpha * 255).astype(np.uint8)
         Image.fromarray(m).resize((canvas.width // 2, canvas.height // 2), Image.LANCZOS).save(out / "plate-mask.png", optimize=True)
@@ -131,11 +162,11 @@ def build_subject(sid, cfg, images=True):
         for f in sorted((cfg["art"] / "detail").glob("*.png")):
             if f.stem == "ground": continue                    # superseded by the four ground-crew close-ups
             im = Image.open(f).convert("RGB"); im.thumbnail((1200, 900), Image.LANCZOS)
-            im.save(out / "detail" / (f.stem + ".webp"), quality=80, method=6)
+            save_webp(im, out / "detail" / (f.stem + ".webp"), 82)
         (out / "zoom").mkdir(parents=True, exist_ok=True)
         for key in tile_index(cfg["art"]):
             f = key.replace("/", "__")
-            feathered(Image.open(cfg["art"] / "zoom" / "tiles" / f"{f}.png")).save(out / "zoom" / f"{f}.webp", quality=80, method=6)
+            save_webp(feathered(Image.open(cfg["art"] / "zoom" / "tiles" / f"{f}.png")), out / "zoom" / f"{f}.webp", 82)
     return json.loads(meta_file.read_text())
 
 # ---------------------------------------------------------------- the world
@@ -172,22 +203,29 @@ def build_world(images=True):
             im = Image.alpha_composite(im, layer)
         return im.convert("RGB")
     if images:
-        paint(src, 0, 0, 1).save(out / "world.webp", quality=84, method=6)
+        save_webp(paint(src, 0, 0, 1), out / "world.webp", 86)
+        # the map at 2x, made from its detail tiles: what a sharp screen needs for the whole map in one picture
+        big = paint(src.resize((src.width * 2, src.height * 2), Image.LANCZOS), 0, 0, 2).convert("RGBA")
     for key, t in plan.items():
         f = WORLD_ART / "zoom" / "tiles" / f"{key}.png"
         if not f.exists(): continue
         if images:
             tim = Image.open(f).convert("RGB")
             x, y, w, h = t["rect"]
-            feathered(paint(tim, x, y, tim.width / w), .04, .05).save(out / f"{key}.webp", quality=80, method=6)
+            ft = feathered(paint(tim, x, y, tim.width / w), .04, .05)
+            save_webp(ft, out / f"{key}.webp", 82)
+            big.alpha_composite(ft.resize((round(w * 2), round(h * 2)), Image.LANCZOS), (round(x * 2), round(y * 2)))
         tiles.append({"key": key, "rect": t["rect"], "src": f"assets/world/{key}.webp"})
+    if images and tiles:
+        save_webp(big.convert("RGB"), out / "world-2x.webp", 84)
     # sprites: cut from the parts sheet, faded like the rest of the city
     sprites_dir = WORLD_ART / "cut"
     if images and sprites_dir.exists():
         for f in sorted(sprites_dir.glob("*.png")):
             a = np.asarray(Image.open(f).convert("RGBA"))
             Image.fromarray(a).save(out / f"{f.stem}.webp", quality=86, method=6)
-    return {"w": src.width, "h": src.height, "src": "assets/world/world.webp", "paper": "rgb(%d,%d,%d)" % paper, "tiles": tiles}
+    return {"w": src.width, "h": src.height, "src": "assets/world/world.webp", "paper": "rgb(%d,%d,%d)" % paper, "tiles": tiles,
+            **({"src2": "assets/world/world-2x.webp"} if tiles else {})}
 
 # ---------------------------------------------------------------- html
 def subject_js(sid, cfg, meta):
@@ -216,7 +254,7 @@ def build_subject_books():
 
 def build_html(world, metas, pages=()):
     page = (SRC / "plane.html").read_text()
-    subjects = "window.SUBJECTS = {};\n" + "".join(subject_js(sid, cfg, metas[sid]) for sid, cfg in SUBJECTS.items() if sid in metas)   # machines still being made are skipped
+    subjects = f"window.ASSET_V = {json.dumps(asset_versions(), separators=(',', ':'))};\nwindow.SUBJECTS = {{}};\n" + "".join(subject_js(sid, cfg, metas[sid]) for sid, cfg in SUBJECTS.items() if sid in metas)   # machines still being made are skipped
     wdata = (WORLD_SRC / "world.js").read_text() if (WORLD_SRC / "world.js").exists() else "window.WORLD_DATA = {};"
     wjs = (f"{wdata}\nwindow.WORLD = Object.assign({json.dumps(world or {}, separators=(',', ':'))}, window.WORLD_DATA);\n"
            "for (const [id, p] of Object.entries(window.WORLD.spots || {})) if (window.SUBJECTS[id] && !window.SUBJECTS[id].spot) window.SUBJECTS[id].spot = p;\n"
@@ -418,6 +456,7 @@ if __name__ == "__main__":
         build_subject_books()
         build_brand()
     world = build_world(images)
+    wait_encodes()
     build_html(world, metas, build_meta(world))
     if "--site" in sys.argv:
         build_site()

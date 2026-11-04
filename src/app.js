@@ -12,6 +12,7 @@
   const NS = "http://www.w3.org/2000/svg";
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const VIDEO = new URLSearchParams(location.search).has("video");
+  const SLOWMO = +new URLSearchParams(location.search).get("slowmo") || 1;     // ?slowmo=8 slows every flight down, for checking them frame by frame
   const svg = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const el = (tag, cls, parent) => { const e = document.createElement(tag); if (cls) e.className = cls; if (parent) parent.appendChild(e); return e; };
   const bbox = polys => {
@@ -26,6 +27,85 @@
   const page = path => track("$pageview", { $current_url: location.origin + path, $pathname: path });
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const smooth = (a, b, t) => { const u = Math.min(1, Math.max(0, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const DPR = () => Math.min(3, devicePixelRatio || 1);
+
+  // ======================================================================= pictures
+  // Every painting is fetched early and decoded off the main thread into a bitmap before it can be needed,
+  // so nothing decodes in the middle of a zoom. Bitmaps far away in the tree of spaces are dropped again
+  // when memory runs short; their bytes stay in the HTTP cache, so they come back in a few milliseconds.
+  const AV = window.ASSET_V || {};                          // content hashes from the build: a new picture is a new URL
+  const vurl = u => AV[u] ? `${u}?v=${AV[u]}` : u;
+  const coarse = matchMedia("(hover: none) and (pointer: coarse)").matches;
+  const lowMem = coarse || (navigator.deviceMemory || 8) <= 4;
+  const BUDGET = (lowMem ? 220 : 560) * 1e6;               // decoded bytes kept around
+  const pics = new Map();
+  let picBytes = 0, clock = 0;
+  const pic = url => { let p = pics.get(url); if (!p) pics.set(url, p = { url, bmp: null, w: 0, h: 0, state: 0, keep: 9, used: 0 }); return p; };
+  const live = p => !!p && p.state === 2;
+  const fromBlob = b => window.createImageBitmap ? createImageBitmap(b) : new Promise((res, rej) => {
+    const i = new Image(), u = URL.createObjectURL(b);
+    i.onload = () => { URL.revokeObjectURL(u); (i.decode ? i.decode() : Promise.resolve()).then(() => res(i), () => res(i)); };
+    i.onerror = rej; i.src = u;
+  });
+  const warmQ = [];                                         // freshly decoded bitmaps, handed to the GPU one per frame
+  function decodePic(p) {
+    if (p.state) return p.ready;
+    p.state = 1;
+    p.ready = fetch(vurl(p.url)).then(r => r.ok ? r.blob() : Promise.reject(new Error(r.status + " " + p.url))).then(fromBlob).then(bmp => {
+      if (p.state !== 1) { if (bmp.close) bmp.close(); return; }         // dropped while it was decoding
+      p.bmp = bmp; p.w = bmp.width || bmp.naturalWidth; p.h = bmp.height || bmp.naturalHeight; p.state = 2;
+      picBytes += p.w * p.h * 4; p.used = clock;
+      warmQ.push(p); evict(); picArrived();
+    }, e => { p.state = 0; p.ready = null; throw e; });
+    return p.ready;
+  }
+  function dropPic(p) {
+    if (p.state === 2) { picBytes -= p.w * p.h * 4; if (p.bmp.close) p.bmp.close(); }
+    p.bmp = null; p.state = 0; p.ready = null;
+  }
+  // over budget: drop what is furthest away in the tree, and least recently drawn
+  function evict() {
+    if (picBytes <= BUDGET) return;
+    const c = [...pics.values()].filter(p => p.state === 2 && p.keep > 1 && clock - p.used > 120).sort((a, b) => (b.keep - a.keep) || (a.used - b.used));
+    for (const p of c) { if (picBytes <= BUDGET) break; dropPic(p); }
+  }
+  const warmed = new Set();
+  const warmUrl = (url, plain) => { if (warmed.has(url)) return; warmed.add(url); return fetch(plain ? url : vurl(url), { priority: "low" }).then(r => r.blob()).then(() => {}, () => warmed.delete(url)); };
+
+  // jobs: decode (bitmap kept) or warm (bytes into the HTTP cache), nearest in the tree first
+  let jobs = [], decoders = 0, fetchers = 0, picArrived = () => {};
+  function pump() {
+    jobs.sort((a, b) => a.prio - b.prio);
+    const hold = urgentLeft();
+    for (let i = 0; i < jobs.length;) {
+      const j = jobs[i];
+      // bytes for later wait while anything near is still decoding, so the first sharp picture comes first
+      if (j.kind === "decode" ? decoders >= 3 : fetchers >= 4 || hold) { i++; continue; }
+      jobs.splice(i, 1);
+      if (j.p) j.p.job = null;
+      if (j.kind === "decode") {
+        if (j.p.state) continue;
+        decoders++;
+        decodePic(j.p).catch(() => {}).then(() => { decoders--; pump(); });
+      } else {
+        const w = warmUrl(j.url, j.plain);
+        if (!w) continue;
+        fetchers++;
+        w.then(() => { fetchers--; pump(); });
+      }
+    }
+  }
+  // prio: how soon (0 = now); keep: how near in the tree (0-1 are never dropped, 2+ may be when memory runs short)
+  const need = (p, prio = 0, keep = prio) => {
+    if (!p) return;
+    p.keep = Math.min(p.keep, keep);
+    if (p.state) return;
+    if (p.job) { if (prio < p.job.prio) p.job.prio = prio; } else jobs.push(p.job = { kind: "decode", p, prio });
+    pump();
+  };
+  const idle = () => !jobs.length && !decoders && !fetchers;
+  const urgentLeft = () => jobs.some(j => j.kind === "decode" && j.prio <= 1) || [...pics.values()].some(p => p.state === 1 && p.keep <= 1);
 
   // ======================================================================= the world
   worldEl.style.width = WORLD.w + "px";
@@ -37,18 +117,14 @@
   const view = el("canvas", "view");
   stage.insertBefore(view, worldEl);
   const vg = view.getContext("2d");
-  const base = new Image();
-  base.decoding = "async";
-  base.src = WORLD.src;
-  base.addEventListener("load", () => requestDraw(), { once: true });
-  const wtiles = (WORLD.tiles || []).map(t => {
-    const [x, y, w, h] = t.rect;
-    const img = new Image(); img.decoding = "async";
-    const wt = { ...t, x, y, w, h, img, loaded: false, wanted: false, a: 0, target: 0, on: (WORLD.baseScale || 2) * .95 };
-    img.addEventListener("load", () => { wt.loaded = true; updateWorldTiles(); requestDraw(); }, { once: true });
-    return wt;
-  });
-  const loadWT = t => { if (!t.wanted) { t.wanted = true; t.img.src = t.src; } };
+  // A space is drawn as layers, coarse to fine: the whole picture at 1x and 2x, then repainted detail tiles.
+  // Each finer layer fades in, with the zoom, once the camera has outgrown the pixels of the one below it.
+  const layer = (url, x, y, w, h, d, on, more) => ({ p: pic(url), x, y, w, h, d, on, a: 0, target: 0, ...more, get loaded() { return live(this.p); } });
+  const WSP = { id: null, w: WORLD.w, h: WORLD.h, paper: WORLD.paper,
+    layers: [layer(WORLD.src, 0, 0, WORLD.w, WORLD.h, 1, 0, { base: true })] };
+  if (WORLD.src2) WSP.layers.push(layer(WORLD.src2, 0, 0, WORLD.w, WORLD.h, 2, 1, { base: true }));
+  const wtiles = (WORLD.tiles || []).map(t => { const [x, y, w, h] = t.rect; return layer(t.src, x, y, w, h, TILE_PX / w, WORLD.src2 ? 2 : 1, { key: t.key }); });
+  WSP.layers.push(...wtiles);
   // subjects live in their own layer: in the city they are part of the drawing, so their plates only appear inside
   const subjEl = el("div", "subjects");
   stage.insertBefore(subjEl, worldEl.nextSibling);          // above the city, below the labels
@@ -128,10 +204,6 @@
     const root = el("div", "subject", subjEl);
     root.dataset.subject = sid;
     Object.assign(root.style, { width: P.w + "px", height: P.h + "px" });
-    const plate = new Image();
-    plate.decoding = "async";
-    plate.src = S.base + "plate.webp";
-    plate.addEventListener("load", () => requestDraw(), { once: true });
     root.setAttribute("aria-label", P.alt || S.title);
     const ov = svg("svg", { class: "ov", viewBox: `0 0 ${P.w} ${P.h}`, width: P.w, height: P.h }, root);
     const leadersG = svg("g", { class: "leaders" }, ov), hotsG = svg("g", { class: "hots" }, ov), subsG = svg("g", { class: "subs" }, ov);
@@ -148,7 +220,7 @@
       by.appendChild(a);
     }
     Object.assign(intro.style, { left: P.introBox.x + "px", top: P.introBox.y + "px", width: P.introBox.w + "px" });
-    Object.assign(S, { root, plate, ov, holePolys: null, leadersG, hotsG, subsG, notes, intro });
+    Object.assign(S, { root, ov, holePolys: null, leadersG, hotsG, subsG, notes, intro });
 
     // nodes: level 2 = parts of the subject, level 3 = parts inside a part
     const nodes = S.nodes = {};
@@ -196,17 +268,19 @@
       label.textContent = node.name;
       els[node.id] = { path: makePath(node, "subhot", g), label };
     }
-    // detail tiles: repainted copies of small areas, faded in once the camera outgrows the layer below
+    // the plate at 1x and 2x, then detail tiles: repainted copies of small areas, faded in once the camera outgrows the layer below
+    S.w = P.w; S.h = P.h;
+    const bases = [layer(S.base + "plate.webp", 0, 0, P.w, P.h, 2, 1, { base: true })];
+    if (S.plate1x !== false) bases.unshift(layer(S.base + "plate-1x.webp", 0, 0, P.w, P.h, 1, 0, { base: true }));
+    else bases[0].on = 0;
+    S.mask = pic(S.base + "plate-mask.png");
     S.tiles = Object.entries(S.TILES || {}).map(([key, t]) => {
       const [x, y, w, h] = t.rect;
-      const img = new Image(); img.decoding = "async";
-      const parentDensity = t.level === 2 ? 1 : TILE_PX / S.TILES[key.split("/")[0]].rect[2];
-      const tile = { key, level: t.level, x, y, w, h, img, on: parentDensity * 1.15, loaded: false, wanted: false, a: 0, target: 0 };
-      img.addEventListener("load", () => { tile.loaded = true; updateTiles(); requestDraw(); }, { once: true });
-      return tile;
+      const below = t.level === 2 ? 2 : TILE_PX / S.TILES[key.split("/")[0]].rect[2];
+      return layer(tileFile(key), x, y, w, h, TILE_PX / w, below, { key, level: t.level });
     });
-    // drawing order: bigger repaints first, smaller (more detailed) ones on top, deepest level last
     S.tiles.sort((a, b) => (a.level - b.level) || (b.w - a.w));
+    S.layers = [...bases, ...S.tiles];
 
     // Spaces form a tree: a subject sits on the map (parent "world"), or inside another subject's
     // plate (parent "<id>", spot in that plate's pixels), which is how the zoom keeps going deeper.
@@ -235,7 +309,6 @@
   }
   const childrenOf = id => SIDS.filter(c => SUBJ[c].parent === id);
 
-  const loadTile = (S, t) => { if (!t.wanted) { t.wanted = true; t.img.src = S.tileFile(t.key); } };
   function drawLeaders(S) {
     for (const id of S.ORDER) {
       const s = S.nodes[id].shape, { note, line } = S.els[id];
@@ -261,23 +334,34 @@
   // the spaces we came through, outermost first: { space: null (the map) or subject id, cam }
   let trail = [];
   const back = () => trail.length ? trail[trail.length - 1] : null;
-  const worldCamNow = () => !space ? cam : (back() && back().space === null ? back().cam : null);
+  const worldCamNow = () => space ? null : cam;
   const toScreen = (c, [x, y]) => { const [a, b] = rot(c.r || 0, [x * c.s, y * c.s]); return [c.x + a, c.y + b]; };
+  // cameras are similarity transforms, so a space inside a space is one multiplication away
+  const mul = (A, B) => { const [x, y] = toScreen(A, [B.x, B.y]); return { x, y, s: A.s * B.s, r: (A.r || 0) + (B.r || 0) }; };
+  const inv = A => { const [x, y] = rot(-(A.r || 0), [-A.x / A.s, -A.y / A.s]); return { x, y, s: 1 / A.s, r: -(A.r || 0) }; };
 
+  const zoomOutBtn = $("#zoom-out"), resetBtn = $("#reset");
+  let kShown = 0, wkShown = 0;
   function apply() {
     const wc = worldCamNow();
     if (wc) worldEl.style.transform = `translate(${wc.x}px, ${wc.y}px) rotate(${wc.r || 0}deg) scale(${wc.s})`;
     if (space) subjEl.style.transform = `translate(${cam.x}px, ${cam.y}px) rotate(${cam.r || 0}deg) scale(${cam.s})`;
-    wov.style.setProperty("--wk", (1 / (wc ? wc.s : 1)).toFixed(5));
-    if (S) S.ov.style.setProperty("--k", (1 / cam.s).toFixed(5));
+    // line widths follow the zoom; while flying between spaces the lines are hidden, so skip the restyle
+    if (!body.classList.contains("entering")) {
+      const wk = 1 / (wc ? wc.s : 1), k = 1 / cam.s;
+      if (Math.abs(wk / wkShown - 1) > .004) { wov.style.setProperty("--wk", wk.toFixed(5)); wkShown = wk; }
+      if (S && Math.abs(k / kShown - 1) > .004) { S.ov.style.setProperty("--k", k.toFixed(5)); kShown = k; }
+    }
     const fit = fitView();
-    $("#zoom-out").disabled = !space && cam.s <= fit.s * 1.01;
-    $("#reset").disabled = cam.s <= fit.s * 1.01 && Math.abs(cam.x - fit.x) < 2 && Math.abs(cam.y - fit.y) < 2;
-    updateTiles(); updateWorldTiles(); placeSubLabels(); placeWorldLabels(); placeChildPlus(); requestDraw();
+    zoomOutBtn.disabled = !space && cam.s <= fit.s * 1.01;
+    resetBtn.disabled = cam.s <= fit.s * 1.01 && Math.abs(cam.x - fit.x) < 2 && Math.abs(cam.y - fit.y) < 2;
+    updateLayers(); placeSubLabels(); placeWorldLabels(); placeChildPlus(); requestDraw();
   }
 
+  // the stage size is read once per resize, not in every frame
+  let stageW = stage.clientWidth, stageH = stage.clientHeight;
   function viewport() {
-    const W = stage.clientWidth, H = stage.clientHeight;
+    const W = stageW, H = stageH;
     const P = S ? S.PLATE : null;
     const full = P ? Math.min((W - 48) / P.w, (H - 96) / P.h) : 1;
     return { W, H, phone: W <= 760, compact: P ? full < 0.6 : W <= 760 };
@@ -316,14 +400,19 @@
     let s = Math.min(area.w / bw, area.h / bh);
     s = n.level === 3 ? Math.min(Math.max(s, fit * 4), fit * 18) : Math.max(Math.min(s, fit * 4.2), fit * 1.3);
     const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+    s = Math.max(Math.min(s, artMax(cx, cy)), Math.min(s, fit * 1.3));
     return { s, x: area.x + area.w / 2 - cx * s, y: area.y + area.h / 2 - cy * s };
   }
 
   // fly in log-scale so zooming feels even; dip out a little on long hops, like a camera crane
-  function flyTo(target, ms = 1100, onFrame) {
+  // seg: this flight is the [t0, t1] stretch of one longer eased move, so two flights can join without stopping
+  const easeInv = f => { let a = 0, b = 1; for (let i = 0; i < 40; i++) { const m = (a + b) / 2; if (ease(m) < f) a = m; else b = m; } return (a + b) / 2; };
+  const flightMs = d => Math.min(1800, Math.max(800, 650 + 320 * d));      // d: zoom distance, in e-folds
+  function flyTo(target, ms = 1100, onFrame, { seg } = {}) {
     if (anim) cancelAnimationFrame(anim.raf);
     // no will-change: a promoted layer keeps its old raster while zooming and re-rasters (flashes) when dropped
     if (reduceMotion) ms = 0;
+    ms *= SLOWMO;
     const from = { r: 0, ...cam }, to = { r: 0, ...target };
     const { W, H } = viewport();
     // the point under the screen centre, in the active space
@@ -336,7 +425,8 @@
     const t0 = performance.now();
     return new Promise(resolve => {
       const step = now => {
-        const t = ms ? Math.min(1, (now - t0) / ms) : 1, e = ease(t);
+        const t = ms ? Math.min(1, (now - t0) / ms) : 1;
+        const e = seg ? (ease(seg[0] + (seg[1] - seg[0]) * t) - ease(seg[0])) / (ease(seg[1]) - ease(seg[0])) : ease(t);
         // centre follows the zoom (geometric), so the target point stays still under the fly-in
         const s = Math.exp(ls0 + (ls1 - ls0) * e - dip * Math.sin(Math.PI * e));
         const g = Math.abs(ls1 - ls0) > .05 ? (1 / s - 1 / from.s) / (1 / target.s - 1 / from.s) : e;
@@ -348,6 +438,7 @@
         cam.y = H / 2 - oy;
         if (onFrame) onFrame(e, t);
         apply();
+        drawNow(now);                        // in this frame, so the canvas never trails the labels by one
         if (t < 1) anim.raf = requestAnimationFrame(step);
         else { Object.assign(cam, to); apply(); anim = null; resolve(); }
       };
@@ -367,10 +458,18 @@
     cam.x = Math.min(slackX, Math.max(W - w - slackX, cam.x));
     cam.y = Math.min(slackY, Math.max(H - h - slackY, cam.y));
   }
+  // the deepest zoom the paintings can take at a point, so no picture is stretched far past its own pixels
+  // (where a part has repaints you can go much deeper than on the bare plate or the map)
+  function artMax(px, py) {
+    const X = space ? S : WSP;
+    let d = 0;
+    for (const L of X.layers) if (px >= L.x && px <= L.x + L.w && py >= L.y && py <= L.y + L.h) d = Math.max(d, L.d);
+    return Math.max(fitView().s * 2.5, (d || 1) * 1.8 / DPR());
+  }
   function zoomAt(factor, sx, sy) {
     if (anim) { cancelAnimationFrame(anim.raf); anim = null; }
     const wx = (sx - cam.x) / cam.s, wy = (sy - cam.y) / cam.s;
-    cam.s *= factor;
+    cam.s = factor > 1 ? Math.min(cam.s * factor, Math.max(cam.s, artMax(wx, wy))) : cam.s * factor;
     clampCam();
     cam.x = sx - wx * cam.s; cam.y = sy - wy * cam.s;
     clampCam();
@@ -379,114 +478,183 @@
     apply();
   }
 
-  // ---------- tiles: which repaints should show (the renderer fades them) ----------
-  function updateTiles() {
-    if (!S) return;
-    const { W, H } = viewport();
-    const vx0 = -cam.x / cam.s, vy0 = -cam.y / cam.s, vx1 = (W - cam.x) / cam.s, vy1 = (H - cam.y) / cam.s;
-    for (const t of S.tiles) {
-      const visible = t.x < vx1 && t.x + t.w > vx0 && t.y < vy1 && t.y + t.h > vy0;
-      // while a part is focused only its own repaints show, so neighbouring repaints never flicker in and out
-      // under the camera; browsing freely, a repaint fades in once the plate is magnified past its pixels
-      const chain = current && (t.key === part(current) || t.key === S.nodes[current].key);
-      const need = current ? (chain ? 1 : 0) : Math.min(1, Math.max(0, (cam.s - t.on * .7) / (t.on * .3)));
-      if (visible && need > 0) loadTile(S, t);
-      t.target = visible && t.loaded ? need : 0;
-    }
+  // ---------- layers: which pictures should show (the renderer fades them) ----------
+  // A finer layer is wanted once the screen has more device pixels than the layer below it has picture
+  // pixels, and it follows the zoom directly, so a closer picture fades in while you zoom rather than after.
+  let chain = null;                           // the focused part's own repaints: { keys, hold, s0, s1 }
+  function chainNeed(L, n) {
+    if (!chain.keys.has(L.key)) return 0;     // while a part is focused, its neighbours' repaints stay away
+    if (L.key === chain.hold) return 1;
+    if (!chain.s1) return n;                  // the flight hasn't started yet
+    if (!(chain.s1 > chain.s0 * 1.15)) return 1;
+    const l0 = Math.log(chain.s0), l1 = Math.log(chain.s1);
+    return Math.max(n, smooth(l0, l0 + (l1 - l0) * .75, Math.log(cam.s)));   // fades in along the flight to the part
   }
-  function updateWorldTiles() {
-    const wc = worldCamNow();
-    if (!wc) return;
-    const { W, H } = viewport(), ws = wc.s;
-    const vx0 = -wc.x / ws, vy0 = -wc.y / ws, vx1 = (W - wc.x) / ws, vy1 = (H - wc.y) / ws;
-    for (const t of wtiles) {
-      const visible = wc.r ? true : t.x < vx1 && t.x + t.w > vx0 && t.y < vy1 && t.y + t.h > vy0;
-      const eff = ws * Math.min(2, devicePixelRatio || 1);          // screen pixels per map pixel
-      const need = Math.min(1, Math.max(0, (eff - t.on * .75) / (t.on * .25)));
-      if (visible && need > 0) loadWT(t);
-      t.target = visible && t.loaded ? need : 0;
+  function updateLayers() {
+    const X = space ? S : WSP, eff = cam.s * DPR();
+    const { W, H } = viewport();
+    let vx0 = -Infinity, vy0 = -Infinity, vx1 = Infinity, vy1 = Infinity;
+    if (!cam.r) { vx0 = -cam.x / cam.s; vy0 = -cam.y / cam.s; vx1 = (W - cam.x) / cam.s; vy1 = (H - cam.y) / cam.s; }
+    const mx = (vx1 - vx0) * .35, my = (vy1 - vy0) * .35;                 // decode a little beyond the edges
+    let below = false;
+    for (const L of X.layers) {
+      const vis = L.base || (L.x < vx1 && L.x + L.w > vx0 && L.y < vy1 && L.y + L.h > vy0);
+      const near = vis || (L.x < vx1 + mx && L.x + L.w > vx0 - mx && L.y < vy1 + my && L.y + L.h > vy0 - my);
+      let n = L.on ? smooth(L.on, L.on * 1.3, eff) : 1;
+      if (L.base && !below) n = 1;                                         // nothing decoded below: this one stands in
+      if (chain && L.key && space) n = chainNeed(L, n);
+      if (near && (n > 0 || eff > L.on * .8)) need(L.p, vis && n > 0 ? 0 : 1, L.base ? 0 : 2);
+      L.target = vis && live(L.p) ? n : 0;
+      if (L.base && live(L.p)) below = true;
     }
   }
 
   // ---------- the renderer ----------
-  let worldAlpha = 1, subjAlpha = 0, shadeA = 0, drawRaf = 0, drawLast = 0;
+  let drawRaf = 0, drawLast = 0, shadeA = 0;
+  let dive = null;                            // a child space drawn over its parent while the camera flies in or out
   const SHADE = "rgba(249, 247, 242, 0.62)";
   function requestDraw() { if (!drawRaf) drawRaf = requestAnimationFrame(draw); }
+  function drawNow(now) { if (drawRaf) { cancelAnimationFrame(drawRaf); drawRaf = 0; } draw(now); }
   function sizeView() {
-    const dpr = Math.min(3, devicePixelRatio || 1), W = stage.clientWidth, H = stage.clientHeight;
+    const dpr = DPR(), W = stageW, H = stageH;
     if (view.width !== Math.round(W * dpr) || view.height !== Math.round(H * dpr)) {
       view.width = Math.round(W * dpr); view.height = Math.round(H * dpr);
       view.style.width = W + "px"; view.style.height = H + "px";
     }
     return dpr;
   }
-  const ready = im => im.complete && im.naturalWidth > 0;
-  function drawPlate(T, c, alpha, dpr) {
-    if (!ready(T.plate)) return;
-    vg.setTransform(dpr, 0, 0, dpr, 0, 0);
-    vg.translate(c.x, c.y); vg.rotate((c.r || 0) * Math.PI / 180); vg.scale(c.s, c.s);
-    vg.globalAlpha = alpha;
-    vg.drawImage(T.plate, 0, 0, T.PLATE.w, T.PLATE.h);
-    for (const t of T.tiles) if (t.a > 0 && t.loaded) { vg.globalAlpha = alpha * t.a; vg.drawImage(t.img, t.x, t.y, t.w, t.h); }
+  const setCam = (g, c, dpr) => { g.setTransform(dpr, 0, 0, dpr, 0, 0); g.translate(c.x, c.y); if (c.r) g.rotate(c.r * Math.PI / 180); g.scale(c.s, c.s); };
+  // fade each layer towards its target: small steps (the zoom moving) are followed exactly, jumps take ~0.35 s
+  const stepLayer = (L, dt) => {
+    const d = L.target - L.a;
+    if (!d) return false;
+    L.a = Math.abs(d) <= Math.max(.1, dt / .35) ? L.target : L.a + Math.sign(d) * dt / .35;
+    return L.a !== L.target;
+  };
+  function drawLayers(g, X, c, dpr) {
+    setCam(g, c, dpr);
+    let from = 0;                                                         // skip pictures fully covered by a finer whole picture
+    X.layers.forEach((L, i) => { if (L.base && L.a >= 1 && live(L.p)) from = i; });
+    for (let i = from; i < X.layers.length; i++) {
+      const L = X.layers[i];
+      if (L.a <= 0 || !live(L.p)) continue;
+      g.globalAlpha = L.a; g.drawImage(L.p.bmp, L.x, L.y, L.w, L.h); L.p.used = clock;
+    }
+    g.globalAlpha = 1;
+  }
+  // the whole plate of a space that isn't the current one: the sharpest decoded picture the zoom needs
+  function platePic(T, eff) {
+    const [b1, b2] = T.layers[0].base && T.layers[1] && T.layers[1].base ? [T.layers[0].p, T.layers[1].p] : [null, T.layers[0].p];
+    const p = eff > 1.05 && live(b2) ? b2 : live(b1) ? b1 : live(b2) ? b2 : null;
+    if (p) p.used = clock;
+    return p;
+  }
+  const oc = document.createElement("canvas"), og = oc.getContext("2d");
+  function drawGhost(dpr) {
+    const { T, g1, g2 } = dive, gc = mul(cam, dive.inP), p = platePic(T, gc.s * dpr);
+    if (!p) return;
+    const quad = [[0, 0], [T.w, 0], [T.w, T.h], [0, T.h]].map(q => toScreen(gc, q).map(v => v * dpr));
+    if (g1 > 0 && g2 < 1 && live(T.mask)) {
+      // only the painted parts of the child (its plate through its mask) over the parent's own drawing of them
+      const xs = quad.map(q => q[0]), ys = quad.map(q => q[1]);
+      const x0 = Math.max(0, Math.floor(Math.min(...xs))), y0 = Math.max(0, Math.floor(Math.min(...ys)));
+      const x1 = Math.min(view.width, Math.ceil(Math.max(...xs))), y1 = Math.min(view.height, Math.ceil(Math.max(...ys)));
+      if (x1 > x0 && y1 > y0) {
+        if (oc.width !== view.width || oc.height !== view.height) { oc.width = view.width; oc.height = view.height; }
+        og.setTransform(1, 0, 0, 1, 0, 0); og.globalCompositeOperation = "source-over"; og.globalAlpha = 1;
+        og.clearRect(x0, y0, x1 - x0, y1 - y0);
+        og.imageSmoothingEnabled = true; og.imageSmoothingQuality = "medium";
+        setCam(og, gc, dpr);
+        og.drawImage(p.bmp, 0, 0, T.w, T.h);
+        og.globalCompositeOperation = "destination-in";
+        og.drawImage(T.mask.bmp, 0, 0, T.w, T.h); T.mask.used = clock;
+        og.globalCompositeOperation = "source-over";
+        vg.setTransform(1, 0, 0, 1, 0, 0); vg.globalAlpha = g1;
+        vg.drawImage(oc, x0, y0, x1 - x0, y1 - y0, x0, y0, x1 - x0, y1 - y0);
+      }
+    }
+    if (g2 > 0) {
+      // then the whole page: the plate and its paper around it take over the screen
+      vg.setTransform(1, 0, 0, 1, 0, 0); vg.globalAlpha = g2; vg.fillStyle = T.paper;
+      vg.beginPath(); vg.rect(0, 0, view.width, view.height);
+      quad.forEach(([x, y], i) => i ? vg.lineTo(x, y) : vg.moveTo(x, y)); vg.closePath();
+      vg.fill("evenodd");
+      setCam(vg, gc, dpr); vg.drawImage(p.bmp, 0, 0, T.w, T.h);
+    }
+    vg.globalAlpha = 1;
   }
   function draw(now) {
-    drawRaf = 0;
-    const dt = Math.min(.1, ((now || performance.now()) - (drawLast || now || 0)) / 1000); drawLast = now;
+    drawRaf = 0; clock++;
+    now = now || performance.now();
+    const dt = Math.min(.1, (now - (drawLast || now)) / 1000); drawLast = now;
     const dpr = sizeView();
     vg.setTransform(1, 0, 0, 1, 0, 0);
     vg.clearRect(0, 0, view.width, view.height);
-    vg.imageSmoothingEnabled = true; vg.imageSmoothingQuality = "high";
+    // medium = bilinear with mipmaps: looks the same as high (bicubic) here, at a third of the GPU time per frame
+    vg.imageSmoothingEnabled = true; vg.imageSmoothingQuality = "medium";
     let moving = false;
-    const step = t => { // fade each repaint towards its target over ~0.4 s
-      if (t.a !== t.target) { t.a = t.target > t.a ? Math.min(t.target, t.a + dt / .4) : Math.max(t.target, t.a - dt / .4); moving = true; }
-    };
-    const wc = worldCamNow();
-    const b = back();
-    if (space && b && b.space && worldAlpha > 0) drawPlate(SUBJ[b.space], b.cam, worldAlpha, dpr);
-    if (worldAlpha > 0 && wc && ready(base)) {
-      vg.setTransform(dpr, 0, 0, dpr, 0, 0);
-      vg.translate(wc.x, wc.y); vg.rotate((wc.r || 0) * Math.PI / 180); vg.scale(wc.s, wc.s);
-      vg.globalAlpha = worldAlpha;
-      vg.drawImage(base, 0, 0, WORLD.w, WORLD.h);
-      for (const t of wtiles) { step(t); if (t.a > 0 && t.loaded) { vg.globalAlpha = worldAlpha * t.a; vg.drawImage(t.img, t.x, t.y, t.w, t.h); } }
-    } else for (const t of wtiles) step(t);
-    if (S && subjAlpha > 0 && ready(S.plate)) {
-      for (const t of S.tiles) step(t);
-      drawPlate(S, cam, subjAlpha, dpr);
+    const X = space ? S : WSP;
+    for (const L of X.layers) if (stepLayer(L, dt)) moving = true;
+    if (!(dive && dive.g2 >= 1)) drawLayers(vg, X, cam, dpr);             // a child that covers everything hides its parent
+    if (S) {
       // the dim veil around the focused part, with the part cut out of it
       const st = body.classList.contains("focused") && S.holePolys ? 1 : 0;
       if (shadeA !== st) { shadeA = st > shadeA ? Math.min(1, shadeA + dt / .6) : Math.max(0, shadeA - dt / .6); moving = true; }
       if (shadeA > 0) {
-        vg.globalAlpha = subjAlpha * shadeA;
+        setCam(vg, cam, dpr);
+        vg.globalAlpha = shadeA;
         vg.fillStyle = SHADE;
         vg.beginPath();
         vg.rect(-cam.x / cam.s - 10, -cam.y / cam.s - 10, view.width / dpr / cam.s + 20, view.height / dpr / cam.s + 20);
         for (const pts of S.holePolys || []) pts.forEach(([x, y], i) => i ? vg.lineTo(x, y) : vg.moveTo(x, y));
         vg.fill("evenodd");
       }
-    } else if (S) for (const t of S.tiles) step(t);
+    }
+    if (dive) drawGhost(dpr);
+    // hand one freshly decoded picture to the GPU per frame (an invisible 1px draw), before it is needed for real
+    const w = warmQ.shift();
+    if (w && live(w)) { vg.setTransform(1, 0, 0, 1, 0, 0); vg.globalAlpha = .004; vg.drawImage(w.bmp, 0, 0, 1, 1); }
+    if (warmQ.length) moving = true;
     vg.globalAlpha = 1;
     if (moving) requestDraw();
+    if (window.__perf) probe(dpr);
+  }
+  // test hook: how many device pixels each picture pixel at the screen centre is stretched over (above ~1.6 looks soft)
+  function probe(dpr) {
+    const X = space ? S : WSP, { W, H } = viewport();
+    const [px, py] = toScreen(inv(cam), [W / 2, H / 2]);
+    let d = 0;
+    for (const L of X.layers) if (L.a > .5 && live(L.p) && px >= L.x && px <= L.x + L.w && py >= L.y && py <= L.y + L.h) d = Math.max(d, L.d);
+    let blur = d ? cam.s * dpr / d : 0;
+    if (dive && dive.g1 > .5) {
+      const gc = mul(cam, dive.inP), [qx, qy] = toScreen(inv(gc), [W / 2, H / 2]), p = platePic(dive.T, gc.s * dpr);
+      if (p && qx > 0 && qy > 0 && qx < dive.T.w && qy < dive.T.h) blur = gc.s * dpr / (p.w / dive.T.w);
+    }
+    window.__perf.push({ t: performance.now(), blur, space, dive: dive ? [+dive.g1.toFixed(2), +dive.g2.toFixed(2), +(dive.k || 0).toFixed(2), +(dive.pb || 0).toFixed(2), +cam.s.toFixed(2)] : null });
   }
 
   // ---------- labels ----------
+  const subLabels = [...document.querySelectorAll(".sublabel")], panelEl = $("#panel");
+  let panelBox = null;                        // the reading panel's size, read once per layout change
   function placeSubLabels() {
     const pid = S && current ? part(current) : null;
+    if (!pid && !subLabels.some(l => l.on)) return;
     const { W, H, phone } = viewport();
-    const panel = $("#panel").getBoundingClientRect();
+    const panel = panelBox || (panelBox = panelEl.getBoundingClientRect());
     const maxX = phone ? W : W - panel.width, maxY = phone ? H - panel.height : H;
     const placed = [];
-    for (const lab of document.querySelectorAll(".sublabel")) {
+    for (const lab of subLabels) {
       const node = S && lab.dataset.subject === S.id ? S.nodes[lab.dataset.id] : null;
       const show = node && node.parent === pid && node.id !== current;
-      if (!show) { lab.classList.remove("on"); continue; }
+      if (!show) { if (lab.on) { lab.classList.remove("on"); lab.on = false; } continue; }
       const b = node.box;
       const x = (b.x0 + b.x1) / 2 * cam.s + cam.x;
       let y = (b.y0 + b.y1) / 2 * cam.s + cam.y;
       const inside = x > 40 && x < maxX - 40 && y > 30 && y < maxY - 30;
-      lab.classList.toggle("on", inside);
+      if (lab.on !== inside) { lab.classList.toggle("on", inside); lab.on = inside; }
       if (!inside) continue;
-      const w = lab.offsetWidth || 120, h = (lab.offsetHeight || 30) + 6;
+      if (!lab.size) lab.size = [lab.offsetWidth || 120, (lab.offsetHeight || 30) + 6];   // measured once, not every frame
+      const [w, h] = lab.size;
       const hits = yy => placed.some(r => Math.abs(r.x - x) < (r.w + w) / 2 + 4 && Math.abs(r.y - yy) < h);
       for (const d of [0, 1, -1, 2, -2, 3, -3]) if (!hits(y + d * h)) { y += d * h; break; }
       placed.push({ x, y, w });
@@ -527,7 +695,8 @@
     if (S) S.root.classList.remove("active");
     space = id; S = id ? SUBJ[id] : null;
     if (S && arrive) S.root.classList.add("active");
-    body.classList.toggle("in-subject", !!S && arrive);
+    body.classList.toggle("in-subject", !!S);
+    chain = null; kShown = 0;
     body.classList.toggle("world-level", !S);
     for (const v of ["--paper", "--wall"]) body.style.setProperty(v, S ? S.paper : WORLD.paper);   // the page is the plate's own paper
     $("#mh-title").textContent = S ? S.title : "howthings.work";
@@ -559,94 +728,100 @@
     const [ox, oy] = rot(r, [mw[0] * s, mw[1] * s]);
     return { world: { s, r, x: mp[0] - ox, y: mp[1] - oy }, plate: { ...t, r: 0 } };
   }
-  const fade = (ms, f) => new Promise(res => {
-    if (reduceMotion) { f(1); return res(); }
-    const t0 = performance.now();
-    const step = now => { const u = Math.min(1, (now - t0) / ms); f(u * u * (3 - 2 * u)); u < 1 ? requestAnimationFrame(step) : res(); };
-    requestAnimationFrame(step);
-  });
-
   const ancestors = sid => { const out = []; for (let p = SUBJ[sid].parent; p && p !== "world"; p = SUBJ[p].parent) out.unshift(p); return out; };
-  // camera on `from` (null = the map) that shows child `sid`'s drawing exactly where its plate will land
-  const camOn = (sid) => landing(SUBJ[sid]).world;
+
+  // ---------- the dive: a child space drawn over its parent while the camera flies in or out ----------
+  // Its painted parts (the plate through its mask) fade in as soon as the parent's own drawing of it would
+  // look soft, then its paper takes over the screen, so the picture is sharp the whole way and lands exactly.
+  function densityAt(X, [x, y]) {
+    let d = 0;
+    for (const L of X.layers) if (L.a > .5 && live(L.p) && x >= L.x && x <= L.x + L.w && y >= L.y && y <= L.y + L.h) d = Math.max(d, L.d);
+    return d || 1;
+  }
+  function setDive(e, dir) {
+    const k = cam.s * dive.inP.s / dive.fitS;                              // 1 = the child's plate at its own size
+    const pb = cam.s * DPR() / densityAt(space ? S : WSP, dive.T.spot.plus);  // how stretched the parent's drawing is
+    const g2 = Math.max(smooth(.5, .97, k), smooth(2.2, 3.6, pb));
+    const g1 = Math.max(g2, smooth(1, 1.6, pb), smooth(.3, .6, k));
+    const w = dir > 0 ? (e >= 1 ? 1 : smooth(0, .22, e)) : 1 - smooth(.72, 1, e);
+    dive.g1 = g1 * w; dive.g2 = g2 * w; dive.k = k; dive.pb = pb;
+    if (!space) worldEl.style.opacity = (1 - dive.g2).toFixed(3);         // clouds and traffic go with the town
+  }
+  const diveOf = (T, L) => ({ T, inP: mul(inv(L.world), L.plate), fitS: L.plate.s, g1: 0, g2: 0 });
+  // after a switch the new space's pictures are shown at once: the dive covered them until this frame
+  function snapLayers() { updateLayers(); for (const L of (space ? S : WSP).layers) L.a = L.target; }
+  const urgent = p => decodePic(p).catch(() => {});
 
   // Entering a child of the current space is a shared-element move: fly until its drawing lies on its
-  // plate, then dissolve. Anything else (a deep link, a jump across the tree) goes there directly.
+  // plate, dissolving on the way. Anything else (a deep link, a jump across the tree) goes there directly.
   async function enter(sid, { instant = false } = {}) {
     if (space === sid || body.classList.contains("entering")) return;
     const T = SUBJ[sid];
     hideTip(); dismissWorldHint(); whover(null);
-    prefetchSubject(T, true);
     const fromHere = (T.parent === "world" ? null : T.parent) === space;
     const L = landing(T);
     if (instant || reduceMotion || !fromHere) {
       if (current) unfocus(true, { noFly: true });
-      const chain = ancestors(sid);                          // e.g. ["body", "skin"] for the cell
-      trail = [{ space: null, cam: camOn(chain[0] || sid) }];
-      chain.forEach((id, i) => trail.push({ space: id, cam: camOn(chain[i + 1] || sid) }));
+      trail = [{ space: null }, ...ancestors(sid).map(id => ({ space: id }))];
       setSpace(sid); Object.assign(cam, L.plate);
-      worldEl.style.opacity = back().space === null ? 0 : 0; subjEl.style.opacity = 1; worldAlpha = 0; subjAlpha = 1; revealSubject(); apply();
+      worldEl.style.opacity = ""; revealSubject(); snapLayers(); apply();
+      plan();
     } else {
       body.classList.add("entering");
       if (current) unfocus(true, { noFly: true });
-      await flyTo(L.world, 1300);
-      trail.push({ space, cam: { ...cam } });
+      // normally decoded long ago (one step away in the tree); a late one gets a short moment
+      await Promise.race([Promise.all([urgent(T.layers[0].p), urgent(T.mask)]), wait(400)]);
+      dive = diveOf(T, L);
+      await flyTo(L.world, flightMs(Math.abs(Math.log(L.world.s / cam.s))), e => setDive(e, 1));
+      trail.push({ space });
       setSpace(sid, { arrive: false });
+      dive = null;
       Object.assign(cam, L.plate);
-      subjEl.style.opacity = 0; subjAlpha = 0;
-      T.root.classList.add("active", "revealing");
-      apply();
-      await T.plate.decode().catch(() => {});
-      const fromMap = back().space === null;
-      await fade(520, u => { subjEl.style.opacity = u.toFixed(3); if (fromMap) worldEl.style.opacity = (1 - u).toFixed(3); subjAlpha = u; worldAlpha = 1 - u; requestDraw(); });
-      if (!fromMap) subjEl.style.opacity = 1;
+      worldEl.style.opacity = "";
       body.classList.remove("entering");
-      revealSubject();
-      apply();
+      revealSubject(); snapLayers(); apply();
+      plan();
     }
     try { history.replaceState(null, "", "#" + sid); } catch (e) {}
     page("/" + sid); track("machine_opened", { machine: sid, depth: trail.length });
-    for (const c of childrenOf(sid)) prefetchSubject(SUBJ[c]);
     showHintOnce();
   }
 
-  // Up one space: back out of the plate onto its drawing in the parent, dissolve, then show the parent whole.
+  // Up one space: back out to the whole plate, which becomes the dive over its parent, and keep flying out
+  // until the parent is whole. Both legs are one eased move, so the camera never stops in between.
   async function leave() {
     if (!space || body.classList.contains("entering")) return;
     const T = S, was = space, b = back();
     if (current) unfocus(true, { noFly: true });
     body.classList.remove("focused");
     body.classList.add("entering");
-    const L = landing(T);
-    await flyTo(L.plate, 600);
-    b.cam = L.world;
-    const toMap = b.space === null;
-    if (!toMap) { const P = SUBJ[b.space]; for (const t of P.tiles) t.a = t.target = 0; }   // parent shown as its bare plate, like on arrival
-    apply();
-    await fade(480, u => { subjEl.style.opacity = (1 - u).toFixed(3); if (toMap) worldEl.style.opacity = u.toFixed(3); subjAlpha = 1 - u; worldAlpha = u; requestDraw(); });
+    const L = landing(T), toMap = b.space === null;
+    const up = toMap ? worldFit() : subjectFit(SUBJ[b.space]);
+    const d1 = Math.abs(Math.log(cam.s / L.plate.s)) + Math.hypot(cam.x - L.plate.x, cam.y - L.plate.y) / Math.max(stageW, stageH);
+    const d2 = Math.abs(Math.log(L.world.s / up.s)), ms = flightMs(d1 + d2);
+    const split = d1 > .03 ? easeInv(d1 / (d1 + d2)) : 0;
+    if (split) await flyTo(L.plate, ms * split, () => {}, { seg: [0, split] });
     T.root.classList.remove("active");
     trail.pop();
+    setSpace(b.space, { arrive: false });
+    Object.assign(cam, L.world);
+    dive = { ...diveOf(T, L), g1: 1, g2: 1 };
+    if (toMap) worldEl.style.opacity = 0;
+    snapLayers(); apply();
+    await flyTo(up, ms * (1 - split), e => setDive(e, -1), { seg: [split, 1] });
+    dive = null;
+    worldEl.style.opacity = "";
     track("back_to_city", { machine: was, to: b.space || "map" });
     if (toMap) {
-      body.classList.remove("in-subject");
-      setSpace(null);
-      Object.assign(cam, L.world);
-      apply();
       try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
       page("/");
-      await flyTo(worldFit(), 1200);
     } else {
-      setSpace(b.space);
-      Object.assign(cam, L.world);
-      subjEl.style.opacity = 1; subjAlpha = 1; worldAlpha = 0;
       revealSubject();
-      apply();
       try { history.replaceState(null, "", "#" + b.space); } catch (e) {}
       page("/" + b.space);
-      await flyTo(subjectFit(S), 1000);
     }
     body.classList.remove("entering");
-    apply();
+    apply(); plan();
     const spot = toMap ? wspots["subject:" + was] : null;
     if (spot) spot.path.focus({ preventScroll: true });
   }
@@ -668,10 +843,11 @@
     const mech = HOW()[current];
     if (!mech) return;
     track("book_opened", { machine: S.id, page: mech, from: current });
-    window.BOOK.open(mech, { fromSrc: S.tileFile(S.nodes[current].level === 3 ? S.nodes[current].key : part(current)) });
+    window.BOOK.open(mech, { fromSrc: vurl(S.tileFile(S.nodes[current].level === 3 ? S.nodes[current].key : part(current))) });
   };
 
   function fillPanel(id) {
+    panelBox = null;
     const p = S.nodes[id], sibs = siblings(id);
     const crumbs = [crumbButton("The city", () => leaveAll())];
     trail.forEach((t, i) => { if (t.space) crumbs.push(crumbButton(SUBJ[t.space].title, async () => { while (trail.length > i + 1) await leave(); })); });
@@ -706,7 +882,7 @@
     fig.hidden = p.level !== 2;
     if (p.level === 2) {
       // swap only once the new picture is decoded, so the panel never blanks between parts
-      const src = `${S.base}detail/${id}.webp`, pre = new Image(), sid = S.id;
+      const src = vurl(`${S.base}detail/${id}.webp`), pre = new Image(), sid = S.id;
       pre.src = src;
       pre.decode().then(() => { if (current === id && space === sid) { img.src = src; img.classList.add("ready"); } },
                         () => { if (current === id && space === sid) fig.hidden = true; });
@@ -731,14 +907,17 @@
     current = id;
     S.els[id].path.classList.add("current");
     body.dataset.level = S.nodes[id].level;
-    const n = S.nodes[id], keys = n.level === 2 ? [id, ...n.children.map(c => S.nodes[c].key)] : [n.parent, n.key];
-    for (const t of S.tiles) if (keys.includes(t.key)) loadTile(S, t);
+    // its own repaints (and, a step deeper, its sub-parts') decode now; they fade in along the flight
+    const n = S.nodes[id], keys = n.level === 2 ? [id] : [n.parent, n.key], deeper = n.level === 2 ? n.children.map(c => S.nodes[c].key) : [];
+    chain = { keys: new Set(keys), hold: n.level === 3 ? n.parent : null, s0: cam.s, s1: 0 };
+    for (const t of S.tiles) if (keys.includes(t.key)) need(t.p, 0, 2); else if (deeper.includes(t.key)) need(t.p, 1, 2);
     fillPanel(id); setHole(id); showSubs(id);
     body.classList.add("focused");
     dismissHint();
     try { history.replaceState(null, "", `#${S.id}_${id}`); } catch (e) {}
     page(`/${S.id}/${id.replace(".", "/")}`); track("part_opened", { machine: S.id, part: id, level: n.level });
-    requestAnimationFrame(() => flyTo(focusView(id), n.level === 3 ? 1300 : 1200));
+    const ch = chain;
+    requestAnimationFrame(() => { const v = focusView(id); ch.s0 = cam.s; ch.s1 = v.s; flyTo(v, n.level === 3 ? 1300 : 1200); });
     if (fromKey) $("#close").focus({ preventScroll: true });
   }
   // up one level; all the way out of the subject's parts with toTop
@@ -751,10 +930,11 @@
     delete body.dataset.level;
     body.classList.remove("focused");
     showSubs(null);
-    if (noFly) { setHole(null); return; }
+    if (noFly) { setHole(null); chain = null; return; }
     try { history.replaceState(null, "", "#" + S.id); } catch (e) {}
     const T = S;
-    flyTo(fitView(), 1000).then(() => { if (!current && S === T) setHole(null); });
+    // the part's repaints fade out with the zoom on the way back, then free browsing takes over
+    flyTo(fitView(), 1000).then(() => { if (!current && S === T) { setHole(null); chain = null; updateLayers(); requestDraw(); } });
     S.els[part(was)].path.focus({ preventScroll: true });
   }
   const step = d => { const s = siblings(current), i = s.indexOf(current); focus(s[(i + d + s.length) % s.length]); };
@@ -905,6 +1085,7 @@
     const { W, H } = viewport(), fit = fitView();
     dismissHint();
     if (cam.s * f <= fit.s * 1.02) { flyTo(fit, 450); return; }
+    if (f > 1) { const [px, py] = toScreen(inv(cam), [W / 2, H / 2]); f = Math.min(f, artMax(px, py) / cam.s); if (f < 1.02) return; }
     const keep = { ...cam };
     Object.assign(cam, { s: cam.s * f, x: W / 2 - (W / 2 - cam.x) * f, y: H / 2 - (H / 2 - cam.y) * f }); clampCam();
     const t = { ...cam }; Object.assign(cam, keep);
@@ -968,55 +1149,61 @@ Credit it to: (your name or @handle, and a link)`;
 
   function setCompact() { body.classList.toggle("compact", S ? viewport().compact : viewport().phone); }
   addEventListener("resize", () => {
+    stageW = stage.clientWidth; stageH = stage.clientHeight; panelBox = null;
+    for (const l of subLabels) l.size = null;
     setCompact();
     if (anim) { cancelAnimationFrame(anim.raf); anim = null; }
     Object.assign(cam, current ? focusView(current) : fitView(), { r: 0 });
     apply();
   });
 
-  // ======================================================================= prefetch
-  // The city's own tiles first, then each subject: plate, part tiles, close-ups, book pages, deep tiles.
-  // Hovering a subject in the city jumps it to the front of the queue. Decoded images stay in memory.
-  const kept = [];
-  const decodeUrl = u => { const i = new Image(); i.src = u; kept.push(i); return i.decode(); };
-  const queue = [];                          // { T, fn }: T is the subject a job belongs to (null for the city)
-  let workers = 0;
-  function pump() {
-    while (workers < 6 && queue.length) {
-      const job = queue.shift();
-      workers++;
-      Promise.resolve().then(job.fn).catch(() => {}).then(() => { workers--; pump(); });
-    }
+  // ======================================================================= prefetch, by distance in the tree of spaces
+  // Decoded and kept: the space you are in and every space one step away (to dive into or back out to),
+  // plus, on big screens, the current plate's detail tiles. Fetched only (bytes in the HTTP cache, decoded
+  // in a few milliseconds when needed): everything else, nearest first. It is re-planned on every move.
+  const parentOf = id => id === null ? undefined : (SUBJ[id].parent === "world" ? null : SUBJ[id].parent);
+  const kidsOf = id => SIDS.filter(c => parentOf(c) === id);
+  const spaceOf = id => id === null ? WSP : SUBJ[id];
+  function distances(from) {
+    const d = new Map([[from, 0]]), q = [from];
+    while (q.length) { const x = q.shift(); for (const y of [parentOf(x), ...kidsOf(x)]) if (y !== undefined && !d.has(y)) { d.set(y, d.get(x) + 1); q.push(y); } }
+    return d;
   }
-  function prefetchSubject(T, urgent = false) {
-    if (!T.prefetched) {
-      T.prefetched = true;
-      const lvl = l => T.tiles.filter(t => t.level === l).map(t => () => { loadTile(T, t); return t.img.decode(); });
-      const fns = [() => T.plate.decode(), ...lvl(2), ...T.ORDER.map(id => () => decodeUrl(`${T.base}detail/${id}.webp`)),
-        ...(T.bookAssets || []).map(u => () => decodeUrl(u)), ...lvl(3)];
-      queue.push(...fns.map(fn => ({ T, fn })));
-    }
-    if (urgent) {                            // move this subject's waiting jobs to the front, keeping their order
-      const mine = queue.filter(j => j.T === T), rest = queue.filter(j => j.T !== T);
-      queue.splice(0, queue.length, ...mine, ...rest);
+  const slow = () => { const c = navigator.connection; return !!c && (c.saveData || /(^|-)2g|3g/.test(c.effectiveType || "")); };
+  const warmJob = (url, prio, versioned = true) => { const p = pics.get(url); if (!warmed.has(url) && (!p || !p.state)) jobs.push({ kind: "warm", url, plain: !versioned, prio }); };
+  function plan() {
+    for (const j of jobs) if (j.p) j.p.job = null;
+    jobs = [];
+    for (const p of pics.values()) p.keep = 9;
+    const dpr = DPR(), far = slow() ? 1 : 99;
+    for (const [id, k] of [...distances(space).entries()].sort((a, b) => a[1] - b[1])) {
+      const X = spaceOf(id), bases = X.layers.filter(L => L.base), tiles = X.layers.filter(L => !L.base);
+      const fitEff = (id === null ? worldFit().s : subjectFit(X).s) * dpr;
+      const sharp = bases.find(L => L.d >= fitEff * .9) || bases[bases.length - 1];   // the picture its whole view needs
+      if (k <= 1) {
+        need(bases[0].p, k); need(sharp.p, k);
+        if (X.mask && k === 1) need(X.mask, 1);
+      } else if (k <= far) { for (const L of bases) warmJob(L.p.url, 10 + k); if (X.mask) warmJob(X.mask.url, 10 + k); }
+      if (k === 0 && id !== null) for (const t of tiles) t.level === 2 && !lowMem ? need(t.p, 2, 2) : warmJob(t.p.url, 3 + t.level);
+      else if (id === null && k <= 1 && !lowMem) for (const t of tiles) need(t.p, 3, 2);   // a dive or a way back crosses most of the map
+      else if (id === null && k === 0) {
+        // small devices: decode the map tiles around each machine, the rest when the zoom gets there
+        for (const t of tiles) kidsOf(null).some(c => { const [x, y] = SUBJ[c].spot.plus; return x > t.x && x < t.x + t.w && y > t.y && y < t.y + t.h; }) ? need(t.p, 2) : warmJob(t.p.url, 4);
+      } else if (k <= far) for (const t of tiles) warmJob(t.p.url, 12 + k + (t.level || 2));
+      if (id !== null && k <= far) {
+        for (const pid of X.ORDER) warmJob(`${X.base}detail/${pid}.webp`, (k ? 12 : 4) + k);
+        for (const u of X.bookAssets || []) warmJob(u, (k ? 13 : 5) + k, false);
+      }
     }
     pump();
   }
-  function prefetchAll() {
-    queue.push(...wtiles.map(t => ({ T: null, fn: () => { loadWT(t); return t.img.decode(); } })));
-    pump();
-    for (const sid of SIDS) prefetchSubject(SUBJ[sid]);
-  }
-  stage.addEventListener("pointerover", e => {
-    const k = hitWorld(e.target);
-    if (k && k.startsWith("subject:")) prefetchSubject(SUBJ[k.slice(8)], true);
-  });
+  picArrived = () => { updateLayers(); requestDraw(); };
 
   // ======================================================================= start
   setSpace(null);
-  subjEl.style.opacity = 0; subjAlpha = 0; worldAlpha = 1;
   Object.assign(cam, worldFit());
   apply();
+  plan();
   const start = () => {
     const h = location.hash.slice(1);
     const legacy = h.startsWith("how-") ? h.slice(4) : null;
@@ -1032,10 +1219,10 @@ Credit it to: (your name or @handle, and a link)`;
     }
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
-  if (base.complete) setTimeout(prefetchAll, 400); else base.addEventListener("load", () => setTimeout(prefetchAll, 400), { once: true });
 
   window.__viewer = {
     get nodes() { return S ? S.nodes : {}; }, get tiles() { return S ? S.tiles : []; }, get space() { return space; },
-    cam, focus, unfocus, enter, leave, leaveAll, subjects: SUBJ, worldTiles: wtiles
+    cam, focus, unfocus, enter, leave, leaveAll, subjects: SUBJ, worldTiles: wtiles, idle,
+    memory: () => ({ decodedMB: Math.round(picBytes / 1e6), pictures: [...pics.values()].filter(live).length, budgetMB: BUDGET / 1e6 })
   };
 })();

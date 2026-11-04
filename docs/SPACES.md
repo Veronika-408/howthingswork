@@ -13,8 +13,10 @@ the map (the town)                       ← you start here
 ```
 
 Each space is drawn **inside its parent**. To dive in, the camera zooms into the parent until the little
-drawing of the child sits exactly where the child's own plate will appear. Then the parent dissolves into
-the child. Going up reverses it. Inside each space, the usual parts, deep-zoom tiles and "How it works"
+drawing of the child sits exactly where the child's own plate will appear. On the way, the child's painted
+parts fade in over its little drawing as soon as that drawing would look soft. Then the child's paper takes
+over, so the picture is sharp the whole way down. Going up reverses it in one continuous move.
+`docs/DEVELOPING.md` explains the layers and the loading. Inside each space, the usual parts, deep-zoom tiles and "How it works"
 pages work as before.
 
 ## What a space needs

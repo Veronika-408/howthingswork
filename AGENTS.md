@@ -36,6 +36,6 @@ cut-away plates, deep zoom and moving "How it works" pages. Live at https://howt
 | `subjects/<id>/` | every other machine: `subject.json`, `src/`, `art/`, `world/`, `mechanisms.js`, `build_book.py`, `screenshots/` |
 | `world/` | the map: `art/world.png`, its tiles, sprites; `src/world.js` (grey machines, clouds, traffic) |
 | `scripts/` | `tiles.py` (deep-zoom repaints), `grid.py`, `cutout.py`, `imagegen.sh` |
-| `tools/` | `new_machine.py`, `colour_in.py`, `smoke.mjs`, `screenshots.mjs` |
+| `tools/` | `new_machine.py`, `colour_in.py`, `smoke.mjs`, `screenshots.mjs`, `perf.mjs` (frame times and blur through every zoom) |
 | `build.py` | builds everything into `dist/` |
 | `docs/SPACES.md` | the zoom tree: how spaces nest (map → body → skin → cell) and how it grows in both directions |
