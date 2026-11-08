@@ -1,0 +1,9 @@
+Image 1 is a crop of a pen-and-ink drawing of a small town: a bus stop with a glass shelter. A family of three has been pasted into it from another drawing of the same book (Image 2), smaller, so their lines are thinner and greyer than the rest, and the shelter behind them was erased to blank white.
+
+EDIT IMAGE 1 with these changes only:
+1. Redraw the three pasted people (the man with the shoulder bag on the left, the see-through woman in the long raincoat in the middle with the tiny skin block beside her arm, the boy with the backpack holding her hand on the right) in EXACTLY the same place, size, spacing and pose, as a tiny faithful copy of the three people in Image 2: crisp dark black ink lines of the same weight as the rest of Image 1. Do not move them closer together or resize them.
+2. Fill the blank white area behind them with what belongs there: the glass back wall and the bench of the shelter, continuing the shelter's lines.
+3. The round bus-stop sign on the pole at the right becomes a square sign with a little bus pictured on it.
+Everything else stays exactly as it is.
+
+Pure black ink on pure white, shading only by fine hatching, no grey, no colour. ABSOLUTELY NO TEXT, letters or numbers. Same framing as Image 1.

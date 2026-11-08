@@ -1,0 +1,15 @@
+A single sticker for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley "Incredible Cross-Sections" style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise engineering lines, realistic materials. Friendly but not cartoon. No 3D render, no cartoon, no photographic look.
+
+SUBJECT: one Boeing 747-400 jumbo jet standing on the ground, white body with a thin blue stripe along the windows and a blue tail fin, light grey wings, NO logos, NO lettering, NO registration.
+Technically correct for a 747-400:
+- exactly FOUR engines in total, TWO under each wing, clearly spread out: the inner engine about one third of the way out along the wing, the outer engine about two thirds of the way out;
+- the famous hump on top at the front, with the flight-deck windows on the upper deck at the front of the hump;
+- upturned winglets at both wing tips;
+- the landing gear down: two nose wheels, and sixteen main wheels on four main legs (two legs under the body, two under the wings);
+- a row of small passenger windows along the main deck and along the hump.
+
+PROJECTION: strict isometric projection, exactly as in an isometric town game. The plane's body lies along one isometric axis: its NOSE points to the UPPER LEFT and its TAIL to the LOWER RIGHT, the body line rising from lower right to upper left at about 27 degrees above horizontal. Seen from above at about 30 degrees, so we see the plane's LEFT side and the top of the wings. The left wing reaches towards the LOWER LEFT, in front of the body; the right wing reaches to the UPPER RIGHT, behind the body. Light from the top left.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the plane, edge to edge, with no texture, no gradient, no ground, no cast shadow, no paper.
+The whole aircraft fits inside the frame with a wide empty magenta margin all round; no part touches the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, logos or markings anywhere.

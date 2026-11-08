@@ -1,0 +1,7 @@
+edit lab/v5-ink-and-wash/art/prompts/human-wash.full.txt lab/v5-ink-and-wash/art/src/human-paint.png lab/v5-ink-and-wash/art/src/human-lines-a.png
+edit lab/v5-ink-and-wash/art/prompts/skin-wash.full.txt lab/v5-ink-and-wash/art/src/skin-paint.png lab/v5-ink-and-wash/art/src/skin-lines.png
+edit lab/v5-ink-and-wash/art/prompts/cell-wash.full.txt lab/v5-ink-and-wash/art/src/cell-paint.png lab/v5-ink-and-wash/art/src/cell-lines-a.png
+edit lab/v5-ink-and-wash/art/prompts/lysosome-wash.full.txt lab/v5-ink-and-wash/art/src/lysosome-paint.png lab/v5-ink-and-wash/art/src/lysosome-lines-a.png
+edit lab/v5-ink-and-wash/art/prompts/pilots-wash.full.txt lab/v5-ink-and-wash/art/src/pilots-paint.png lab/v5-ink-and-wash/art/src/pilots-lines-a.png
+edit lab/v5-ink-and-wash/art/prompts/drive-sprites.txt lab/v5-ink-and-wash/art/src/drive-sprites.png lab/v5-ink-and-wash/art/src/drive-from-pilots.png
+edit lab/v5-ink-and-wash/art/prompts/drive-wash.full.txt lab/v5-ink-and-wash/art/src/drive-paint.png lab/v5-ink-and-wash/art/src/drive-lines-a.png

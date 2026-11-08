@@ -1,0 +1,18 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise lines, realistic materials and proportions. Friendly but not cartoon. No 3D render, no cartoon, no photographic look.
+
+PROJECTION: strict isometric projection, exactly as in an isometric town-building game (the 2:1 pixel-art angle): every horizontal edge runs at about 27 degrees, either up to the left or up to the right; vertical edges stay perfectly vertical; everything is seen from above at the front, at the same angle. Light from the top left.
+
+SUBJECT: nine separate buildings of a small, friendly European river town, each standing on nothing (no lawn, no pavement, no trees around them), in a 3 by 3 grid:
+1. a tall narrow townhouse with a red tiled roof and white window frames;
+2. a pair of cream semi-detached houses with grey slate roofs and chimneys;
+3. a small white cottage with a dark roof, a chimney and a green door;
+4. a three-storey pale yellow apartment block with small balconies;
+5. a corner shop with a green-and-white striped awning and big windows (no lettering);
+6. a small stone church with a slender spire;
+7. a red-brick primary school with tall windows;
+8. a blue-grey house with a steep roof and a dormer window;
+9. a terracotta-coloured row of three narrow houses joined together.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no ground, no cast shadows, no paper. No pink or magenta inside the objects.
+LAYOUT: a neat grid with WIDE empty magenta gaps between the objects; every object is complete and whole; no object touches another object or the edge of the picture; all at the same scale.
+ABSOLUTELY NO TEXT: no letters, numbers, signs, logos, labels or writing anywhere.

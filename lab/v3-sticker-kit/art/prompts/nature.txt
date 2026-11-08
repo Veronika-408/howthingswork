@@ -1,0 +1,12 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise lines, realistic materials and proportions. Friendly but not cartoon. No 3D render, no cartoon, no photographic look.
+
+PROJECTION: strict isometric projection, exactly as in an isometric town-building game (the 2:1 pixel-art angle): every horizontal edge runs at about 27 degrees, either up to the left or up to the right; vertical edges stay perfectly vertical; everything is seen from above at the front, at the same angle. Light from the top left.
+
+SUBJECT: separate trees, plants and clouds, in a neat grid of 4 columns and 3 rows:
+row 1: a big round leafy deciduous tree; a tall slim poplar tree; a dark green conifer (fir) tree; a white birch tree with light leaves;
+row 2: a small round leafy tree; a low round green bush; a flowering bush with small yellow flowers; a short straight hedge, lying along one isometric axis;
+row 3: three fluffy white cumulus clouds of different sizes, soft watercolour, seen from the side, and a small autumn tree with orange leaves.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no ground, no cast shadows, no paper. No pink or magenta inside the objects.
+LAYOUT: a neat grid with WIDE empty magenta gaps between the objects; every object is complete and whole; no object touches another object or the edge of the picture; all at the same scale.
+ABSOLUTELY NO TEXT: no letters, numbers, signs, logos, labels or writing anywhere.

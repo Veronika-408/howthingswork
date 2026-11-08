@@ -1,0 +1,12 @@
+You are an illustrator of children's science encyclopedias.
+
+Generate one illustrated encyclopedic plate of a single LYSOSOME, the recycling bubble inside a cell, magnified enormously and cut open so we can see inside, in the style of the great children's encyclopedias of the 1980s-1990s (Dorling Kindersley): fine ink linework and transparent traditional watercolor washes, warm natural colors on slightly ivory paper, friendly and calm. No 3D render, no cartoon, no photographic look. Nothing scary.
+
+The lysosome is a big ROUND bubble in the centre, seen from the front, with the front of its skin cut away. It is built in clearly separated depth planes, like the layers of a paper theatre:
+1. BACK: pale golden cytoplasm around the bubble with fine golden threads, and the inside of the far half of the bubble, a soft lilac curved wall.
+2. INSIDE the bubble, floating in a pale lilac liquid: dozens of tiny ENZYMES drawn as little purple and violet bean- and scissor-shaped proteins; on the left a worn-out old MITOCHONDRION (a faded orange bean with folds) inside a thin wrapping bubble, half taken apart, with small pieces coming off; on the lower right a rod-shaped GERM (a greenish bacterium) breaking up into pieces.
+3. The SKIN of the bubble: a SINGLE membrane, a smooth violet rim all around, with several small PUMPS sitting in it (little barrel-shaped proteins) and a few DOORS (small channels) through which tiny round pieces (building blocks) are leaving into the cytoplasm.
+4. OUTSIDE, in front: three small round DELIVERY BUBBLES arriving at the top right, each a little violet vesicle carrying tiny enzymes, one of them just joining the skin.
+
+COMPOSITION: wide 16:9 landscape. The bubble fills about 70% of the height, centered, with calm ivory paper around it.
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, annotation lines or title.

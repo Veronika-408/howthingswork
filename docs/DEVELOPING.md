@@ -54,3 +54,8 @@ Add `?slowmo=8` to the URL to slow every flight down eightfold and watch a dive 
   dropped. They come back from the HTTP cache in milliseconds.
 - **Caching.** The build gives every picture a content hash (`window.ASSET_V`, sent as `?v=`), so a changed
   picture is a new URL. Everything else is cached for a day and refreshed in the background.
+
+## The lab
+
+`lab/` holds five experimental ways of making the pictures, built on one demo and compared side by side
+(`python3 -m http.server -d lab 8766`). See `lab/README.md` for the results and `lab/core/API.md` for the viewer they share.

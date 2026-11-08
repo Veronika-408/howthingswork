@@ -1,0 +1,9 @@
+Image 1 is an enlarged crop of a pen-and-ink cutaway drawing of a jumbo jet's engine from a children's "how things work" encyclopedia; it is blurry and coarse because it has been enlarged five times.
+
+Redraw Image 1 as a crisp, MUCH MORE DETAILED pen-and-ink drawing of exactly the same thing: every big shape keeps exactly its outline, position and size in the frame (the round fan at the front left, the open engine core behind it, the cowling, the wing above, the wheels and people at the edges), so the new drawing lies exactly on top of the old one. Inside those outlines, add the fine detail a technical illustrator would draw at this size, technically correct for a big turbofan:
+- the fan: many curved, twisted blades around a pointed spinner, the fan case around it with its thin inner lining;
+- behind it the bypass duct, then the core: many rows of small compressor blades on their discs getting smaller towards the back, the ring-shaped combustion chamber with a row of fuel nozzles, then the turbine stages with tiny blades, and the long shaft running through the middle;
+- outside the core: pipes, cables, brackets, small pumps and gearboxes, rivet lines on the cowling.
+Shading only by fine hatching and cross-hatching.
+
+PURE BLACK INK ON PURE WHITE PAPER ONLY: no colour, no grey tones, no gradients, no large solid black areas. Lines crisp and dark, thinner than in Image 1. ABSOLUTELY NO TEXT, letters, numbers or labels. Same framing as Image 1.

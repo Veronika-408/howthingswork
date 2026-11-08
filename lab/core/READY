@@ -1,0 +1,10 @@
+The core works (lab/core/lab.js, lab/core/lab.css). A working example variant: lab/core/test/ (data.js + renderer.js,
+using the live site's pictures and placeholder shapes): open http://localhost:8766/core/test/ to see the viewer.
+Screenshots of both chains: node lab/tools/shots.mjs <your-variant>   (add --quick to skip opening every part)
+Notes:
+- The reading panel is a 360px column on the right on desktop (the picture fits in the area left of it), a sheet at
+  the bottom on phones. Your picture is framed by `frame` (or 0,0,w,h) into that area.
+- In the drive space, centred controls fly level; the flight state is in o.drive (see API.md).
+- Ghost dives: the core paints the parent, then your child with o.ghost = true and o.alpha rising, then fills the
+  screen with the child's paper and paints the child with o.ghost = false. A child that paints its full page rectangle
+  while ghost is true shows as a fading rectangle: paint only the subject when o.ghost is true.

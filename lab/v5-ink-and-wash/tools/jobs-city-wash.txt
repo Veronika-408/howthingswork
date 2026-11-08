@@ -1,0 +1,1 @@
+edit lab/v5-ink-and-wash/art/prompts/city-wash.full.txt lab/v5-ink-and-wash/art/src/city-paint.png lab/v5-ink-and-wash/art/src/city-lines.png

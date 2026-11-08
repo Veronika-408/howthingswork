@@ -1,0 +1,9 @@
+Image 1 is a pen-and-ink drawing of the left half of a Boeing 747-400 flight deck, seen from just behind the captain's seat: the captain (the pilot on the left) sitting in his big seat with his hand on his control wheel, the windscreen above, the instrument panel with its screens, the centre pedestal with the thrust levers on the right.
+
+EDIT IMAGE 1, keeping every other line, shape, position and the framing exactly as they are, with these changes only, so that it becomes the view from the captain's own seat:
+1. Remove the captain and his seat completely. Where they were, draw what is behind them: the side wall and side window of the flight deck on the left, the lower instrument panel and the floor.
+2. Remove the captain's control wheel (the ram's-horn shaped wheel), but keep its column: a short sturdy column rising from the floor in front of the panel, ending in a round hub where the wheel was. The space where the wheel was shows the instrument panel and screens behind it, drawn complete.
+3. Remove the four thrust lever handles on the centre pedestal, keeping the pedestal with four empty straight slots where the levers move.
+4. All window panes (the windscreen and the side window) are EMPTY: plain pure white inside their frames, no sky and nothing seen through them.
+
+Same line style: crisp pure black ink on pure white, shading only by fine hatching, no grey, no colour. The screens are blank. ABSOLUTELY NO TEXT, letters, numbers or labels.

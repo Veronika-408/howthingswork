@@ -1,0 +1,11 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise lines, realistic materials and proportions. Friendly but not cartoon. No 3D render, no cartoon, no photographic look.
+
+PROJECTION: strict isometric projection, exactly as in an isometric town-building game (the 2:1 pixel-art angle): every horizontal edge runs at about 27 degrees, either up to the left or up to the right; vertical edges stay perfectly vertical; everything is seen from above at the front, at the same angle. Light from the top left.
+
+SUBJECT: separate airport buildings and street furniture, in a neat grid of 4 columns and 2 rows:
+row 1: a long low airport terminal building with a big glass front and a flat roof (wide, it may take two grid cells); an airport control tower (a tall round concrete shaft with a glass cab on top); a large curved-roof aircraft hangar with its big doors open;
+row 2: a glass bus shelter with a curved roof and a bench inside, open at the front, its long side running along an isometric axis; a single bus stop pole with a round blank sign plate (no symbol, no text); two tall old-fashioned street lamps; a park bench with a backrest.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no ground, no cast shadows, no paper. No pink or magenta inside the objects.
+LAYOUT: a neat grid with WIDE empty magenta gaps between the objects; every object is complete and whole; no object touches another object or the edge of the picture; all at the same scale.
+ABSOLUTELY NO TEXT: no letters, numbers, signs, logos, labels or writing anywhere.

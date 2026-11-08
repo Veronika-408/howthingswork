@@ -1,0 +1,10 @@
+# The lab's working files stay local: generated sources, rejects, intermediates and most screenshots.
+# Tracked: each runnable demo (the files its page loads, listed in v*/SHIPPED.txt, force-added), the reports,
+# briefs, prompts, tools and generation logs, and the screenshots the comparison page shows.
+.slots/
+core/test/
+v*/art/*
+!v*/art/prompts/
+v*/edits/
+v*/shots/
+v3-sticker-kit/*.jpg

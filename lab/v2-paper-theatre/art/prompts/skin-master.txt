@@ -1,0 +1,13 @@
+You are an illustrator of children's science encyclopedias.
+
+Generate one illustrated encyclopedic plate of a piece of human skin seen in cross-section, magnified many times, in the style of the great children's encyclopedias of the 1980s-1990s (Dorling Kindersley "The Human Body"): fine ink linework and transparent traditional watercolor washes, warm natural colors on slightly ivory paper, friendly and calm. No 3D render, no cartoon, no photographic look. Nothing scary.
+
+The slice is seen STRAIGHT FROM THE FRONT, flat, like a cut cake seen side-on (not a 3D block), a wide band filling the picture from the left edge to the right edge. It is built in clearly separated horizontal layers, like the layers of a paper theatre, each with a clear wavy boundary:
+1. Near the top, a thin air gap of plain paper with a few flakes of old skin lifting off the surface and a drop of sweat on the surface.
+2. The EPIDERMIS: the top layer, made of many small packed cells like bricks, flat and pale at the surface, rounder pinkish-violet cells with purple nuclei lower down, with a wavy bottom edge.
+3. The DERMIS: the thick middle layer of pink fibrous tissue, containing: one long HAIR growing up out of a hair follicle (a deep pocket) with a little yellow oil gland and a small red muscle beside it, the hair sticking out above the surface; one coiled SWEAT GLAND like a ball of yellow string with a thin duct winding up to a pore on the surface; red arteries and blue veins branching into fine capillaries; yellow nerve fibres with a few small touch sensors.
+4. The FAT layer at the bottom: big round pale-yellow fat cells like a heap of balloons, with a vessel running along its top.
+The hair, the sweat gland and the vessels are each clearly separate, with space between them.
+
+COMPOSITION: wide 16:9 landscape. The skin band spans the whole width; plain ivory paper above the surface (about 15% of the height).
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, annotation lines or title.

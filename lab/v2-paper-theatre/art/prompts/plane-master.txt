@@ -1,0 +1,22 @@
+You are a historical illustrator, aeronautical engineer and technical draftsman specializing in illustrated encyclopedias for children.
+
+Subject: a white Boeing 747-400 jumbo jet with a single thin blue cheatline along the fuselage and a plain white tail with a blue stripe, parked on the apron of a small airport, being made ready for a flight. NO logos, NO lettering of any kind.
+
+Generate one illustrated encyclopedic plate: the whole 747 seen from its LEFT side, nose pointing to the LEFT, viewed from slightly in front and slightly above (about 10 degrees), so it reads almost as a side profile. Large portions of the outer skin are cut away to reveal everything inside, in the style of a classic cutaway drawing.
+
+The picture is built in clearly separated depth planes, like the layers of a paper theatre, with very little overlap between them:
+1. BACK: a pale sky and, far behind, a low airport terminal building with a control tower, softly washed and faint.
+2. The FAR (right) wing, seen behind the fuselage, sloping up and away towards the top of the picture, with its two engines hanging under it, spread out along the wing.
+3. The FUSELAGE, cut open along its whole length: at the front, the famous hump with the flight deck on the upper level, where two pilots in white shirts sit side by side in blue seats in front of their instrument panels; behind the flight deck the upper-deck cabin inside the hump with a short staircase down; the long main-deck cabin with many rows of blue seats and dozens of tiny passengers; the lower-deck cargo hold under the floor with metal luggage containers and suitcases; the tall tail fin with the rudder, and the horizontal tailplane. The two nose wheels under the nose.
+4. The NEAR (left) wing in front of the fuselage, sweeping down and towards us to the lower right, its inner structure partly cut away to show the fuel tanks and ribs, flaps at its back edge, with its TWO engines hanging under it, spread out along the wing; the nearer engine is cut open to show the big fan at the front and the core inside. The main landing gear under the wing and the body: 16 main wheels in four groups of four.
+5. FRONT, along the bottom of the picture, standing on the apron in front of the plane: a pushback tug at the nose, a belt loader carrying suitcases up into the open cargo door with a baggage tug and three trolleys of colourful suitcases, a fuel truck under the near wing, orange cones and ground crew in hi-vis vests.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+TECHNICALLY CORRECT FOR A 747-400: exactly 4 engines, 2 under each wing, spread out along the wing; 18 wheels in total (2 nose wheels, 16 main wheels); the hump with the flight deck on the upper level; winglets at the wing tips.
+
+COMPOSITION: Wide 16:9 landscape plate. The whole 747 fits inside the frame, spanning about 88% of the width, centered, with ivory paper margins around it.
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, signs, annotation lines or title. Pure illustration only.

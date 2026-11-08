@@ -1,0 +1,10 @@
+A page illustration for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+SUBJECT: the view from the captain's seat of a Boeing 747-400 flight deck, looking straight forward, drawn front-on and level (no tilt). The picture fills the whole frame edge to edge:
+- at the top, the row of windscreen panes in their thick grey frames: two large front panes in the middle and side panes going round to the left and right; the overhead panel's front edge just visible above;
+- below the windows, the dark grey glareshield running across the whole width, with a small autopilot panel of knobs in its middle;
+- below that, the main instrument panel in pale grey: THREE square display screens in front of the captain on the left half and the centre, and the first officer's screens just visible on the right edge; every screen is plain flat dark grey, switched off and EMPTY;
+- at the bottom right, the top of the centre pedestal, EMPTY on top (no levers: they are added separately);
+- in the lower middle of the left half, only the short base of the captain's control column, with NO control wheel on it (it is added separately).
+EVERY WINDOW PANE is filled with ONE perfectly flat, uniform pure magenta colour (#FF00FF), edge to edge, with no sky, no scenery, no reflection, no texture.
+ABSOLUTELY NO TEXT: no letters, numbers, labels or logos anywhere.

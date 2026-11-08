@@ -1,0 +1,10 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s: the working parts of a lysosome drawn as separate objects, hugely magnified, extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, scientifically correct and friendly, like little machines. No 3D render, no cartoon, no photographic look. Light from the top left.
+
+SUBJECT: separate objects, in a neat grid of 4 columns and 3 rows, wide gaps between them:
+row 1: an ACID PUMP (a V-ATPase protein machine: a ring-shaped barrel at the bottom, a thin stalk, and a big round knobbly head on top made of six lobes, warm orange-brown), standing upright; a second identical acid pump; a DOOR protein (a transporter: two rounded blue lobes side by side with a narrow channel between them), standing upright; a second identical door protein;
+row 2: four ENZYMES, small friendly protein machines: knobbly folded blobs with an open jaw like a pair of tiny scissors, in teal, ochre, sea-green and rust colours, each a different shape;
+row 3: a WORN-OUT MITOCHONDRION (a faded, cracked, crumpled orange bean with broken folds inside) wrapped completely in a thin transparent double-skinned bubble; a GERM (a rod-shaped bacterium, olive green with little hairs, half broken apart into pieces) inside a thin transparent bubble; a small DELIVERY BUBBLE (a small round clear bubble with three tiny enzymes inside it); a little cluster of SMALL PIECES (tiny round beads, little hexagons and small droplets, the building blocks) loosely grouped.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no cast shadows. No pink, purple or magenta inside the objects.
+LAYOUT: WIDE empty magenta gaps between the objects; every object complete; nothing touches another object or the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, labels or annotation lines anywhere.

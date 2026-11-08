@@ -1,0 +1,24 @@
+You are a historical illustrator, aviation engineer and technical draftsman specializing in illustrated encyclopedias for children.
+
+Subject: the flight deck of a white Boeing 747-400 airliner with a thin dark-blue cheatline, parked at the gate, the same aircraft, people and colours as the attached reference (a crop of the flight deck from the whole-aircraft plate in the same book). NO logos, NO lettering of any kind.
+
+Generate one vast illustrated encyclopedic plate: the flight deck in the hump at the front of the upper deck, seen from its LEFT side, nose pointing to the LEFT, exactly as in the reference, but much closer, and viewed from above and slightly behind (about 35 degrees down), so we look down into it. The roof, the left side wall and the captain's side window wall are cut away in the style of a classic cutaway drawing, so the whole flight deck is open to view; the cut edges of the white fuselage skin, its frames and the yellow insulation show as a clean cut-away rim around it.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+WHAT MUST BE VISIBLE (technically correct for a Boeing 747-400)
+- TWO pilots sitting SIDE BY SIDE, both facing the windscreen at the left: the captain in the near (left-hand) seat, the first officer beyond him in the far (right-hand) seat, both clearly visible, white short-sleeved shirts with gold epaulettes, dark navy trousers and ties, in dark-blue seats.
+- Each pilot has their OWN control wheel (a dark grey ram's-horn yoke on a column rising from the floor) in front of them, hands on it or near it.
+- Between the two pilots, the centre pedestal with exactly FOUR cream-white thrust levers side by side, and the flap lever beside them.
+- The main instrument panel in front of the pilots under the glareshield, with six glowing flight screens (sky-blue and brown attitude displays, dark map displays).
+- The overhead panel full of small switches above the pilots' heads, under the cut-away roof.
+- The windscreen frames at the left, the panes showing pale sky.
+- Two pairs of rudder pedals at the pilots' feet, visible under the panel.
+- Behind the pilots, at the right: one empty dark-blue jump seat and the grey equipment wall with the flight deck door.
+
+COMPOSITION
+- Wide 16:9 landscape plate. The flight deck fits comfortably INSIDE the frame: it spans about 85% of the width, centered, with calm empty ivory paper margins (about 7% left and right, about 12% at the top, about 10% at the bottom). These margins stay completely empty. The cut-away fuselage ends softly in the paper with an irregular watercolor edge, not a hard rectangle.
+- ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, signs, annotation lines or title. Pure illustration only.

@@ -1,0 +1,8 @@
+Image 1 is a pen-and-ink drawing of the left half of a Boeing 747-400 flight deck, seen from just behind the captain.
+
+EDIT IMAGE 1: keep ONLY two things, exactly where they are, at exactly the same size, shape and angle, and erase EVERYTHING else to plain white paper:
+1. the captain's control wheel (the ram's-horn shaped wheel in front of the captain, with its hub), drawn complete and unbroken: remove the captain's hand from it and draw the part of the wheel that the hand was covering;
+2. the four thrust lever handles on the centre pedestal (the four handles side by side and their short straight shafts).
+Nothing else may remain: no captain, no seat, no panels, no screens, no windows, no pedestal, no floor. Pure white everywhere else.
+
+Same line style: crisp pure black ink on pure white, shading only by fine hatching, no grey, no colour. ABSOLUTELY NO TEXT, letters or numbers. Same framing as Image 1.

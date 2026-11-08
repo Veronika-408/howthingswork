@@ -1,0 +1,8 @@
+A single sticker for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+SUBJECT: one modern cable-stayed road bridge over a river, with ONE tall slender concrete pylon (tower) standing on a pier at one end of the span, and straight steel cables fanning out from the top of the pylon down to the road deck in a neat harp of evenly spaced lines. The deck is a flat road with a grey asphalt lane in each direction, a pavement and railings on both sides, and stone abutments at both ends where it meets the banks. No water, no ground, no river banks, no cars and no people: only the bridge itself.
+
+PROJECTION: strict isometric projection, exactly as in an isometric town-building game (2:1 angle). The deck runs in a straight line from the UPPER LEFT down to the LOWER RIGHT, at about 27 degrees below horizontal; the pylon stands vertical, near the upper-left end. Seen from above at the front. Light from the top left.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the bridge, edge to edge, with no texture, no gradient, no ground, no cast shadow. The whole bridge fits in the frame with a clear magenta margin; nothing touches the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, signs or logos anywhere.

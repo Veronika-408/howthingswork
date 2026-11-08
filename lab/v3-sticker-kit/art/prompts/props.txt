@@ -1,0 +1,11 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise lines, realistic materials and proportions. Friendly but not cartoon. No 3D render, no cartoon, no photographic look.
+
+PROJECTION: strict isometric projection, as in an isometric game: seen from above at the front at about 30 degrees, light from the top left.
+
+SUBJECT: eight small everyday objects, each on its own, all drawn LARGE (each fills its grid cell), in a neat grid of 4 columns and 2 rows:
+row 1: a white china coffee cup full of brown coffee, on a white saucer, with a small handle on the right; a white paper takeaway coffee cup with a brown lid and a cardboard sleeve; a dark blue mug with steam-free hot tea; a sandwich cut in half on a small plate;
+row 2: a pilot's peaked cap, navy blue with a gold band; a black leather flight bag (a square briefcase); a folded newspaper with only grey squiggles and blocks, no readable letters; a small bottle of water.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no ground, no cast shadows. No pink or magenta inside the objects.
+LAYOUT: WIDE empty magenta gaps between the objects; every object complete; nothing touches another object or the edge of the picture.
+ABSOLUTELY NO TEXT: no letters, numbers, logos, labels or writing anywhere.

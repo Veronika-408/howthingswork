@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five ways to paint · howthings.work lab</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { --paper: #f6f1e7; --ink: #2b2620; --soft: #6d6257; --line: rgba(43,38,32,.14); --accent: #a23b20; --card: #fffcf5;
+    --font: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.55 var(--font); }
+  main { max-width: 1320px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-weight: 400; font-size: 46px; line-height: 1.05; margin: 0 0 10px; }
+  h2 { font-weight: 400; font-size: 30px; margin: 48px 0 12px; }
+  h3 { font-weight: 400; font-size: 23px; margin: 0 0 6px; }
+  .kicker { font: 600 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+  .lead { font-size: 21px; max-width: 860px; color: #3d362e; }
+  .verdict { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; margin: 24px 0; }
+  .verdict:empty { display: none; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; align-items: center; }
+  .tabs button { border: 1px solid var(--line); background: var(--card); border-radius: 18px; padding: 7px 13px; cursor: pointer; font: 600 14px/1 var(--sans); color: var(--soft); }
+  .tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tabs .gap { width: 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
+  .frame { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .frame .bar { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 12px; font: 600 13px/1.2 var(--sans); }
+  .frame .bar a { color: var(--accent); text-decoration: none; }
+  .frame .win { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #eee8dc; }
+  .frame iframe { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; }
+  .frame .missing { position: absolute; inset: 0; display: grid; place-items: center; color: var(--soft); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; font: 15px/1.35 var(--sans); background: var(--card); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--soft); font-weight: 600; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .score { display: inline-block; min-width: 26px; text-align: center; border-radius: 6px; padding: 2px 4px; font-weight: 700; }
+  .v { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 18px 0; }
+  .v .meta { font: 14px/1.4 var(--sans); color: var(--soft); margin-bottom: 10px; }
+  .strip { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+  .strip img { height: 150px; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+  .edit { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .edit figure { margin: 0; } .edit img { width: 100%; border-radius: 8px; border: 1px solid var(--line); }
+  .edit figcaption { font: 13px/1.3 var(--sans); color: var(--soft); margin-top: 4px; }
+  .notes { font-size: 16px; }
+  @media (max-width: 700px) { h1 { font-size: 34px; } .grid { grid-template-columns: 1fr; } .edit { grid-template-columns: 1fr; } }
+</style></head>
+<body><main>
+  <div class="kicker">howthings.work · lab</div>
+  <h1>Five ways to paint an infinite book</h1>
+  <p class="lead">The same demo built five ways: a town, a jumbo jet down to its flight deck and the controls you fly
+    with, and a person at the bus stop down to the skin, a cell and a lysosome inside it. Same viewer, same words for
+    ages 3 to 11. What changes is how the pictures are made.</p>
+  <div class="verdict" id="verdict"></div>
+
+  <h2>Compare one space</h2>
+  <div class="tabs" id="spaces"></div>
+  <div class="tabs" id="ages"></div>
+  <div class="grid" id="frames"></div>
+
+  <h2>The numbers</h2>
+  <div id="table"></div>
+
+  <h2>Each variant</h2>
+  <div id="variants"></div>
+</main>
+<script>
+const VARIANTS = [
+  ["v1-patchwork", "Patchwork painting", "One painting per space, as today, plus a region system that repaints any object in place."],
+  ["v2-paper-theatre", "Paper theatre", "Each space is a stack of cut-paper layers with parallax, like a tunnel book."],
+  ["v3-sticker-kit", "Sticker kit", "Every object is an isometric sticker from a reusable library; scenes are JSON assembled by code."],
+  ["v4-encyclopedia-page", "Encyclopedia page", "White book pages of isolated painted subjects, insets and code-drawn labels."],
+  ["v5-ink-and-wash", "Ink and wash", "Vector pen-and-ink lines, sharp at any zoom, over a separate watercolour wash."]
+];
+const SPACES = [["city", "Town"], ["plane", "Jumbo jet"], ["pilots", "Flight deck"], ["drive", "Fly it"], ["human", "Person"], ["skin", "Skin"], ["cell", "Cell"], ["lysosome", "Lysosome"]];
+const AGES = [3, 5, 7, 9, 11];
+let cur = "city", age = 7, data = {};
+const $ = s => document.querySelector(s);
+const btn = (label, on, fn) => { const b = document.createElement("button"); b.textContent = label; b.setAttribute("aria-pressed", on); b.onclick = fn; return b; };
+function tabs() {
+  $("#spaces").replaceChildren(...SPACES.map(([id, l]) => btn(l, id === cur, () => { cur = id; tabs(); frames(); })));
+  $("#ages").replaceChildren(Object.assign(document.createElement("span"), { textContent: "Age", style: "font:600 13px var(--sans);color:var(--soft);margin-right:4px" }),
+    ...AGES.map(a => btn(a + "+", a === age, () => { age = a; tabs(); frames(); })));
+}
+function frames() {
+  $("#frames").replaceChildren(...VARIANTS.map(([id, name]) => {
+    const f = document.createElement("div"); f.className = "frame";
+    f.innerHTML = `<div class="bar"><span>${name}</span><a href="${id}/?age=${age}#${cur}" target="_blank">open ↗</a></div><div class="win"></div>`;
+    const win = f.querySelector(".win");
+    if ((data[id] || {}).ready === false) win.innerHTML = `<div class="missing">not built yet</div>`;
+    else {
+      const fr = document.createElement("iframe"); fr.loading = "lazy"; fr.src = `${id}/?age=${age}#${cur}`; fr.title = name;
+      win.appendChild(fr);
+      const fit = () => { fr.style.transform = `scale(${win.clientWidth / 1440})`; };
+      new ResizeObserver(fit).observe(win); fit();
+    }
+    return f;
+  }));
+}
+const color = s => s == null ? "" : `background:hsl(${(s - 1) * 13},55%,${88 - s}%)`;
+function table() {
+  const rows = VARIANTS.map(([id, name]) => {
+    const d = data[id] || {}, sc = d.scores || {};
+    return `<tr><td><b>${name}</b></td><td class="num">${d.calls ?? "–"}${d.rejected != null ? ` <small>(${d.rejected} redone)</small>` : ""}</td>
+      <td class="num">${d.genMinutes ?? "–"}</td><td class="num">${d.wallHours ?? "–"}</td><td class="num">${d.mb ?? "–"}</td>
+      <td>${d.edit1 || "–"}</td><td>${d.edit2 || "–"}</td>
+      ${["beauty", "coherence", "sharpness", "dives", "making", "editing", "growth", "child"].map(k => `<td class="num"><span class="score" style="${color(sc[k])}">${sc[k] ?? "–"}</span></td>`).join("")}</tr>`;
+  }).join("");
+  $("#table").innerHTML = `<div style="overflow-x:auto"><table><thead><tr><th>Variant</th><th>Image calls</th><th>Gen. min</th><th>Build h</th><th>MB shipped</th>
+    <th>Edit: 5 people</th><th>Edit: coffee cup</th><th>Beauty</th><th>Coherence</th><th>Sharp</th><th>Dives</th><th>Making</th><th>Editing</th><th>Growth</th><th>Child</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="notes">Scores are out of 10, from the lead's review of the finished demos (the builders' own scores are in their reports). Image calls and minutes are
+    from each variant's <code>genlog.jsonl</code>; MB is what a visitor downloads walking both chains.</p>`;
+}
+function variants() {
+  $("#variants").replaceChildren(...VARIANTS.map(([id, name, how]) => {
+    const d = data[id] || {}, v = document.createElement("section"); v.className = "v";
+    const shots = (d.shots || []).map(s => `<a href="${id}/shots/${s}" target="_blank"><img loading="lazy" src="${id}/shots/${s}" alt=""></a>`).join("");
+    const ed = (d.editShots || []).map(([src, cap]) => `<figure><img loading="lazy" src="${id}/${src}" alt=""><figcaption>${cap}</figcaption></figure>`).join("");
+    v.innerHTML = `<h3>${name}</h3><div class="meta">${how} · <a href="${id}/" target="_blank">open the demo</a> · <a href="${id}/REPORT.md" target="_blank">builder's report</a> · <a href="${id}/APPROACH.md" target="_blank">brief</a></div>
+      ${d.review ? `<div class="notes">${d.review}</div>` : ""}<div class="strip">${shots}</div>${ed ? `<div class="edit">${ed}</div>` : ""}`;
+    return v;
+  }));
+}
+fetch("compare.json").then(r => r.ok ? r.json() : {}).catch(() => ({})).then(j => {
+  data = j.variants || {};
+  if (j.verdict) $("#verdict").innerHTML = j.verdict;
+  tabs(); frames(); table(); variants();
+});
+</script>
+</body></html>

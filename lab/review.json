@@ -1,0 +1,157 @@
+{
+ "verdict": "<p style=\"margin-top:0\"><b>Recommendation: ink and wash, with two ideas borrowed from the others.</b></p>\n<ul style=\"margin:0 0 10px 1.1em;padding:0\">\n<li><b>Ink and wash</b> is the best balance. It has one coherent book look, and every child is drawn inside its parent, so all seven dives land.\nIts lines are vectors, so they stay sharp at any zoom, and a finer level costs little (it's lines only). It took about <b>6\u00bd generation minutes per space</b> (today's method measured 47\u201365), and it is the smallest download.</li>\n<li>Borrow from the <b>paper theatre</b>: split every scene into layers, painted as one picture and then separated by edits. An edit then redoes one layer (1 call, under 3 minutes), and the layers give the parallax that makes it feel like a real book. It has the most beautiful scenes of the five, but goes soft when you zoom.</li>\n<li>Borrow from the <b>sticker kit</b>: keep a library of the things that come and go (people, props, vehicles) and place them by code. <b>Five people at the bus stop took 0 image calls</b> there. On its own the kit looks too much like a game.</li>\n<li><b>Patchwork</b> (today's method plus a repair tool) gives the richest single paintings and its region edits work. It stays the most expensive way to grow the world.\nThe <b>encyclopedia page</b> is the cheapest and cleanest, but the town turns into floating landmarks and stops being a place.</li>\n</ul>\n<p style=\"margin:0\">Lessons all five builders found on their own:\n<b>paint the child inside the parent from the child's own picture</b>, or the dive can't line up;\n<b>never paint things that must line up as separate pictures</b>: paint the whole thing, then separate it;\nand outlines traced from cut-outs are free, while hand-traced ones are the slowest step.</p>",
+ "v1-patchwork": {
+  "wallHours": "~1 (reuses 5 live spaces)",
+  "edit1": "1 call \u00b7 5 min",
+  "edit2": "2 calls \u00b7 4 min",
+  "scores": {
+   "beauty": 9,
+   "coherence": 7,
+   "sharpness": 6,
+   "dives": 7,
+   "making": 5,
+   "editing": 7,
+   "growth": 5,
+   "child": 8
+  },
+  "review": "The richest pictures: the live site's paintings plus three new plates that match them. Five of eight spaces are reused, so its 9 calls hide the real cost of this method (the owner measured 47\u201365 minutes per space). Sharp only where the live site already had deep-zoom tiles (town, jet). Plane \u2192 flight deck \u2192 cockpit change camera angle, so those dives read as cross-fades. The region tool works: one call per edit, old versions kept, tiles updated automatically. <br><b>Edit test.</b> Five people: 1 call \u00b7 5 min \u00b7 one region repainted; a sliver at the seam fixed by re-blending (0 calls). Coffee cup: 2 calls \u00b7 4 min \u00b7 the cup had to be painted into the flight deck and the cockpit view.",
+  "editShots": [
+   [
+    "shots/small/busstop-crop-before-after.jpg",
+    "Bus stop, before | after (region repaint)"
+   ],
+   [
+    "shots/small/captain-cup-crop-before-after.jpg",
+    "Captain's cup, before | after"
+   ]
+  ]
+ },
+ "v4-encyclopedia-page": {
+  "wallHours": "~1",
+  "edit1": "1 call \u00b7 3 min",
+  "edit2": "1 call \u00b7 2 min",
+  "scores": {
+   "beauty": 7,
+   "coherence": 8,
+   "sharpness": 5,
+   "dives": 8,
+   "making": 9,
+   "editing": 9,
+   "growth": 9,
+   "child": 6
+  },
+  "review": "Looks like a real visual dictionary: white pages, insets, scale bars, crisp labels. Every child is literally the same cut-out as in its parent, so dives are exact. Cheapest and easiest to change of the three finished. The town is the weak page (floating landmarks at mismatched scales); there is no world to wander through, so it feels more like a reference book than a place. <br><b>Edit test.</b> Five people: 1 call \u00b7 3 min \u00b7 one new cut-out placed by code, nothing repainted. Coffee cup: 1 call \u00b7 2 min \u00b7 one sticker pinned to the flight-deck picture.",
+  "editShots": [
+   [
+    "shots/small/edit1-compare-busstop.jpg",
+    "Bus stop, before | after (one new cut-out)"
+   ],
+   [
+    "shots/small/edit2-compare-captain.jpg",
+    "Captain's cup, before | after"
+   ]
+  ]
+ },
+ "v5-ink-and-wash": {
+  "wallHours": "~1.2",
+  "edit1": "2 calls \u00b7 8 min",
+  "edit2": "2 calls \u00b7 11\u00bd min",
+  "scores": {
+   "beauty": 8,
+   "coherence": 9,
+   "sharpness": 9,
+   "dives": 8,
+   "making": 8,
+   "editing": 8,
+   "growth": 8,
+   "child": 8
+  },
+  "review": "A real line-and-wash book look, and the most coherent set: every child was drawn inside its parent, so all seven dives land within a few pixels. The lines are vector, so they are sharp at any zoom, and the engine has a second, finer line level. Line art came out right first time for every space. Smallest download (3.9 MB for everything). The ink is heavy in places, and the wash is lighter than the live paintings. <br><b>Edit test.</b> Five people: 2 calls \u00b7 8 min \u00b7 lines, then wash, of one region; the family protected. Coffee cup: 2 calls \u00b7 11.5 min \u00b7 copied into the cockpit view with no call.",
+  "editShots": [
+   [
+    "shots/small/edit1-before-busstop.jpg",
+    "Bus stop, before"
+   ],
+   [
+    "shots/small/edit1-after-busstop.jpg",
+    "Bus stop, after (lines + wash of one region)"
+   ],
+   [
+    "shots/small/edit2-before-captain.jpg",
+    "Captain, before"
+   ],
+   [
+    "shots/small/edit2-after-captain.jpg",
+    "Captain, after"
+   ]
+  ]
+ },
+ "v2-paper-theatre": {
+  "wallHours": "~1.3",
+  "edit1": "1 call \u00b7 2 min",
+  "edit2": "1 call \u00b7 3 min",
+  "scores": {
+   "beauty": 9,
+   "coherence": 8,
+   "sharpness": 5,
+   "dives": 8,
+   "making": 7,
+   "editing": 8,
+   "growth": 7,
+   "child": 8
+  },
+  "review": "The most beautiful scenes of the five: every space a rich painted card with deckled paper edges, built from 4\u20137 layers that move with parallax; the flight deck shows both pilots side by side with the airport outside, and the cockpit view is the captain's half of it. Painting each layer separately did not line up, so every scene is painted whole once and its layers extracted with edits (within 1 px). Parents draw children from the child's own layers, so dives land; three children too small to see are shown in a paper magnifier. No deep-zoom level, so it goes soft at 3\u00d7. <br><b>Edit test.</b> Five people: only the town's foreground layer redone (1 call, 1\u00be min); the family is its own layer and never touched. Coffee cup: 1 call, 3 min; the cup became its own little cut-out piece, so it also appears in the cockpit view for free.",
+  "editShots": [
+   [
+    "shots/small/1-before-busstop.jpg",
+    "Bus stop, before"
+   ],
+   [
+    "shots/small/1-after-busstop.jpg",
+    "Bus stop, after (one layer redone)"
+   ],
+   [
+    "shots/small/2-before-captain.jpg",
+    "Captain, before"
+   ],
+   [
+    "shots/small/2-after-captain.jpg",
+    "Captain, after (cup as its own piece)"
+   ]
+  ]
+ },
+ "v3-sticker-kit": {
+  "wallHours": "~1.25",
+  "edit1": "0 calls \u00b7 78 s",
+  "edit2": "1 call \u00b7 3 min",
+  "scores": {
+   "beauty": 6,
+   "coherence": 8,
+   "sharpness": 7,
+   "dives": 8,
+   "making": 8,
+   "editing": 10,
+   "growth": 9,
+   "child": 7
+  },
+  "review": "A library of 107 isometric stickers cut from 20 sheets; scenes are lists of placements, outlines are traced from each sticker automatically, and the same stickers recur at every level (the jet and the family are swapped for their cut-away and see-through versions), so dives land exactly. The most editable and cheapest to grow. But it looks assembled: the town is a small game-like diorama with a lot of empty page around it, and the cell and lysosome are flatter and more diagrammatic than the others. <br><b>Edit test.</b> Five people: two library stickers placed with two lines of JSON, 0 image calls, 78 s. Coffee cup: one props sheet (1 call; the other 7 props became library stock), placed in the flight deck and the cockpit view.",
+  "editShots": [
+   [
+    "shots/small/edit1-before-busstop.jpg",
+    "Bus stop, before"
+   ],
+   [
+    "shots/small/edit1-after-busstop.jpg",
+    "Bus stop, after (two library stickers, 0 calls)"
+   ],
+   [
+    "shots/small/edit2-before-drive.jpg",
+    "Cockpit view, before"
+   ],
+   [
+    "shots/small/edit2-after-drive.jpg",
+    "Cockpit view, after (cup sticker)"
+   ]
+  ]
+ }
+}

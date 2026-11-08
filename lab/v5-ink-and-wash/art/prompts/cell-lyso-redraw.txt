@@ -1,0 +1,8 @@
+Image 1 is a crop of a pen-and-ink drawing of the inside of a cell. In the middle, a tiny drawing of a lysosome (a round bubble with pumps in its skin, little enzymes, an old bean-shaped mitochondrion and a germ inside, small delivery bubbles at its upper right, small pieces leaving at its lower left) has been pasted in from the big drawing of the same lysosome in the same book (Image 2), so its lines are thin, grey and blurry, and the cell's threads behind it were erased in a white rectangle.
+
+EDIT IMAGE 1 with these changes only:
+1. Redraw the pasted lysosome in EXACTLY the same place and size, as a tiny faithful copy of Image 2: the round bubble with its beaded membrane and the six small barrel pumps around it, the old mitochondrion with zig-zag folds in its wrapping on the left, the capsule germ lower right, the little enzymes, the three small delivery bubbles at the upper right touching it, the small round pieces streaming out at the lower left. Crisp dark black ink lines of the same weight as the rest of Image 1, simplifying only the tiniest details. Do not move or resize the bubble.
+2. Fill the white rectangle around it with what belongs there: the cell's criss-crossing threads and small dots, continuing those around it.
+Everything else stays exactly as it is.
+
+Pure black ink on pure white, shading only by fine hatching, no grey, no colour. ABSOLUTELY NO TEXT, letters or numbers. Same framing as Image 1.

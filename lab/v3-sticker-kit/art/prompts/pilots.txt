@@ -1,0 +1,14 @@
+A single sticker for a children's illustrated encyclopedia of the 1980s-1990s (Stephen Biesty / Dorling Kindersley "Incredible Cross-Sections" style): extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look. The attached image is a STYLE REFERENCE ONLY (the ink-and-watercolour treatment, the aircraft's colours, the viewing angle); follow this written prompt for the content.
+
+SUBJECT: the flight deck of a Boeing 747-400, cut out of the aircraft like a slice: only the nose section of the upper deck, with its floor, its curved white fuselage walls, the LEFT wall and the front part of the roof cut away with neat jagged edges so we look inside. Technically correct:
+- TWO pilots sitting SIDE BY SIDE facing forward: the captain in the LEFT seat (nearest to us), the first officer in the RIGHT seat; both in white shirts with dark epaulettes and headsets;
+- in front of EACH pilot their own control wheel (a W-shaped yoke on a column) and rudder pedals by their feet;
+- between the two seats the centre pedestal with FOUR thrust levers side by side, radio panels behind them;
+- in front of the pilots the main instrument panel under a dark glareshield, with SIX square display screens in a row (screens show only plain blue-over-brown and green shapes, no numbers, no text);
+- the windscreen: the row of cockpit window panes at the front, looking out to a pale blue sky;
+- the overhead panel above their heads, on the remaining part of the roof, with rows of small switches and knobs;
+- behind the seats, a folded jump seat and the back wall with a door.
+PROJECTION: strict isometric, as in an isometric game, for a jumbo jet whose NOSE points to the UPPER LEFT: the pilots face the upper left, we see them from behind and from their left side, from above, and we see the instrument panel, the screens and the windscreen in front of them. Light from the top left.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the section, edge to edge, with no texture, no gradient, no ground, no cast shadow. The whole section fits in the frame with a clear magenta margin; nothing touches the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, labels or logos anywhere.

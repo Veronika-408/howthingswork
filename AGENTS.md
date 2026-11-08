@@ -39,3 +39,4 @@ cut-away plates, deep zoom and moving "How it works" pages. Live at https://howt
 | `tools/` | `new_machine.py`, `colour_in.py`, `smoke.mjs`, `screenshots.mjs`, `perf.mjs` (frame times and blur through every zoom) |
 | `build.py` | builds everything into `dist/` |
 | `docs/SPACES.md` | the zoom tree: how spaces nest (map → body → skin → cell) and how it grows in both directions |
+| `lab/` | five ways to make the pictures, compared on the same demo (`lab/README.md`); experiments, not the live site |

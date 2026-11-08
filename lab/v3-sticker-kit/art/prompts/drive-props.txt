@@ -1,0 +1,11 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s: extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look. Light from the top left.
+
+SUBJECT: separate flight-deck controls of a Boeing 747-400, seen from the captain's seat, in a neat grid with wide gaps:
+1. the captain's CONTROL WHEEL seen exactly front-on: a W-shaped yoke (two curved horn grips left and right, joined by a central hub), dark grey with worn black rubber grips and a small round hub in the middle, perfectly upright and symmetrical; the largest object;
+2. the FOUR THRUST LEVERS side by side in a row, seen from behind and slightly above as the captain sees them: four parallel silver levers with black knob handles, standing up from a short slotted base, all at the same height;
+3. the FLAP LEVER: a short silver lever with a handle shaped like a small wing flap, on a slotted base;
+4. the GEAR LEVER: a short silver lever whose knob is shaped like a little wheel, on a small panel.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no cast shadows. No pink or magenta inside the objects.
+LAYOUT: WIDE empty magenta gaps; every object complete; nothing touches another object or the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, labels or logos anywhere.

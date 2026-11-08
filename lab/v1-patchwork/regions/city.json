@@ -1,0 +1,683 @@
+{
+ "id": "city",
+ "w": 1672,
+ "h": 940,
+ "paper": [
+  252,
+  251,
+  249
+ ],
+ "base": {
+  "file": "art/src/city/base.png"
+ },
+ "tiles": [
+  {
+   "key": "w00",
+   "rect": [
+    0.0,
+    0.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w00.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w01",
+   "rect": [
+    397.33,
+    0.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w01.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w02",
+   "rect": [
+    794.67,
+    0.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w02.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w03",
+   "rect": [
+    1192.0,
+    0.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w03.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w10",
+   "rect": [
+    0.0,
+    206.67,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w10.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w11",
+   "rect": [
+    397.33,
+    206.67,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w11.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w12",
+   "rect": [
+    794.67,
+    206.67,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w12.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w13",
+   "rect": [
+    1192.0,
+    206.67,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w13.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w20",
+   "rect": [
+    0.0,
+    413.33,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w20.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w21",
+   "rect": [
+    397.33,
+    413.33,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w21.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w22",
+   "rect": [
+    794.67,
+    413.33,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w22.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w23",
+   "rect": [
+    1192.0,
+    413.33,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w23.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w30",
+   "rect": [
+    0.0,
+    620.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w30.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w31",
+   "rect": [
+    397.33,
+    620.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w31.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w32",
+   "rect": [
+    794.67,
+    620.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w32.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "w33",
+   "rect": [
+    1192.0,
+    620.0,
+    480,
+    320.0
+   ],
+   "file": "art/src/city/tiles/w33.png",
+   "level": 2,
+   "feather": [
+    0.04,
+    0.05
+   ]
+  },
+  {
+   "key": "family",
+   "rect": [
+    1068.0,
+    690.0,
+    150.0,
+    100.0
+   ],
+   "file": "art/src/city/tiles/family.png",
+   "level": 3,
+   "feather": null
+  },
+  {
+   "key": "weather",
+   "rect": [
+    1020.0,
+    0.0,
+    440.0,
+    160.0
+   ],
+   "file": "art/src/city/tiles/weather.png",
+   "level": 3,
+   "feather": null
+  }
+ ],
+ "version": 4,
+ "maxZoom": 4,
+ "parts": {
+  "plane": {
+   "polys": [
+    [
+     [
+      100,
+      228
+     ],
+     [
+      130,
+      190
+     ],
+     [
+      240,
+      150
+     ],
+     [
+      440,
+      115
+     ],
+     [
+      485,
+      70
+     ],
+     [
+      500,
+      72
+     ],
+     [
+      492,
+      128
+     ],
+     [
+      528,
+      140
+     ],
+     [
+      515,
+      196
+     ],
+     [
+      470,
+      214
+     ],
+     [
+      472,
+      256
+     ],
+     [
+      390,
+      265
+     ],
+     [
+      210,
+      245
+     ],
+     [
+      110,
+      245
+     ]
+    ]
+   ],
+   "child": "plane",
+   "plus": [
+    330,
+    112
+   ]
+  },
+  "people": {
+   "polys": [
+    [
+     [
+      1136,
+      739
+     ],
+     [
+      1178,
+      739
+     ],
+     [
+      1179,
+      785
+     ],
+     [
+      1135,
+      785
+     ]
+    ]
+   ],
+   "child": "human",
+   "plus": [
+    1158,
+    795
+   ]
+  },
+  "river": {
+   "polys": [
+    [
+     [
+      0,
+      385
+     ],
+     [
+      300,
+      352
+     ],
+     [
+      480,
+      332
+     ],
+     [
+      650,
+      292
+     ],
+     [
+      760,
+      254
+     ],
+     [
+      850,
+      228
+     ],
+     [
+      950,
+      205
+     ],
+     [
+      1050,
+      178
+     ],
+     [
+      1150,
+      162
+     ],
+     [
+      1300,
+      165
+     ],
+     [
+      1450,
+      170
+     ],
+     [
+      1672,
+      178
+     ],
+     [
+      1672,
+      212
+     ],
+     [
+      1450,
+      214
+     ],
+     [
+      1300,
+      210
+     ],
+     [
+      1160,
+      214
+     ],
+     [
+      1060,
+      250
+     ],
+     [
+      1040,
+      300
+     ],
+     [
+      920,
+      345
+     ],
+     [
+      800,
+      398
+     ],
+     [
+      700,
+      430
+     ],
+     [
+      600,
+      455
+     ],
+     [
+      480,
+      470
+     ],
+     [
+      300,
+      456
+     ],
+     [
+      150,
+      442
+     ],
+     [
+      0,
+      440
+     ]
+    ]
+   ]
+  },
+  "bridge": {
+   "polys": [
+    [
+     [
+      575,
+      205
+     ],
+     [
+      600,
+      195
+     ],
+     [
+      960,
+      224
+     ],
+     [
+      975,
+      95
+     ],
+     [
+      1000,
+      85
+     ],
+     [
+      1030,
+      95
+     ],
+     [
+      1040,
+      240
+     ],
+     [
+      1340,
+      280
+     ],
+     [
+      1345,
+      305
+     ],
+     [
+      1040,
+      286
+     ],
+     [
+      1030,
+      330
+     ],
+     [
+      975,
+      330
+     ],
+     [
+      970,
+      266
+     ],
+     [
+      600,
+      236
+     ],
+     [
+      575,
+      226
+     ]
+    ]
+   ]
+  }
+ },
+ "regions": {
+  "queue": {
+   "polys": [
+    [
+     [
+      1093,
+      723
+     ],
+     [
+      1137.6,
+      723
+     ],
+     [
+      1137.6,
+      771
+     ],
+     [
+      1093,
+      771
+     ]
+    ]
+   ],
+   "margin": 38,
+   "grow": 0,
+   "feather": 1.5
+  },
+  "busstop": {
+   "polys": [
+    [
+     [
+      1068,
+      700
+     ],
+     [
+      1190,
+      700
+     ],
+     [
+      1190,
+      790
+     ],
+     [
+      1068,
+      790
+     ]
+    ]
+   ],
+   "margin": 20
+  }
+ },
+ "history": [
+  {
+   "version": 2,
+   "region": "queue",
+   "prompt": "lab/v1-patchwork/art/prompts/edits/city-busstop-five.txt",
+   "edit_dir": "edits/03-city-queue",
+   "rect": [
+    1020.5,
+    685,
+    186.0,
+    124
+   ],
+   "scale": 8.26,
+   "calls": 1,
+   "align": {
+    "aligned": true,
+    "inliers": 923,
+    "matches": 983,
+    "at": "1/1",
+    "scale": 0.9999,
+    "rot": 0.002,
+    "shift": [
+     0.1,
+     -0.2
+    ]
+   },
+   "colour": null,
+   "outside_change": 6.0,
+   "touched": [
+    "base",
+    "w22",
+    "w32",
+    "family"
+   ],
+   "kept": "art/src/city/v1",
+   "secs": 81.7,
+   "t": "2026-11-08T22:45:32"
+  },
+  {
+   "version": 3,
+   "revert_to": 1
+  },
+  {
+   "version": 4,
+   "region": "queue",
+   "prompt": "lab/v1-patchwork/art/prompts/edits/city-busstop-five.txt",
+   "edit_dir": "edits/03-city-queue",
+   "rect": [
+    1022.3,
+    685,
+    186.0,
+    124
+   ],
+   "scale": 8.26,
+   "calls": 1,
+   "align": {
+    "aligned": true,
+    "inliers": 923,
+    "matches": 983,
+    "at": "1/1",
+    "scale": 0.9999,
+    "rot": 0.002,
+    "shift": [
+     0.1,
+     -0.2
+    ]
+   },
+   "colour": null,
+   "outside_change": 5.99,
+   "touched": [
+    "base",
+    "w22",
+    "w32",
+    "family"
+   ],
+   "kept": "art/src/city/v3",
+   "secs": 5.8,
+   "t": "2026-11-08T22:47:15"
+  }
+ ]
+}

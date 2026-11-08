@@ -1,0 +1,24 @@
+You are a scientific illustrator and cell biologist specializing in illustrated encyclopedias for children.
+
+Subject: ONE lysosome, the small round recycling bubble inside an animal cell, the same lysosome as in the attached reference (a mauve-purple sphere speckled with darker purple and orange dots, floating in pale golden cytoplasm with fine golden fibres, from the whole-cell plate in the same book). Same colours as the reference. NO lettering of any kind.
+
+Generate one vast illustrated encyclopedic plate: the lysosome seen from slightly above, a big round sphere in the middle of the page, with its front-upper quarter cut away in the style of a classic cutaway drawing, so we look inside it. The outside of the sphere keeps the reference's look: mauve-purple, speckled with darker purple and orange dots.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise lines, realistic soft biological materials. No 3D render, no cartoon, no photographic look, no faces on anything.
+
+WHAT MUST BE VISIBLE (technically correct, simplified for children)
+- ONE single, thin membrane around the sphere (a single lipid bilayer, shown as a thin two-layered skin at the cut edge).
+- Several small barrel-shaped acid pumps set into the membrane, poking through it.
+- Inside, in a slightly cloudier pink-violet liquid: many tiny enzymes, small purple and orange bead-like blobs (the dots seen from outside), scattered everywhere.
+- Inside, at the left: a worn-out mitochondrion (orange-red bean with folded inner ridges, like the mitochondria in the reference cell) wrapped in a thin extra double wrapping, half broken up into pieces.
+- Inside, at the right: one small rod-shaped germ (a green-brown bacterium with a few short hairs), half digested, its edges crumbling.
+- Outside, arriving from the upper right: three or four little round golden delivery bubbles, one of them just merging into the membrane.
+- At the lower left, a few small doors (channel proteins) in the membrane, with tiny pieces (little beads and short chains) coming out of them into the cytoplasm.
+- Around the lysosome, a little pale golden cytoplasm with fine golden fibres, fading out into the paper.
+
+COMPOSITION
+- Wide 16:9 landscape plate. The lysosome is centered and fills about 75% of the height; with the delivery bubbles and the cytoplasm around it, everything fits comfortably INSIDE the frame, with calm empty ivory paper margins (about 10% left and right, about 8% at top and bottom). The cytoplasm fades softly into the paper with an irregular watercolor edge, not a hard rectangle.
+- ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, signs, annotation lines or title. Pure illustration only.

@@ -1,0 +1,2 @@
+edit lab/v5-ink-and-wash/art/prompts/city-plane-redraw.txt lab/v5-ink-and-wash/art/src/city-plane-edit2.png lab/v5-ink-and-wash/art/src/city-plane-crop2.png lab/v5-ink-and-wash/art/src/plane-lines-a.png
+edit lab/v5-ink-and-wash/art/prompts/city-family-redraw.txt lab/v5-ink-and-wash/art/src/city-family-edit2.png lab/v5-ink-and-wash/art/src/city-family-crop2.png lab/v5-ink-and-wash/art/src/human-lines-a.png

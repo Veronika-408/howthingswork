@@ -1,0 +1,1394 @@
+{
+ "id": "plane",
+ "w": 1672,
+ "h": 941,
+ "paper": [
+  249,
+  247,
+  241
+ ],
+ "base": {
+  "file": "art/src/plane/base.png"
+ },
+ "tiles": [
+  {
+   "key": "radar",
+   "rect": [
+    0,
+    328.4,
+    319.8,
+    213.2
+   ],
+   "file": "art/src/plane/tiles/radar.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "cockpit",
+   "rect": [
+    96.44,
+    207.96,
+    300.12,
+    200.08
+   ],
+   "file": "art/src/plane/tiles/cockpit.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "avionics",
+   "rect": [
+    0,
+    268.97,
+    475.6,
+    317.07
+   ],
+   "file": "art/src/plane/tiles/avionics.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "first-class",
+   "rect": [
+    114.56,
+    343.37,
+    232.88,
+    155.25
+   ],
+   "file": "art/src/plane/tiles/first-class.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "upper-deck",
+   "rect": [
+    221.52,
+    158.01,
+    596.96,
+    397.97
+   ],
+   "file": "art/src/plane/tiles/upper-deck.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "jet-bridge",
+   "rect": [
+    69.82,
+    346.88,
+    408.36,
+    272.24
+   ],
+   "file": "art/src/plane/tiles/jet-bridge.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "cabin",
+   "rect": [
+    319.84,
+    30.89,
+    1128.32,
+    752.21
+   ],
+   "file": "art/src/plane/tiles/cabin.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "fuselage",
+   "rect": [
+    513.84,
+    0,
+    964.32,
+    642.88
+   ],
+   "file": "art/src/plane/tiles/fuselage.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "cargo",
+   "rect": [
+    191.25,
+    0.0,
+    1411.5,
+    941.0
+   ],
+   "file": "art/src/plane/tiles/cargo.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "wing",
+   "rect": [
+    260.5,
+    0.0,
+    1411.5,
+    941.0
+   ],
+   "file": "art/src/plane/tiles/wing.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "flaps",
+   "rect": [
+    846.0,
+    392.5,
+    738.0,
+    492.0
+   ],
+   "file": "art/src/plane/tiles/flaps.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "engine",
+   "rect": [
+    689.6,
+    572.4,
+    442.8,
+    295.2
+   ],
+   "file": "art/src/plane/tiles/engine.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "landing-gear",
+   "rect": [
+    564.16,
+    479.77,
+    429.68,
+    286.45
+   ],
+   "file": "art/src/plane/tiles/landing-gear.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "galley",
+   "rect": [
+    1169.85,
+    312.4,
+    258.3,
+    172.2
+   ],
+   "file": "art/src/plane/tiles/galley.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "bulkhead",
+   "rect": [
+    1269.54,
+    297.36,
+    250.92,
+    167.28
+   ],
+   "file": "art/src/plane/tiles/bulkhead.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "tail",
+   "rect": [
+    835.6,
+    0,
+    836.4,
+    557.6
+   ],
+   "file": "art/src/plane/tiles/tail.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "apu",
+   "rect": [
+    1396.48,
+    249.16,
+    275.52,
+    183.68
+   ],
+   "file": "art/src/plane/tiles/apu.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "recorder",
+   "rect": [
+    1407.5,
+    277.33,
+    230,
+    153.33
+   ],
+   "file": "art/src/plane/tiles/recorder.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "pushback",
+   "rect": [
+    0,
+    527.96,
+    300.12,
+    200.08
+   ],
+   "file": "art/src/plane/tiles/pushback.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "baggage",
+   "rect": [
+    104.64,
+    378.93,
+    652.72,
+    435.15
+   ],
+   "file": "art/src/plane/tiles/baggage.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "fuel-truck",
+   "rect": [
+    856.24,
+    593.32,
+    521.52,
+    347.68
+   ],
+   "file": "art/src/plane/tiles/fuel-truck.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "catering",
+   "rect": [
+    1101.28,
+    345.76,
+    570.72,
+    380.48
+   ],
+   "file": "art/src/plane/tiles/catering.png",
+   "level": 2,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "radar__dish",
+   "rect": [
+    0.0,
+    387.363,
+    151.031,
+    100.687
+   ],
+   "file": "art/src/plane/tiles/radar__dish.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "radar__radome",
+   "rect": [
+    0.0,
+    387.363,
+    151.031,
+    100.687
+   ],
+   "file": "art/src/plane/tiles/radar__radome.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "cockpit__windows",
+   "rect": [
+    145.913,
+    291.744,
+    94.491,
+    62.994
+   ],
+   "file": "art/src/plane/tiles/cockpit__windows.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "cockpit__controls",
+   "rect": [
+    222.193,
+    276.489,
+    113.874,
+    75.915
+   ],
+   "file": "art/src/plane/tiles/cockpit__controls.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "avionics__racks",
+   "rect": [
+    73.291,
+    362.728,
+    178.536,
+    119.024
+   ],
+   "file": "art/src/plane/tiles/avionics__racks.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "first-class__seats",
+   "rect": [
+    149.953,
+    391.376,
+    115.245,
+    76.831
+   ],
+   "file": "art/src/plane/tiles/first-class__seats.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "first-class__door",
+   "rect": [
+    228.999,
+    395.616,
+    118.441,
+    78.961
+   ],
+   "file": "art/src/plane/tiles/first-class__door.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "upper-deck__stairs",
+   "rect": [
+    291.729,
+    330.802,
+    213.25,
+    142.167
+   ],
+   "file": "art/src/plane/tiles/upper-deck__stairs.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "upper-deck__cabin",
+   "rect": [
+    451.443,
+    216.074,
+    274.695,
+    183.13
+   ],
+   "file": "art/src/plane/tiles/upper-deck__cabin.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "jet-bridge__cab",
+   "rect": [
+    203.388,
+    424.405,
+    158.24,
+    105.493
+   ],
+   "file": "art/src/plane/tiles/jet-bridge__cab.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "engine__fan",
+   "rect": [
+    716.41,
+    658.02,
+    214.481,
+    142.987
+   ],
+   "file": "art/src/plane/tiles/engine__fan.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "engine__compressor",
+   "rect": [
+    815.291,
+    674.452,
+    160.861,
+    107.241
+   ],
+   "file": "art/src/plane/tiles/engine__compressor.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "engine__combustor",
+   "rect": [
+    873.077,
+    685.349,
+    126.008,
+    84.005
+   ],
+   "file": "art/src/plane/tiles/engine__combustor.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "engine__turbine",
+   "rect": [
+    926.711,
+    679.064,
+    134.051,
+    89.367
+   ],
+   "file": "art/src/plane/tiles/engine__turbine.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "landing-gear__bogie",
+   "rect": [
+    635.801,
+    597.932,
+    119.673,
+    79.782
+   ],
+   "file": "art/src/plane/tiles/landing-gear__bogie.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "landing-gear__strut",
+   "rect": [
+    718.017,
+    567.888,
+    117.491,
+    78.327
+   ],
+   "file": "art/src/plane/tiles/landing-gear__strut.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "galley__trolleys",
+   "rect": [
+    1224.981,
+    390.383,
+    102.802,
+    68.535
+   ],
+   "file": "art/src/plane/tiles/galley__trolleys.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "galley__ovens",
+   "rect": [
+    1216.095,
+    345.612,
+    70.629,
+    47.086
+   ],
+   "file": "art/src/plane/tiles/galley__ovens.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "tail__fin",
+   "rect": [
+    1233.445,
+    47.941,
+    438.555,
+    292.37
+   ],
+   "file": "art/src/plane/tiles/tail__fin.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "tail__rudder",
+   "rect": [
+    1195.971,
+    29.187,
+    476.029,
+    317.353
+   ],
+   "file": "art/src/plane/tiles/tail__rudder.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "tail__stabiliser",
+   "rect": [
+    1418.793,
+    291.324,
+    253.207,
+    168.805
+   ],
+   "file": "art/src/plane/tiles/tail__stabiliser.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "apu__unit",
+   "rect": [
+    1525.63,
+    320.91,
+    75.337,
+    50.225
+   ],
+   "file": "art/src/plane/tiles/apu__unit.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "apu__exhaust",
+   "rect": [
+    1583.03,
+    306.56,
+    75.337,
+    50.225
+   ],
+   "file": "art/src/plane/tiles/apu__exhaust.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "pushback__towbar",
+   "rect": [
+    157.289,
+    589.508,
+    82.064,
+    54.709
+   ],
+   "file": "art/src/plane/tiles/pushback__towbar.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "pushback__nose-gear",
+   "rect": [
+    157.749,
+    546.991,
+    129.016,
+    86.011
+   ],
+   "file": "art/src/plane/tiles/pushback__nose-gear.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "baggage__belt-loader",
+   "rect": [
+    337.426,
+    489.077,
+    268.737,
+    179.158
+   ],
+   "file": "art/src/plane/tiles/baggage__belt-loader.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "baggage__carts",
+   "rect": [
+    310.485,
+    572.111,
+    331.969,
+    221.313
+   ],
+   "file": "art/src/plane/tiles/baggage__carts.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "catering__box",
+   "rect": [
+    1430.354,
+    406.919,
+    203.876,
+    135.918
+   ],
+   "file": "art/src/plane/tiles/catering__box.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "catering__scissor",
+   "rect": [
+    1427.066,
+    503.191,
+    165.865,
+    110.577
+   ],
+   "file": "art/src/plane/tiles/catering__scissor.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  },
+  {
+   "key": "fuel-truck__panel",
+   "rect": [
+    941.123,
+    601.808,
+    142.603,
+    95.069
+   ],
+   "file": "art/src/plane/tiles/fuel-truck__panel.png",
+   "level": 3,
+   "feather": [
+    0.03,
+    0.04
+   ]
+  }
+ ],
+ "version": 1,
+ "parent": "city",
+ "spot": {
+  "axis": [
+   [
+    134,
+    190
+   ],
+   [
+    522,
+    137
+   ]
+  ],
+  "plateAxis": [
+   [
+    12,
+    440
+   ],
+   [
+    1640,
+    330
+   ]
+  ]
+ },
+ "maxZoom": 6,
+ "parts": {
+  "cockpit": {
+   "polys": [
+    [
+     [
+      155,
+      334
+     ],
+     [
+      178,
+      314
+     ],
+     [
+      232,
+      280
+     ],
+     [
+      262,
+      272
+     ],
+     [
+      336,
+      268
+     ],
+     [
+      338,
+      346
+     ],
+     [
+      160,
+      348
+     ]
+    ]
+   ],
+   "child": "pilots",
+   "plus": [
+    262,
+    352
+   ]
+  },
+  "cabin": {
+   "polys": [
+    [
+     [
+      540,
+      352
+     ],
+     [
+      1228,
+      352
+     ],
+     [
+      1228,
+      462
+     ],
+     [
+      540,
+      462
+     ]
+    ],
+    [
+     [
+      338,
+      268
+     ],
+     [
+      420,
+      258
+     ],
+     [
+      520,
+      254
+     ],
+     [
+      640,
+      256
+     ],
+     [
+      700,
+      266
+     ],
+     [
+      702,
+      343
+     ],
+     [
+      338,
+      346
+     ]
+    ],
+    [
+     [
+      160,
+      380
+     ],
+     [
+      300,
+      380
+     ],
+     [
+      302,
+      460
+     ],
+     [
+      162,
+      462
+     ]
+    ]
+   ]
+  },
+  "engine": {
+   "polys": [
+    [
+     [
+      782,
+      700
+     ],
+     [
+      800,
+      676
+     ],
+     [
+      850,
+      668
+     ],
+     [
+      905,
+      662
+     ],
+     [
+      1000,
+      652
+     ],
+     [
+      1035,
+      698
+     ],
+     [
+      1040,
+      725
+     ],
+     [
+      1010,
+      760
+     ],
+     [
+      900,
+      772
+     ],
+     [
+      820,
+      786
+     ],
+     [
+      790,
+      776
+     ],
+     [
+      778,
+      740
+     ]
+    ],
+    [
+     [
+      1032,
+      730
+     ],
+     [
+      1060,
+      712
+     ],
+     [
+      1150,
+      720
+     ],
+     [
+      1240,
+      738
+     ],
+     [
+      1248,
+      780
+     ],
+     [
+      1220,
+      800
+     ],
+     [
+      1130,
+      815
+     ],
+     [
+      1060,
+      828
+     ],
+     [
+      1036,
+      800
+     ]
+    ],
+    [
+     [
+      612,
+      205
+     ],
+     [
+      640,
+      190
+     ],
+     [
+      700,
+      192
+     ],
+     [
+      755,
+      200
+     ],
+     [
+      760,
+      245
+     ],
+     [
+      700,
+      255
+     ],
+     [
+      640,
+      258
+     ],
+     [
+      615,
+      240
+     ]
+    ],
+    [
+     [
+      735,
+      250
+     ],
+     [
+      760,
+      232
+     ],
+     [
+      820,
+      232
+     ],
+     [
+      842,
+      262
+     ],
+     [
+      840,
+      295
+     ],
+     [
+      790,
+      298
+     ],
+     [
+      740,
+      292
+     ]
+    ]
+   ]
+  },
+  "wing": {
+   "polys": [
+    [
+     [
+      600,
+      570
+     ],
+     [
+      650,
+      550
+     ],
+     [
+      770,
+      522
+     ],
+     [
+      910,
+      518
+     ],
+     [
+      1050,
+      550
+     ],
+     [
+      1200,
+      615
+     ],
+     [
+      1285,
+      645
+     ],
+     [
+      1420,
+      718
+     ],
+     [
+      1495,
+      790
+     ],
+     [
+      1560,
+      752
+     ],
+     [
+      1612,
+      712
+     ],
+     [
+      1662,
+      696
+     ],
+     [
+      1650,
+      728
+     ],
+     [
+      1600,
+      800
+     ],
+     [
+      1550,
+      816
+     ],
+     [
+      1470,
+      822
+     ],
+     [
+      1350,
+      768
+     ],
+     [
+      1200,
+      718
+     ],
+     [
+      1050,
+      662
+     ],
+     [
+      900,
+      632
+     ],
+     [
+      780,
+      600
+     ],
+     [
+      700,
+      590
+     ],
+     [
+      640,
+      590
+     ]
+    ],
+    [
+     [
+      735,
+      150
+     ],
+     [
+      880,
+      90
+     ],
+     [
+      870,
+      135
+     ],
+     [
+      960,
+      230
+     ],
+     [
+      990,
+      300
+     ],
+     [
+      900,
+      300
+     ],
+     [
+      800,
+      230
+     ]
+    ]
+   ]
+  },
+  "gear": {
+   "polys": [
+    [
+     [
+      652,
+      600
+     ],
+     [
+      700,
+      578
+     ],
+     [
+      790,
+      578
+     ],
+     [
+      870,
+      592
+     ],
+     [
+      905,
+      620
+     ],
+     [
+      905,
+      668
+     ],
+     [
+      860,
+      672
+     ],
+     [
+      760,
+      664
+     ],
+     [
+      652,
+      662
+     ]
+    ],
+    [
+     [
+      197,
+      552
+     ],
+     [
+      247,
+      552
+     ],
+     [
+      248,
+      626
+     ],
+     [
+      197,
+      626
+     ]
+    ]
+   ]
+  },
+  "hold": {
+   "polys": [
+    [
+     [
+      462,
+      462
+     ],
+     [
+      1000,
+      462
+     ],
+     [
+      1330,
+      458
+     ],
+     [
+      1332,
+      500
+     ],
+     [
+      1290,
+      528
+     ],
+     [
+      1150,
+      540
+     ],
+     [
+      1000,
+      522
+     ],
+     [
+      900,
+      520
+     ],
+     [
+      760,
+      530
+     ],
+     [
+      620,
+      545
+     ],
+     [
+      462,
+      545
+     ]
+    ]
+   ]
+  },
+  "tail": {
+   "polys": [
+    [
+     [
+      1272,
+      308
+     ],
+     [
+      1335,
+      290
+     ],
+     [
+      1378,
+      266
+     ],
+     [
+      1440,
+      180
+     ],
+     [
+      1515,
+      70
+     ],
+     [
+      1640,
+      60
+     ],
+     [
+      1600,
+      180
+     ],
+     [
+      1570,
+      300
+     ]
+    ],
+    [
+     [
+      1458,
+      376
+     ],
+     [
+      1500,
+      362
+     ],
+     [
+      1580,
+      368
+     ],
+     [
+      1667,
+      380
+     ],
+     [
+      1665,
+      392
+     ],
+     [
+      1580,
+      396
+     ],
+     [
+      1470,
+      400
+     ]
+    ]
+   ]
+  }
+ },
+ "regions": {}
+}

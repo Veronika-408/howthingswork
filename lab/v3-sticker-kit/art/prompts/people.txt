@@ -1,0 +1,10 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s: extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, realistic proportions, gentle friendly faces. Friendly but not cartoon. No 3D render, no cartoon, no photographic look. The attached image is a STYLE REFERENCE ONLY (the ink-and-watercolour treatment, the scale and the viewing angle of the people); follow this written prompt for the content.
+
+SUBJECT: eight different people of a small town, each standing alone, full figures head to toe, all at the same scale as each other, in a neat grid of 4 columns and 2 rows:
+row 1: an old man with a white beard, a flat cap, a tweed coat and a walking stick; a teenage girl with dark braids in a green parka with headphones round her neck; a woman in a red coat carrying a paper shopping bag; a man in a navy suit with a briefcase;
+row 2: a grandmother in a lilac cardigan pulling a tartan shopping trolley; a young man with dark skin in a grey hoodie and jeans; a woman with a long black plait in an orange jumper holding a closed umbrella; a girl of about nine in a red raincoat with a yellow schoolbag.
+All of them stand upright on nothing, facing the viewer and turned slightly towards the left, seen from slightly above (a three-quarter view from above, as on an isometric town map, but finely drawn). Light from the top left.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the people, edge to edge, with no texture, no gradient, no ground, no cast shadows, no paper. No pink or magenta in the clothes.
+LAYOUT: wide empty magenta gaps between the figures; nobody touches anybody else or the edge of the picture.
+ABSOLUTELY NO TEXT: no letters, numbers, logos or labels anywhere.

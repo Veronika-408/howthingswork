@@ -1,0 +1,15 @@
+You are an illustrator of children's science encyclopedias.
+
+Generate one illustrated encyclopedic plate called "the see-through person", in the style of the great children's encyclopedias of the 1980s-1990s (Dorling Kindersley "The Human Body"): fine ink linework and transparent traditional watercolor washes, warm natural colors on slightly ivory paper, friendly, calm and gentle, like a museum poster for children. No 3D render, no cartoon, no photographic look. Nothing scary.
+
+COMPOSITION: a family of three waits side by side at a bus stop, seen from the front, full figure, all standing on one faint ground line near the bottom, all fully painted in colour:
+- On the LEFT, a friendly man with short wavy greying hair, in a tan canvas jacket over a cream knitted jumper, beige trousers, brown boots, a brown leather shoulder bag at his side, one hand in his pocket, looking towards the centre.
+- In the CENTRE, larger and in front, a friendly grown-up with curly auburn hair in a long bright yellow hooded raincoat, blue jeans rolled up at the ankle and brown lace-up boots, smiling, arms slightly away from the body. This central figure fills about 80% of the picture height.
+- On the RIGHT, a small boy with curly blond hair in a blue denim jacket with a grey hood, beige trousers, white trainers and a small backpack, holding the central grown-up's hand and looking up.
+- Behind them, faint and pale, a simple bus stop sign on a pole at the far right and the soft outline of a bus shelter.
+There is a clear gap between the man and the central figure.
+
+THE CENTRAL FIGURE IS SEE-THROUGH, like a glass window drawn in a science book: the yellow raincoat and the body are shown as a pale transparent yellow outline, so we can see the inner organs painted inside, in correct places and sizes for an adult: the brain in the head, the windpipe, two pink spongy lungs, the heart between them, the liver, the stomach, the coiled intestines, the two kidneys and the bladder. On the figure's right arm and leg (the picture's left side) we see the red muscles inside; on the other arm and leg we see the white bones of the skeleton. Thin red and blue blood vessels run along one arm. The man and the boy are NOT see-through: they are painted normally in their clothes. Medically correct, simplified for children, like a school science poster.
+
+Calm ivory paper margins on all sides (about 6% left and right, about 5% top and bottom).
+ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, annotation lines or title, nothing on the bus stop sign but a simple bus pictogram shape. Wide 16:9 landscape.

@@ -1,0 +1,10 @@
+A sticker sheet for a children's illustrated encyclopedia of the 1980s-1990s: the parts of an animal cell drawn as separate objects, extremely detailed fine ink linework with transparent traditional watercolour washes, warm natural colours, scientifically correct and friendly. No 3D render, no cartoon, no photographic look. All seen from slightly above, light from the top left.
+
+SUBJECT: separate cell parts, all at the same scale, in a neat grid:
+row 1: the NUCLEUS, the biggest piece: a sphere with a wedge cut out of it, its double membrane dotted with round pores, inside the dark round nucleolus and fine coiled threads of chromatin, soft cornflower blue; next to it, the ROUGH ENDOPLASMIC RETICULUM: a stack of four folded, wavy, flattened sacs like ribbons, dotted all over with tiny dark ribosomes, soft teal blue, bent into a crescent so it could wrap around one side of the nucleus;
+row 2: the GOLGI APPARATUS: a stack of five curved flat discs like a pile of bent pancakes, with little round bubbles budding off its ends, golden yellow; and three MITOCHONDRIA, bean-shaped, each cut open lengthwise to show the folded inner membranes (cristae), warm orange-red, in three slightly different sizes and angles;
+row 3: three small round transport bubbles (vesicles) of different sizes, pale gold; a pair of centrioles (two small barrels of tubes at right angles), pale green; and two more mitochondria like the others.
+
+BACKGROUND: one perfectly flat, uniform pure magenta (#FF00FF) everywhere around the objects, edge to edge, with no texture, no gradient, no cast shadows. No pink, purple or magenta inside the objects.
+LAYOUT: WIDE empty magenta gaps between the objects; every object complete; nothing touches another object or the edge.
+ABSOLUTELY NO TEXT: no letters, numbers, labels or annotation lines anywhere.

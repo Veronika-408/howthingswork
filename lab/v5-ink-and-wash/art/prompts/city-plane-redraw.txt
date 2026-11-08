@@ -1,0 +1,8 @@
+Image 1 is a crop of a pen-and-ink drawing of a small river town seen from above at an angle. A cut-away jumbo jet with its ground crew has been pasted into it from another drawing of the same book (Image 2), smaller, so its lines are thinner and greyer than the rest, and the background behind it was erased to a blank white rectangle.
+
+EDIT IMAGE 1 with these changes only:
+1. Redraw the pasted jumbo jet and everything pasted around it (the belt loader with suitcases, the ground crew, the step ladders, the baggage cart) in EXACTLY the same place, size, shape and pose, as a tiny faithful copy of Image 2: crisp, dark black ink lines of the same weight as the rest of Image 1, simplifying only the tiniest details. Do not move, resize, tilt or reshape the plane.
+2. Fill the blank white rectangle behind the plane with what belongs there, continuing the surroundings: the airport terminal building on the left, the hangar and floodlight poles behind, the grey apron with its paving lines, so nothing looks erased.
+Everything outside the white rectangle stays exactly as it is.
+
+Pure black ink on pure white, shading only by fine hatching, no grey, no colour. ABSOLUTELY NO TEXT, letters, numbers or logos. Same framing as Image 1.
