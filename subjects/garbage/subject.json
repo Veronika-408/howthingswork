@@ -1,0 +1,58 @@
+{
+  "title": "The Garbage Truck",
+  "kicker": "Inside a garbage truck",
+  "whole": "Whole garbage truck",
+  "hint": "Pick any part of the garbage truck to look closer.",
+  "alt": "Cut-away painting of a garbage truck.",
+  "credit": {
+    "name": "Veronika Csiba",
+    "url": "https://www.linkedin.com/in/veronika-csiba/"
+  },
+  "describe": [
+    "a garbage truck (describe colour, model and where it stands, as in the plate)",
+    "a garbage truck"
+  ],
+  "plate_w": 1672,
+  "open_sky": false,
+  "replaces": "garbage",
+  "how": {
+    "map": {},
+    "thumb": {},
+    "part": {}
+  },
+  "spot": {
+    "polys": [],
+    "plus": [
+      0,
+      0
+    ],
+    "axis": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "plateAxis": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "overlay": {
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ]
+  }
+}
