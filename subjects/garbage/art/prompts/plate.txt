@@ -1,0 +1,29 @@
+You are a historical illustrator, municipal vehicle engineer and technical draftsman specializing in illustrated encyclopedias for children.
+
+Subject: a modern European rear-loader refuse collection truck (a generic 2020s design on a two-axle 18-tonne truck chassis, about 9 m long), stopped at the kerb of a quiet residential street in a Central European river town on bin-collection morning. Bright orange cab and orange box-shaped body, with white reflective stripes along the bottom edge, black wheels with grey hubs, two small amber warning beacons on the cab roof. NO company name, NO logos, NO number plate text, NO lettering of any kind.
+
+Generate one vast illustrated encyclopedic plate: the whole garbage truck seen from its RIGHT side, cab and front pointing to the RIGHT, the rear loading end on the LEFT, viewed from slightly in front and slightly above (about 15 degrees), so it reads almost as a side profile. Large portions of the outer skin are cut away to reveal everything inside, in the style of a classic cutaway drawing.
+
+ARTISTIC DIRECTION
+- Aesthetic of the great illustrated children's encyclopedias of the 1980s-1990s (Dorling Kindersley "Incredible Cross-Sections", Stephen Biesty style).
+- Extremely detailed fine ink linework and traditional watercolor washes. Warm natural colors on slightly ivory paper.
+- Precise engineering lines, realistic materials. No 3D render, no cartoon, no photographic look.
+
+WHAT MUST BE VISIBLE (technically correct for a rear-loader refuse truck), from right to left
+- Cab (far right): a flat-fronted low-entry crew cab with a big windscreen and a large side window; the driver seated on the far (left-hand) side of the cab behind the steering wheel, one crew member seated on the near side beside the driver; a wing mirror; the cab skin partly cut away.
+- Under the cab: the diesel engine sitting low under the cab floor, with the radiator at the front and the exhaust pipe; the gearbox behind it; a small hydraulic pump driven from the gearbox, connected by hoses to the body.
+- Chassis: two straight steel chassis rails running the whole length; a fuel tank and a hydraulic oil tank hung on the side of the chassis between the axles; a long drive shaft from the gearbox back to the rear axle.
+- Wheels: EXACTLY TWO AXLES. The front axle under the cab has ONE single wheel on this side. The rear axle, under the back third of the body, has ONE PAIR OF TWIN WHEELS on this side (two tyres side by side). EXACTLY two wheel positions visible on this side, nothing more.
+- The body (middle): a big closed box, its side cut away to show it full of squashed rubbish bags and rubbish pressed together in layers; at the front end of the box (next to the cab) a flat vertical EJECTOR PLATE (a steel wall that slides along the box) with a long telescopic hydraulic cylinder behind it.
+- The tailgate (left end): a separate steel rear section hinged at the TOP of the body, currently closed, containing the open HOPPER at the bottom (a low scoop-shaped trough where bags are thrown in), and the PACKER: a curved sweep blade on a slide plate moved by two hydraulic cylinders, shown pushing rubbish up out of the hopper into the body. A few loose rubbish bags lie in the hopper.
+- The BIN LIFTER: on the very back of the tailgate below the hopper lip, a steel comb lifter is tipping ONE green wheeled bin upside down over the hopper, rubbish falling out of it into the hopper. A second worker's green wheeled bin waits on the pavement.
+- On the back: amber lights, a small reversing camera above the hopper, two grab handles.
+- People: TWO refuse workers in bright orange-and-yellow high-visibility jackets, trousers and gloves standing on the pavement at the rear: one pressing the lifter control button on the side of the tailgate, one wheeling a green bin towards the truck. The driver and the crew member in the cab.
+- The street: only a short strip of grey asphalt under the truck and a strip of paving-stone pavement with a kerb in front of the rear end, two more green wheeled bins waiting on the pavement, one slim street lamp behind the rear. NOTHING ELSE: NO houses, NO trees, NO river, NO town, NO sky, NO background scenery at all. Above and behind the truck there is only plain empty ivory paper.
+- A small detail to explore: a cat sitting on the pavement watching the bin lifter.
+
+COMPOSITION
+- Wide 16:9 landscape plate. The whole truck, the workers and the bins fit comfortably INSIDE the frame: the truck spans about 80% of the width, centered, with calm empty ivory paper margins (about 8% left and right, about 14% at the top, about 10% at the bottom). These margins stay completely empty for annotations. The street fades softly into the paper with an irregular watercolor edge, not a hard rectangle.
+- The background is plain empty ivory paper, exactly like a classic cutaway plate: the truck and its little piece of street float on the page. Keep the street lamp slim so it never hides the hopper, the lifter or the body.
+- ABSOLUTELY NO TEXT anywhere: no letters, numbers, labels, signs, annotation lines or title. Pure illustration only.
+- Rich but perfectly organized, many small details to explore for minutes.

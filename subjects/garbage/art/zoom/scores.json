@@ -1,0 +1,107 @@
+{
+ "bins": {
+  "after": 0.9821,
+  "before": 0.9819,
+  "warped": true
+ },
+ "body": {
+  "after": 0.9847,
+  "before": 0.9846,
+  "warped": true
+ },
+ "cab": {
+  "after": 0.985,
+  "before": 0.9849,
+  "warped": true
+ },
+ "cab/beacons": {
+  "after": 0.9866,
+  "before": 0.9859,
+  "warped": true
+ },
+ "cab/mirror": {
+  "after": 0.9917,
+  "before": 0.9916,
+  "warped": true
+ },
+ "cab/wheel": {
+  "after": 0.9804,
+  "before": 0.9804,
+  "warped": true
+ },
+ "crew": {
+  "after": 0.9874,
+  "before": 0.987,
+  "warped": true
+ },
+ "ejector": {
+  "after": 0.9884,
+  "before": 0.9883,
+  "warped": true
+ },
+ "engine": {
+  "after": 0.9825,
+  "before": 0.9823,
+  "warped": true
+ },
+ "fuel": {
+  "after": 0.9664,
+  "before": 0.9658,
+  "warped": true
+ },
+ "hopper": {
+  "after": 0.9722,
+  "before": 0.9719,
+  "warped": true
+ },
+ "hydraulics": {
+  "after": 0.9571,
+  "before": 0.9558,
+  "warped": true
+ },
+ "lifter": {
+  "after": 0.9856,
+  "before": 0.9852,
+  "warped": true
+ },
+ "lifter/camera": {
+  "after": 0.9485,
+  "before": 0.9481,
+  "warped": true
+ },
+ "lifter/comb": {
+  "after": 0.9843,
+  "before": 0.9835,
+  "warped": true
+ },
+ "lifter/falling": {
+  "after": 0.9669,
+  "before": 0.9669,
+  "warped": false
+ },
+ "lights": {
+  "after": 0.981,
+  "before": 0.981,
+  "warped": false
+ },
+ "packer": {
+  "after": 0.9828,
+  "before": 0.9826,
+  "warped": true
+ },
+ "packer/blade": {
+  "after": 0.9726,
+  "before": 0.9721,
+  "warped": true
+ },
+ "packer/cylinders": {
+  "after": 0.9737,
+  "before": 0.9735,
+  "warped": true
+ },
+ "wheels": {
+  "after": 0.9804,
+  "before": 0.9798,
+  "warped": true
+ }
+}

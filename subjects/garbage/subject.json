@@ -3,56 +3,50 @@
   "kicker": "Inside a garbage truck",
   "whole": "Whole garbage truck",
   "hint": "Pick any part of the garbage truck to look closer.",
-  "alt": "Cut-away painting of a garbage truck.",
+  "alt": "Cut-away painting of a yellow rear-loader garbage truck emptying a bin at the kerb.",
   "credit": {
     "name": "Veronika Csiba",
     "url": "https://www.linkedin.com/in/veronika-csiba/"
   },
   "describe": [
-    "a garbage truck (describe colour, model and where it stands, as in the plate)",
-    "a garbage truck"
+    "a modern golden-yellow two-axle rear-loader garbage truck with charcoal-grey trim, emptying a green wheeled bin at the kerb of a paved street, two workers in orange high-visibility clothes",
+    "a modern two-axle European rear-loader refuse collection truck"
   ],
   "plate_w": 1672,
   "open_sky": false,
   "replaces": "garbage",
   "how": {
-    "map": {},
-    "thumb": {},
-    "part": {}
+    "map": {
+      "lifter": "loading",
+      "hopper": "loading",
+      "packer": "loading",
+      "body": "loading",
+      "bins": "loading"
+    },
+    "thumb": {
+      "loading": "assets/garbage/book/loading.webp"
+    },
+    "part": {
+      "loading": "packer"
+    }
   },
   "spot": {
-    "polys": [],
-    "plus": [
-      0,
-      0
-    ],
-    "axis": [
+    "polys": [
       [
-        0,
-        0
-      ],
-      [
-        1,
-        0
+        [1322, 860], [1330, 838], [1352, 805], [1365, 792], [1460, 770], [1475, 772],
+        [1488, 788], [1488, 818], [1465, 833], [1415, 853], [1388, 861], [1360, 866], [1332, 865]
       ]
     ],
-    "plateAxis": [
-      [
-        0,
-        0
-      ],
-      [
-        1,
-        0
-      ]
-    ]
+    "plus": [1410, 780],
+    "axis": [[1400.1, 839.3], [1472.7, 823.0]],
+    "plateAxis": [[660, 680], [1410, 665]]
   },
   "overlay": {
     "rect": [
-      0,
-      0,
-      1,
-      1
+      1296.0,
+      740.0,
+      228.0,
+      160.0
     ]
   }
 }
