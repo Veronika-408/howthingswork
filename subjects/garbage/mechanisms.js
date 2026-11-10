@@ -1,6 +1,7 @@
 // The garbage truck's "How it works" page: from the bin into the box. The painting is the rear of the
 // truck switched off, with an empty hopper and an empty tailgate; the code lifts and tips the bin, and
-// draws the packer (slide plate, sweep blade, cylinders) so the mechanism is exact at every moment.
+// draws the packer (slide plate, sweep blade, cylinders) and the oil hoses, so the mechanism is exact at
+// every moment. The child drags the bin itself and works the packer with the page's lever.
 (({ el, lerp }) => {
   Object.assign(window.MECHANISMS, {
     loading: {
@@ -15,8 +16,9 @@
         { name: "Into the box.", text: "Then the blade slides up and pushes the rubbish into the big box, squashing it tight against what is already there." }
       ],
       know: "Squashing makes rubbish take up a few times less space. Without it, the truck would be full after just one short street.",
-      caption: "Tip a bin into the hopper, then squash it into the box. Do it again and again and watch the box fill up.",
-      control: { kind: "buttons", label: "Try it", buttons: [{ id: "tip", label: "Tip the bin" }, { id: "pack", label: "Squash it!" }] },
+      caption: "Drag the black bin up to tip it, or just tap it. Then push the packer lever all the way to squash the rubbish into the box. The orange in the hoses is the oil that moves the machines.",
+      control: { label: "Packer lever", min: "Rest", max: "Squash", value: 0,
+        text: v => v < .02 ? "Resting." : v < .2 ? "The blade swings open." : v < .4 ? "The slide plate goes down." : v < .75 ? "The blade scoops." : v < .99 ? "Pushing into the box!" : "Done: back to rest." },
       callouts: [[1, 70, 520, 190, 700], [2, 760, 860, 560, 690], [3, 470, 112, 540, 400], [4, 900, 112, 880, 400]],
       setup(st) {
         const A2 = "assets/garbage/book/";
@@ -103,12 +105,62 @@
         const slot = i => { const col = Math.floor(i / 12), row = i % 12; return [1018 - col * 21 + (row % 2) * 7, 578 - row * 30]; };
         const spawn = mouth => bits.push({ x: mouth[0] + (Math.random() - .5) * 30, y: mouth[1] + 10, vx: 40 + Math.random() * 90, vy: 30 + Math.random() * 60,
           c: COLS[Math.floor(Math.random() * COLS.length)], s: 44 + Math.random() * 22, state: "fall", rest: 6 + Math.random() * 30, v: Math.floor(Math.random() * 4) });
-        // ---------------------------------------------------------------- the sequences
-        let seq = null, t = 0, lift = 0, phi = 0, slide = 1, th = TH_REST, toSpawn = 0, spawnT = 0, lastSay = "";
-        const TIPSEQ = [["lift", .8], ["turn", 1.0], ["hold", 1.3], ["unturn", .9], ["lower", .7]];
-        const PACK = [["open", .8], ["down", .9], ["sweep", 1.5], ["up", 1.2], ["home", .5]];
-        const start = name => { if (seq) return false; seq = { name, phases: name === "tip" ? TIPSEQ : PACK, i: 0 }; t = 0; return true; };
+        // ---------------------------------------------------------------- oil: a pump under the body, two hoses
+        // The engine's pump pushes oil to whichever cylinder is moving: one hose runs back to the lifter's pivot,
+        // one up the tailgate pillar to the packer's slide cylinders. The hoses are see-through, so the oil shows.
+        const PUMP = [780, 690];
+        const HOSE_LIFT = [PUMP, [700, 712], [600, 714], [470, 702], [392, 655]];
+        const HOSE_PACK = [PUMP, [722, 640], [706, 560], [698, 300], ANCHOR];
+        const hoseG = el("g", {}, st.art);
+        hoseG.parentNode.insertBefore(hoseG, hoseG.parentNode.firstChild);         // behind the lifter and the packer
+        for (const hp of [HOSE_LIFT, HOSE_PACK]) {
+          const d = "M" + hp.map(q => q.map(n => n.toFixed(1)).join(",")).join(" L");
+          el("path", { d, fill: "none", stroke: "#4a4640", "stroke-width": 15, "stroke-linecap": "round", "stroke-linejoin": "round" }, hoseG);
+          el("path", { d, fill: "none", stroke: "#efe6d2", "stroke-width": 9, "stroke-linecap": "round", "stroke-linejoin": "round" }, hoseG);
+        }
+        el("circle", { cx: PUMP[0], cy: PUMP[1], r: 20, fill: "#7d858c", stroke: "#2b2620", "stroke-width": 3 }, hoseG);
+        el("circle", { cx: PUMP[0], cy: PUMP[1], r: 7, fill: "#3a3632" }, hoseG);
+        const OIL = ["#d0661a", "#e07a18", "#c25a12"];
+        const oilLift = new st.Flow(HOSE_LIFT, { colors: OIL, size: 19, count: 40, speed: 220, jitter: 0, fadeIn: .02, fadeOut: .02 });
+        const oilPack = new st.Flow(HOSE_PACK, { colors: OIL, size: 19, count: 46, speed: 220, jitter: 0, fadeIn: .02, fadeOut: .02 });
+        // ---------------------------------------------------------------- controls
+        // aPos 0..1: up to .4 the lifter raises the bin, from .4 to 1 it turns it over.
+        // cPos 0..1 is one packer cycle: open (0-.2), slide down (.2-.4), sweep (.4-.75), slide up and push (.75-1).
+        // Both ends of the cycle are the same rest pose, so a finished cycle simply starts again at 0.
+        let aPos = 0, aTarget = 0, cPos = 0, cTarget = 0, spawned = false, toSpawn = 0, spawnT = 0;
+        let autoTip = 0, autoTipT = 0, autoPack = false, dragging = false, lastSay = "";
+        const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+        const pose = c => {
+          if (c < .2) return { slide: 1, th: lerp(TH_REST, TH_OPEN, ease(c / .2)) };
+          if (c < .4) return { slide: 1 - ease((c - .2) / .2), th: TH_OPEN };
+          if (c < .75) return { slide: 0, th: lerp(TH_OPEN, TH_REST, ease((c - .4) / .35)) };
+          return { slide: ease((c - .75) / .25), th: TH_REST };
+        };
         const say = s => { if (s !== lastSay) { lastSay = s; st.status(s); } };
+        // the bin is the handle: drag it up (and towards the truck) to lift and tip it, or just tap it
+        const handles = el("g", { class: "ck-handles" }, st.ink.parentNode);
+        const hBin = el("polygon", { class: "ck-handle", tabindex: 0, role: "slider", "aria-label": "Bin lifter: drag the bin up, or press the arrow keys" }, handles);
+        hBin.style.touchAction = "none";
+        const top = st.ink.ownerSVGElement;
+        const toDiagram = e => { const r = top.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * st.w, (e.clientY - r.top) / r.height * st.h]; };
+        hBin.addEventListener("pointerdown", e => {
+          e.preventDefault(); window.__clearStep && window.__clearStep();
+          const [x0, y0] = toDiagram(e), base = aPos, t0 = performance.now(); let moved = false;
+          autoTip = 0; aTarget = base; dragging = true;
+          const move = ev => { const [x, y] = toDiagram(ev); if (Math.hypot(x - x0, y - y0) > 8) moved = true; aTarget = clamp(base + (y0 - y) / 280 + (x - x0) / 700); };
+          const up = () => {
+            removeEventListener("pointermove", move); removeEventListener("pointerup", up); removeEventListener("pointercancel", up);
+            dragging = false;
+            if (!moved && performance.now() - t0 < 400) autoTip = 1;           // a tap: the lifter does it all
+            else aTarget = 0;                                                     // let go and the lifter lowers the bin
+          };
+          addEventListener("pointermove", move); addEventListener("pointerup", up); addEventListener("pointercancel", up);
+        });
+        hBin.addEventListener("keydown", e => {
+          const d = { ArrowUp: .25, ArrowRight: .25, ArrowDown: -.25, ArrowLeft: -.25 }[e.key];
+          if (d) { e.preventDefault(); e.stopPropagation(); autoTip = 0; aTarget = clamp(aTarget + d); }
+          if (e.key === " " || e.key === "Enter") { e.preventDefault(); autoTip = 1; }
+        });
         const arrows = {
           1: [st.arrow("M200,580 C220,450 300,430 372,500")],
           2: [st.arrow("M440,540 C450,600 470,630 490,665", { color: "#9c3b1c" })],
@@ -122,41 +174,46 @@
           4: [{ cx: 860, cy: 410, rx: 280, ry: 210 }]
         };
         placeBin(0, 0); placePacker(1, TH_REST);
+        st.sig.garbage = () => ({ aPos, aTarget, cPos, cTarget, autoTip });
         return {
-          control(c) {
-            if (c.tip && !start("tip")) say("Wait a moment, the machine is busy.");
-            if (c.pack && !start("pack")) say("Wait a moment, the machine is busy.");
-          },
+          control(v) { if (!autoPack) cTarget = v; },
           step(n) {
             for (const [k, list] of Object.entries(arrows)) for (const a of list) +k === n ? a.draw(900) : a.hide();
             st.spot(n ? spots[n] : null);
-            if ((n === 1 || n === 2) && !bits.some(b => b.state !== "gone")) start("tip");
-            if (n === 3 || n === 4) start(bits.some(b => b.state === "rest") ? "pack" : "tip");
+            const inHopper = bits.some(b => b.state === "rest");
+            if (!inHopper && aPos < .05 && n && !dragging) autoTip = 1;
+            if ((n === 3 || n === 4) && inHopper && !autoPack) { autoPack = true; cTarget = 1; }
           },
           tick(dt) {
-            if (seq) {
-              const [ph, dur] = seq.phases[seq.i];
-              t += dt / dur; const k = ease(t);
-              if (seq.name === "tip") {
-                if (ph === "lift") lift = k;
-                if (ph === "turn") phi = TIP * k;
-                if (ph === "hold" && t < .05) { toSpawn = 16; }
-                if (ph === "unturn") phi = TIP * (1 - k);
-                if (ph === "lower") lift = 1 - k;
-                say(ph === "lift" ? "The lifter grabs the bin and lifts it." : ph === "turn" || ph === "hold" ? "Upside down! Out falls the rubbish." : "The empty bin goes back down.");
-              } else {
-                if (ph === "open") th = lerp(TH_REST, TH_OPEN, k);
-                if (ph === "down") slide = 1 - k;
-                if (ph === "sweep") th = lerp(TH_OPEN, TH_REST, k);
-                if (ph === "up") slide = k;
-                if (ph === "home" && t < .05) for (const b of bits) if (b.state === "carried") { b.state = "fly"; b.slot = slot(packed++ % 144); }
-                say(ph === "open" ? "The blade swings open." : ph === "down" ? "The slide plate goes down to the hopper." : ph === "sweep" ? "The blade scoops the rubbish up." : "Squash! Into the box it goes.");
-              }
-              if (t >= 1) { t = 0; seq.i++; if (seq.i >= seq.phases.length) { seq = null; if (packed >= 144) { packed = 0; bits = []; say("The box is full! Off to empty it, then start again."); } } }
+            // the lifter: a tap or a step runs it up, holds it a moment, and brings it down
+            if (dragging) autoTip = 0;
+            if (autoTip === 1) { aTarget = 1; if (aPos > .995) { autoTip = 2; autoTipT = 1.1; } }
+            else if (autoTip === 2) { autoTipT -= dt; if (autoTipT <= 0) { autoTip = 0; aTarget = 0; } }
+            const aStep = clamp(aTarget - aPos, -.9 * dt, .9 * dt); aPos += aStep;
+            const lift = clamp(aPos / .4), phi = TIP * clamp((aPos - .4) / .6);
+            if (aPos < .15) spawned = false;
+            if (!spawned && phi > 95) { spawned = true; toSpawn = 14; }
+            // the packer moves slowly and steadily, as hydraulics do
+            const cStep = clamp(cTarget - cPos, -.4 * dt, .4 * dt); cPos += cStep;
+            if (autoPack && Math.abs(cStep) > 0) st.setControl(cPos);
+            const { slide, th } = pose(cPos);
+            const forward = cStep > 1e-4;
+            if (cPos >= .995) {                                                   // a full cycle: into the box, and rest again
+              for (const b of bits) if (b.state === "carried") { b.state = "fly"; b.slot = slot(packed++ % 144); }
+              cPos = 0; cTarget = 0; autoPack = false; st.setControl(0);
+              if (packed >= 144) { packed = 0; bits = []; }
             }
             const { mouth } = placeBin(lift, phi);
             const S = placePacker(slide, th);
+            // the moving part's hose fills with flowing oil, faster the faster it moves
+            const la = Math.abs(aStep) / Math.max(dt, 1e-3), lc = Math.abs(cStep) / Math.max(dt, 1e-3);
+            oilLift.rate = (aStep < 0 ? -1 : 1) * (.4 + la); oilLift.density = clamp(la * 1.6);
+            oilPack.rate = (cStep < 0 ? -1 : 1) * (.4 + lc * 2); oilPack.density = clamp(lc * 4);
+            for (const f of [oilLift, oilPack]) { f.tick(dt); f.draw(st.g); }
+            hBin.setAttribute("points", [[-10, -20], [BW * .85, -20], [BW * .85, BH * .75], [-10, BH * .75]]
+              .map(q => binPt(q, LIFT[0] * lift, LIFT[1] * lift, phi).map(n => n.toFixed(1)).join(",")).join(" "));
             if (toSpawn > 0 && phi > 95) { spawnT -= dt; if (spawnT <= 0) { spawn(mouth); toSpawn--; spawnT = .07; } }
+            const sweeping = cPos > .4 && cPos < .75;
             for (const b of bits) {
               if (b.state === "fall") {
                 b.vy += 1400 * dt; b.x += b.vx * dt; b.y += b.vy * dt; b.vx *= .98;
@@ -166,7 +223,8 @@
               } else if (b.state === "rest" || b.state === "carried") {
                 // the blade sweeps from the rear (large angle) to the front: whatever it reaches, it pushes
                 const a = Math.atan2(b.y - S[1], b.x - S[0]) * 180 / Math.PI, r = Math.min(L - 12, Math.hypot(b.x - S[0], b.y - S[1]));
-                if (b.state === "rest" && seq && seq.name === "pack" && seq.phases[seq.i][0] === "sweep" && th <= a + 2) { b.state = "carried"; b.r = r; b.da = -4 - Math.random() * 10; }
+                if (b.state === "rest" && sweeping && forward && th <= a + 2) { b.state = "carried"; b.r = r; b.da = -4 - Math.random() * 10; }
+                if (b.state === "carried" && cStep < -1e-4 && cPos < .75) { b.state = "fall"; b.vx = 0; b.vy = 0; }   // pulled back: it drops again
                 if (b.state === "carried") { const aa = rad(th + b.da); b.x = S[0] + b.r * Math.cos(aa); b.y = S[1] + b.r * Math.sin(aa); }
               } else if (b.state === "fly") {
                 b.x += (b.slot[0] - b.x) * Math.min(1, dt * 5); b.y += (b.slot[1] - b.y) * Math.min(1, dt * 5);
@@ -175,17 +233,18 @@
             }
             st.g.save(); st.g.globalCompositeOperation = "source-over";
             for (const b of bits) {
-              if (b.state === "gone") continue;
               const sz = b.state === "packed" || b.state === "fly" ? b.s * .8 : b.s;   // squashed smaller in the box
               st.g.globalAlpha = 1;                                    // two dabs on top of each other: a solid little bag
               st.g.drawImage(st.dab(b.c, b.v), b.x - sz / 2, b.y - sz / 2, sz, sz);
               st.g.drawImage(st.dab(b.c, (b.v + 1) % 4), b.x - sz * .4, b.y - sz * .42, sz * .8, sz * .8);
             }
             st.g.restore();
-            if (!seq) {
-              const inHopper = bits.filter(b => b.state === "rest").length;
-              say(inHopper ? "Rubbish in the hopper. Press Squash it!" : packed ? `The box is filling up: ${Math.round(packed / 144 * 100)}% of the space used.` : "Press Tip the bin to start.");
-            }
+            const inHopper = bits.filter(b => b.state === "rest").length;
+            say(aPos > .02 ? (phi > 95 ? "Upside down! Out falls the rubbish." : aStep < 0 ? "The empty bin goes back down." : "The lifter grabs the bin and lifts it.")
+              : cPos > .01 ? (cPos < .2 ? "The blade swings open." : cPos < .4 ? "The slide plate goes down to the hopper." : cPos < .75 ? "The blade scoops the rubbish up." : "Squash! Into the box it goes.")
+              : inHopper ? "Rubbish in the hopper. Push the packer lever all the way!"
+              : packed ? `The box is filling up: ${Math.round(packed / 144 * 100)}% of the space used. Tip another bin!`
+              : "Drag the black bin up, or tap it.");
           }
         };
       }
